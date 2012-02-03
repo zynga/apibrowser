@@ -1,0 +1,43 @@
+body {
+	font-size: 14px;
+}
+
+#content {
+	margin: 5px;
+}
+
+#heading {
+	height: 90px;
+	top: 20px;
+	left:0px;
+	right: 0px;
+}
+
+#heading h1 {
+	font-size: 16px;
+}
+
+#heading small {
+	display: block;
+	margin-top: 20px;
+}
+
+.triangle-l, 
+.triangle-r {
+	display: none;
+}
+
+#content div.meta {
+	top: 130px;
+}
+
+#description {
+	padding-top: 170px;
+}
+
+#description code {
+	min-width: inherit;
+	padding: 0.3em 0.5em;
+	margin: 30px auto;
+	width: 90%;
+}
