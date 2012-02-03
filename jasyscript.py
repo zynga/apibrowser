@@ -40,24 +40,6 @@ def distclean():
         logging.info("Deleting build folder...")
         shutil.rmtree("build")
 
-@task
-def buildcompressed():
-    session = getSession()
-
-    for staticFile in [ "index.html", "style.css", "style.small.css" ]:
-        updateFile("source/%s" % staticFile, "build/%s" % staticFile)
-
-    # Include all game relevant assets
-    resolver = Resolver(session.getProjects())
-    resolver.addClassName("api.Browser")
-    assets = Asset(session, resolver.getIncludedClasses()).exportBuild()
-
-    # Writing source loader
-    classes = Sorter(resolver).getSortedClasses()
-    storeCompressed('build/browser.js', classes, bootCode="new api.Browser('../../jukebox/api/data');")
-
-    session.close()
-
 
 @task
 def build():
@@ -77,7 +59,7 @@ def build():
     includedByKernel = storeKernel("build/script/kernel.js", session, assets=assets, formatting=formatting, debug=True)
 
     # Copy files from source
-    for staticFile in [ "index.html", "style.css", "style.small.css" ]:
+    for staticFile in [ "index.html", "style.css", "style.small.css", "jquery-1.7.1.min.js" ]:
         updateFile("source/%s" % staticFile, "build/%s" % staticFile)
 
     # Compiler configuration
