@@ -28,7 +28,6 @@ def clean():
     session.close()
 
 
-
 @task
 def distclean():
     logging.info("Clearing cache...")
@@ -44,6 +43,10 @@ def distclean():
 @task
 def build():
     session = getSession()
+    
+    # Write API data
+    writer = ApiWriter(session)
+    writer.write("build/data")
 
     # Configure permutations
     session.setField("es5", True)
@@ -76,7 +79,7 @@ def build():
 
         # Compressing classes
         classes = Sorter(resolver, permutation).getSortedClasses()
-        compressedCode = storeCompressed("build/script/browser.js", classes,
+        compressedCode = storeCompressed("build/script/browser-" + permutation.getChecksum() + ".js", classes,
             permutation=permutation, optimization=optimization, formatting=formatting, bootCode="new api.Browser();")
 
     session.close()

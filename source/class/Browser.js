@@ -1,24 +1,34 @@
+/**
+ * The main class of the API Browser
+ *
+ * #asset(apibrowser/*)
+ */
+core.Class("api.Browser", {
+	
+	/**
+	 * Initialize with the @base {String} URL for the data
+	 */
+	construct : function(base) {
+		
+		base = base || './data';
 
-this.api = {};
-
-
-api.Browser = function(base) {
-
-	base = base || 'apidoc/';
-
-	core.io.Asset.load(base + '/index.json', function(data) {
-		console.log(data);
-	}, this);
-
-};
-
-
-
-api.Browser.prototype = {
-
-	init: function(index) {
-
+		core.io.Text.load(base + '/index.json', function(data) {
+			console.log(data);
+		}, this);
+		
+		
+		$("#menu-tree").treeview({
+			animated: "fast"
+		});
+		
+	},
+	
+	
+	members: {
+		
+		
+		
+		
 	}
-
-};
-
+	
+});
