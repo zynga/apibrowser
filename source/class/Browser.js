@@ -10,11 +10,19 @@ core.Class("api.Browser", {
 	 */
 	construct : function(base) {
 		
-		base = base || './data';
+		location.path
+		
+		base = base || location.href.replace("index.html", "data");
 
-		core.io.Text.load(base + '/index.json', function(data) {
-			console.log(data);
-		}, this);
+		try{
+			core.io.Text.load(base + '/index.json', function(url, errornous, data) {
+				if (!errornous) {
+					alert("index content: " + data.text)
+				}
+			}, this);
+		} catch(ex) {
+			console.error("Could not load index file!");
+		}
 		
 		
 		$("#menu-tree").treeview({
