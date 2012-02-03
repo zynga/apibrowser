@@ -5,8 +5,13 @@
 	<title></title>
 	<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0" />
 
+	<link rel="stylesheet" href="../external/treeview/jquery.treeview.css" />
+	<link rel="stylesheet" href="../external/syntaxhighlighter/styles/shCore.css" />
+	<link rel="stylesheet" href="../external/syntaxhighlighter/styles/shThemeDefault.css" />
+
 	<link rel="stylesheet" href="asset/style.css">
 	<link rel='stylesheet' media='only screen and (max-device-width: 480px)' href='asset/style.small.css' />
+
 
 
 </head>
@@ -14,7 +19,32 @@
 
 <div id="menu">
 
-oh hai, I'm teh menu.
+	<h1>TileEngine</h1>
+
+	<ul id="menu-tree" class="filetree">
+		<li><span class="folder">Folder 1</span>
+			<ul>
+				<li><span class="file">Item 1.1</span></li>
+			</ul>
+		</li>
+		<li><span class="folder">Folder 2</span>
+			<ul>
+				<li><span class="folder">Subfolder 2.1</span>
+					<ul id="folder21">
+						<li><span class="file">File 2.1.1</span></li>
+						<li><span class="file">File 2.1.2</span></li>
+					</ul>
+				</li>
+				<li><span class="file">File 2.2</span></li>
+			</ul>
+		</li>
+		<li class="closed"><span class="folder">Folder 3 (closed at start)</span>
+			<ul>
+				<li><span class="file">File 3.1</span></li>
+			</ul>
+		</li>
+		<li><span class="file">File 4</span></li>
+	</ul>
 
 </div>
 
@@ -50,7 +80,7 @@ oh hai, I'm teh menu.
 				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat .
 			</p>
 
-			<code><pre>function foo() {
+			<code><pre class="brush: js">function foo() {
 	alert("very important code");
 	prompt("Really? A prompt in 2012?");	
 };</pre></code>
@@ -149,7 +179,13 @@ oh hai, I'm teh menu.
 </div>
 
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.js"></script>
-<script src="asset/init.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+<script src="../external/treeview/jquery.treeview.js"></script>
+
+<script src="../external/syntaxhighlighter/scripts/shCore.js"></script>
+<script src="../external/syntaxhighlighter/scripts/shBrushJScript.js"></script>
+
+<script src="class/init.js"></script>
+
 </body>
 </html>
