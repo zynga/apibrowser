@@ -16,7 +16,6 @@
 	<script type="text/javascript">core.io.Script.load("script/browser.js");</script>
 -->
 
-	<script src="class/Browser.js"></script>
 
 </head>
 <body>
@@ -185,6 +184,14 @@
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 <script src="../external/treeview/jquery.treeview.js"></script>
+<script src="class/Browser.js"></script>
 
+<script>
+$("#menu-tree").treeview({
+	animated: "fast"
+});
+
+var APIBROWSER = new api.Browser('../../jukebox/api/data');
+</script>
 </body>
 </html>
