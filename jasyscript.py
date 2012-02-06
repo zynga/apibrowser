@@ -28,7 +28,6 @@ def clean():
     session.close()
 
 
-
 @task
 def distclean():
     logging.info("Clearing cache...")
@@ -40,28 +39,14 @@ def distclean():
         logging.info("Deleting build folder...")
         shutil.rmtree("build")
 
-@task
-def buildcompressed():
-    session = getSession()
-
-    for staticFile in [ "index.html", "style.css", "style.small.css" ]:
-        updateFile("source/%s" % staticFile, "build/%s" % staticFile)
-
-    # Include all game relevant assets
-    resolver = Resolver(session.getProjects())
-    resolver.addClassName("api.Browser")
-    assets = Asset(session, resolver.getIncludedClasses()).exportBuild()
-
-    # Writing source loader
-    classes = Sorter(resolver).getSortedClasses()
-    storeCompressed('build/browser.js', classes, bootCode="new api.Browser('../../jukebox/api/data');")
-
-    session.close()
-
 
 @task
 def build():
     session = getSession()
+    
+    # Write API data
+    writer = ApiWriter(session)
+    writer.write("build/data")
 
     # Configure permutations
     session.setField("es5", True)
@@ -94,7 +79,7 @@ def build():
 
         # Compressing classes
         classes = Sorter(resolver, permutation).getSortedClasses()
-        compressedCode = storeCompressed("build/script/browser.js", classes,
+        compressedCode = storeCompressed("build/script/browser-" + permutation.getChecksum() + ".js", classes,
             permutation=permutation, optimization=optimization, formatting=formatting, bootCode="new api.Browser();")
 
     session.close()

@@ -1,5 +1,7 @@
 
 jasycache.db
-build/
 source/script/*
+
+build/
+jasycache*
 
