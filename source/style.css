@@ -32,7 +32,7 @@ h1 {
  *	Menu area
  */
 
- #menu {
+#menu {
 	background: #fff;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
@@ -55,8 +55,12 @@ h1 {
 	margin-bottom: 10px;
 }
 
-#menu .filetree {
+#menu-tree {
 	font-size: 12px;
+}
+
+#menu-tree .file {
+	cursor: pointer;
 }
 
 /*

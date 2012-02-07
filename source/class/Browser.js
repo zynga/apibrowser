@@ -7,16 +7,16 @@ core.Class('api.Browser', {
 
 	construct: function(base) {
 
-		base = base || '../../jukebox/api/data';
+		base = base || 'data';
 
 		this.load(base + '/index.json', function(status, data) {
 			this.__base = base;
 			this.init(data);
 		}, this);
 
-		$("#menu-tree").treeview({
-			animated: "fast"
-		});
+		this.__tree = {};
+		this.__index = {};
+
 
 	},
 
@@ -41,7 +41,8 @@ core.Class('api.Browser', {
 
 		init: function(json) {
 
-			var data = null;
+			var data = null,
+				that = this;
 
 			try {
 				data = JSON.parse(json);
@@ -51,63 +52,136 @@ core.Class('api.Browser', {
 
 
 			if (Object.prototype.toString.call(data) === '[object Object]') {
+
 				this.__tree = data;
-				this.__parse();
+
+				var html = this.walk();
+				document.getElementById('menu-tree').innerHTML = html;
+
+				if (!this.__initialized) {
+
+					$('#menu-tree').treeview({
+						animated: 'fast'
+					});
+
+
+					$('#menu-tree').bind('click', function(data) {
+
+						var target = data.target;
+						if (target.className === 'file') {
+							that.show(target.getAttribute('data-ns'), target.innerHTML);
+						}
+
+					});
+
+					this.__initialized = true;
+
+				}
+
 			} else {
 				throw 'Invalid JSON data';
 			}
 
 		},
 
-		__parse: function(tree, href) {
+		__getHTML: function(type, what, name, namespace) {
 
-			if (tree === undefined) {
-				tree = this.__tree;
-				href = '/';
-			}
+			var html = '';
 
+			namespace = namespace.substr(0, namespace.length - 1);
+
+			if (type === 'folder') {
+				if (what === 'start') {
+					html += '<li><span class="folder" data-ns="' + namespace + '">' + name + '</span><ul>';
+				} else if (what === 'end') {
+					html += '</ul></li>';
+				}
+			} else if (type === 'file') {
+				html += '<li><span class="file" data-ns="' + namespace + '">' + name + '</span></li>';
+            }
+
+
+			return html;
+
+
+		},
+
+		walk: function(tree, href) {
+
+			var that = this;
+
+			tree = tree === undefined ? this.__tree : tree;
+			href = href === undefined ? '' : href + '.';
+
+			var html = '';
 
 			for (var id in tree) {
 
+				var newHref = href + id;
+
 				var entry = tree[id];
+				if (entry.type === undefined) {
 
-				if (entry.type !== undefined) {
-
-					(function(entry, href, that) {
-
-						that.load(that.__base + href + '.json', function(status, data) {
-							this.__parseClass(entry, data, href);
-						}, that);
-
-					})(entry, href + id.charAt(0).toUpperCase() + id.substr(1), this);
+					html += this.__getHTML('folder', 'start', newHref, href);
+					html += this.walk(entry, newHref, html);
+					html += this.__getHTML('folder', 'end', newHref, href);
 
 				} else {
 
-					// recursion 4tw :)
-					href += id+'.';
-					this.__parse(entry, href);
+					this.__index[href + id] = entry;
+					html += this.__getHTML('file', null, id, href);
 
 				}
 
 			}
 
+			return html;
+
 		},
 
-		__parseClass: function(treeEntry, json, href) {
+		show: function(namespace, id) {
 
-			var data = null;
-
-			try {
-				data = JSON.parse(json);
-			} catch(e) {
-				throw 'Invalid JSON of ' + href;
+			var entry = this.__index[namespace + '.' + id];
+			if (
+				entry === undefined
+				|| this.__base === undefined
+			) {
+				return false;
 			}
 
 
-			if (data !== null) {
-				treeEntry.data = data;
+			if (
+				entry.data === undefined
+			) {
+
+				var file = this.__base + '/' + namespace + '.' + id + '.json';
+				this.load(file, function(status, json) {
+
+					var data = null;
+					try {
+						data = JSON.parse(json);
+					} catch(e) {
+						console.warn('Invalid JSON', file);
+					}
+
+					if (data !== null) {
+						entry.data = data;
+						this.__renderTemplate(entry);
+					}
+
+				}, this);
+
+			} else {
+				this.__renderTemplate(entry);
 			}
 
+//			console.log('showing', namespace, id, this.__index[namespace + '.' + id]);
+
+		},
+
+		__renderTemplate: function(entry) {
+
+			console.log('rendering template now', entry);
 
 		}
 

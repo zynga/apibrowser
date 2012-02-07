@@ -10,6 +10,7 @@ import shutil
 def getSession():
     session = Session()
     session.addProject(Project("../core/"))
+    session.addProject(Project("../jukebox/"))
     session.addProject(Project("."))
 
     return session
