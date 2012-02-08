@@ -165,7 +165,7 @@ core.Class('api.Browser', {
 					}
 
 					if (data !== null) {
-						entry.data = data;
+						entry.data = this.__process(data);
 						this.__renderTemplate(entry);
 					}
 
@@ -179,9 +179,77 @@ core.Class('api.Browser', {
 
 		},
 
+
+		__process: function(data) {
+
+			var i, l;
+
+
+			if (data.members !== undefined) {
+				data.members = this.__processObjectToArray(data.members);
+
+
+				for (i = 0, l = data.members.length; i < l; i++) {
+					data.members[i].params = this.__processObjectToArray(data.members[i].params);
+				}
+
+			}
+
+
+			if (data.statics !== undefined) {
+				data.statics = this.__processObjectToArray(data.statics);
+
+				for (i = 0, l = data.statics.length; i < l; i++) {
+					data.statics[i].params = this.__processObjectToArray(data.statics[i].params);
+				}
+
+			}
+
+
+			return data;
+
+		},
+
+		__processObjectToArray: function(obj) {
+
+			var arr = [];
+
+			for (var id in obj) {
+
+				var data = obj[id];
+				data._id = id;
+				arr.push(data);
+
+			}
+
+			return arr;
+
+		},
+
 		__renderTemplate: function(entry) {
 
-			console.log('rendering template now', entry);
+
+			console.log('rendering template');
+
+			if (this.__template === undefined) {
+
+				this.load('template.mustache', function(status, mustache) {
+					this.__template = mustache;
+					this.__renderTemplate(entry);
+				}, this);
+
+				return;
+
+			}
+
+
+			var template = core.template.Compiler.compile(this.__template);
+			var html = template.render(entry.data);
+
+			var content = document.getElementById('content');
+			content.innerHTML = html;
+
+			console.log(entry.data);
 
 		}
 

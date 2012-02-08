@@ -63,7 +63,7 @@ def build():
     includedByKernel = storeKernel("build/script/kernel.js", session, assets=assets, formatting=formatting, debug=True)
 
     # Copy files from source
-    for staticFile in [ "index.html", "style.css", "style.small.css" ]:
+    for staticFile in [ "index.html", "style.css", "style.small.css", "template.mustache" ]:
         updateFile("source/%s" % staticFile, "build/%s" % staticFile)
 
     # Compiler configuration
