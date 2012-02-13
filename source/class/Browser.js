@@ -76,6 +76,12 @@ core.Class('api.Browser', {
 
 					this.__initialized = true;
 
+					if (document.location.hash.match(/!/)) {
+						var hashbang = document.location.hash;
+						var data = hashbang.substr(2, hashbang.length - 1).split('/');
+						this.show(data[0], data[1]);
+					}
+
 				}
 
 			} else {
@@ -150,6 +156,9 @@ core.Class('api.Browser', {
 			}
 
 
+			document.location.hash = '!' + namespace + '/' + id;
+
+
 			if (
 				entry.data === undefined
 			) {
@@ -185,28 +194,66 @@ core.Class('api.Browser', {
 			var i, l;
 
 
+			data['constructor'].params = this.__processParams(data['constructor'].params);
+
+
 			if (data.members !== undefined) {
+
 				data.members = this.__processObjectToArray(data.members);
 
 
 				for (i = 0, l = data.members.length; i < l; i++) {
-					data.members[i].params = this.__processObjectToArray(data.members[i].params);
+					data.members[i].params = this.__processParams(data.members[i].params);
 				}
 
 			}
 
 
 			if (data.statics !== undefined) {
+
 				data.statics = this.__processObjectToArray(data.statics);
 
 				for (i = 0, l = data.statics.length; i < l; i++) {
-					data.statics[i].params = this.__processObjectToArray(data.statics[i].params);
+					data.statics[i].params = this.__processParams(data.statics[i].params);
 				}
 
 			}
 
 
 			return data;
+
+		},
+
+		__processParams: function(params) {
+
+			var arr = [],
+				id;
+
+			for (id in params) {
+				arr.push({});
+			}
+
+			for (id in params) {
+
+				var pos = params[id].position;
+
+				if (pos !== undefined) {
+
+					var data = params[id];
+					data.name = id;
+					if (data.type instanceof Array) {
+						data.type = data.type.join(' | ');
+					} else {
+						data.type = 'undefined';
+					}
+					arr[pos] = data;
+
+				}
+
+			}
+
+
+			return arr;
 
 		},
 
@@ -217,7 +264,7 @@ core.Class('api.Browser', {
 			for (var id in obj) {
 
 				var data = obj[id];
-				data._id = id;
+				data.name = id;
 				arr.push(data);
 
 			}

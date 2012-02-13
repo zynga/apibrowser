@@ -6,9 +6,10 @@
 		<small>
 			{{#constructor}} (
 			{{#params}}
-				<span class="param">{{*}}<sub>{{type}}</sub></span>
-			{{/params}} )
-			{{/constructor}}
+	   			{{#position}} , {{/position}}
+				<span class="param">{{name}}<sub>{{type}}</sub></span>
+			{{/params}}
+			) {{/constructor}}
 <!--			<span class="param optional">crap<sub>String</sub></span> -->
 		</small>
 	</h1>
@@ -40,37 +41,49 @@
 		<li>
 			<span class="line-number">{{line}}</span>
 			<h3>
-				{{_id}}
+				{{name}}
 				<span class="params">(
 	   			{{#params}}
 	   				{{#position}} , {{/position}}
-					<span class="param"><span class="type">{{type}}</span> {{_id}} </span>
+					<span class="param">
+						{{name}}
+						<span class="type"> {{type}} </span>
+					</span>
 	   			{{/params}}
 				)</span>
-				<span class="return-value"><span class="type">{{returns}}</span></span>
 			</h3>
+			<span class="return-value">{{returns}}{{^returns}}-{{/returns}}</span>
 		</li>
+		{{/statics}}
+		{{^statics}}
+		<li><h3>- No Statics -</h3></li>
 		{{/statics}}
 	</ul>
 
+	{{#members}}
 	<h2>Members<span>Returns</span></h2>
 	<ul>
 		{{#members}}
 		<li>
 			<span class="line-number">{{line}}</span>
 			<h3>
-				{{_id}}
+				{{name}}
 				<span class="params">
 	   			{{#params}}
 	   				{{#position}} , {{/position}}
 	   				<span class="type">{{type}}</span> {{.}}
 	   			{{/params}}
 				</span>
-				<span class="return-value"><span class="type">{{returns}}</span></span>
 			</h3>
+			<span class="return-value">{{returns}}{{^returns}}-{{/returns}}</span>
+			<div class="documentation">{{{doc}}}</div>
 		</li>
 		{{/members}}
+		{{^members}}
+		<li><h3> - No Members -</h3></li>
+		{{/members}}
 	</ul>
+	{{/members}}
 
 </div>
 
