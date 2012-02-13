@@ -247,31 +247,31 @@ h1 {
  *	Detail area
  */
 
- .detail {
- 	background: #eee;
- 	margin-left: 0px;
- 	margin-right: 0px;
- 	border-top: 1px solid #aaa;
- 	position: relative;
- 	margin-top: 30px;
- 	line-height: 1.5em;
- 	padding-left: 20px;
- 	padding-right: 20px;
- 	padding-top: 0px;
- 	padding-bottom: 20px;
- }
+.detail {
+	background: #eee;
+	margin-left: 0px;
+	margin-right: 0px;
+	border-top: 1px solid #aaa;
+	position: relative;
+	margin-top: 30px;
+	line-height: 1.5em;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 0px;
+	padding-bottom: 20px;
+}
 
- .detail div.line-background {
- 	position: absolute;
- 	top: 0;
- 	left: 0;
- 	width: 48px;
- 	bottom: 0;
- 	background: #ddd;
- 	border-right: 1px solid #fff;
- }
+.detail div.line-background {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 48px;
+	bottom: 0;
+	background: #ddd;
+	border-right: 1px solid #fff;
+}
 
- .detail:after {
+.detail:after {
 	content: ".";
 	display: block;
 	clear: both;
@@ -338,6 +338,12 @@ h1 {
 	margin-left: 40px;
 }
 
+.detail ul li.unfold h3:before {
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-top: 8px solid #7f9db9;
+}
+
 .detail ul li h3 {
 	padding: 0;
 	margin: 0;
@@ -370,4 +376,21 @@ h1 {
 
 .detail ul li span.return-value {
 	float: right;
+}
+
+
+
+
+
+.detail ul li div.doc {
+	margin: 1em 0 1em 45px;
+	display: none;
+}
+
+.detail ul li.unfold div.doc {
+	display: block;
+}
+
+.detail ul li div.doc p {
+	margin: 0.25em 0 0 0;
 }

@@ -74,6 +74,20 @@ core.Class('api.Browser', {
 
 					});
 
+					$(document).bind('click', function(event) {
+
+						if (event.button === 2) return;
+
+						if (
+							event.target && event.target.tagName === 'H3'
+						) {
+							$(event.target).parent('li').toggleClass('unfold');
+						}
+
+						console.log('CLICK DUDE');
+
+					});
+
 					this.__initialized = true;
 
 					if (document.location.hash.match(/!/)) {
