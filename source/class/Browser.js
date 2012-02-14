@@ -60,31 +60,23 @@ core.Class('api.Browser', {
 
 				if (!this.__initialized) {
 
-					$('#menu-tree').treeview({
-						animated: 'fast'
-					});
-
-
-					$('#menu-tree').bind('click', function(data) {
-
-						var target = data.target;
-						if (target.className === 'file') {
-							that.show(target.getAttribute('data-ns'), target.innerHTML);
-						}
-
-					});
-
 					$(document).bind('click', function(event) {
 
 						if (event.button === 2) return;
 
-						if (
-							event.target && event.target.tagName === 'H3'
-						) {
-							$(event.target).parent('li').toggleClass('unfold');
-						}
 
-						console.log('CLICK DUDE');
+						var target = $(event.target);
+						if (target.hasClass('tree-class')) {
+
+							that.show(target.attr('data-ns'), target.attr('data-class'));
+
+						} else if (target.hasClass('tree-namespace')) {
+
+							$(target).parent('li').toggleClass('unfold');
+
+						} else if (target[0].tagName === 'H3') {
+							$(target).parent('li').toggleClass('unfold');
+						}
 
 					});
 
@@ -112,12 +104,12 @@ core.Class('api.Browser', {
 
 			if (type === 'folder') {
 				if (what === 'start') {
-					html += '<li><span class="folder" data-ns="' + namespace + '">' + name + '</span><ul>';
+					html += '<li><div class="tree-namespace" data-ns="' + namespace + '">' + name + '</div><ul>';
 				} else if (what === 'end') {
 					html += '</ul></li>';
 				}
 			} else if (type === 'file') {
-				html += '<li><span class="file" data-ns="' + namespace + '">' + name + '</span></li>';
+				html += '<li><div class="tree-class" data-ns="' + namespace + '" data-class="' + name + '">' + name + '</div></li>';
             }
 
 

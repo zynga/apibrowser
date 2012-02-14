@@ -10,7 +10,7 @@ import shutil
 def getSession():
     session = Session()
     session.addProject(Project("../core/"))
-    session.addProject(Project("../jukebox/"))
+    session.addProject(Project("../jukebox_API/"))
     session.addProject(Project("."))
 
     return session
@@ -63,7 +63,15 @@ def build():
     includedByKernel = storeKernel("build/script/kernel.js", session, assets=assets, formatting=formatting, debug=True)
 
     # Copy files from source
-    for staticFile in [ "index.html", "style.css", "style.small.css", "template.mustache" ]:
+    for staticFile in [
+        "index.html",
+        "style.css",
+        "style.small.css",
+        "template.mustache",
+        "class.png",
+        "namespace.png",
+        "namespace_unfold.png"
+    ]:
         updateFile("source/%s" % staticFile, "build/%s" % staticFile)
 
     # Compiler configuration

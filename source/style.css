@@ -56,12 +56,59 @@ h1 {
 }
 
 #menu-tree {
-	font-size: 12px;
+	font-size: 16px;
 }
 
-#menu-tree .file {
-	cursor: pointer;
+#menu ul,
+#menu li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
 }
+
+#menu ul {
+	border-bottom: 3px solid #ddd;
+	padding-bottom: 0.5em;
+	margin-left: 0.5em;
+	margin-bottom: 1em;
+}
+
+#menu li {
+	line-height: 16px;
+}
+
+#menu div {
+	padding-left: 35px;
+	color: #222;
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+	line-height: 30px;
+}
+
+#menu-tree li ul {
+	display: none;
+}
+
+#menu-tree li.unfold > ul {
+	display: block;
+}
+
+#menu-tree .tree-namespace {
+	background-image: url('namespace.png');
+}
+
+#menu-tree li.unfold > div.tree-namespace {
+	background-image: url('namespace_unfold.png');
+}
+
+#menu-tree .tree-class {
+	background-image: url('class.png');
+}
+
+
+
+
+
 
 /*
  *	Content area
@@ -339,6 +386,7 @@ h1 {
 }
 
 .detail ul li.unfold h3:before {
+	margin-right: 3px;
 	border-left: 5px solid transparent;
 	border-right: 5px solid transparent;
 	border-top: 8px solid #7f9db9;
@@ -383,12 +431,25 @@ h1 {
 
 
 .detail ul li div.doc {
-	margin: 1em 0 1em 45px;
+	margin: 0 0 0 45px;
 	display: none;
 }
 
-.detail ul li.unfold div.doc {
+.detail ul li div.doc {
 	display: block;
+	height: 0px;
+	opacity: 0;
+	overflow: hidden;
+}
+.detail ul li.unfold div.doc {
+	height: auto;
+	opacity: 1;
+	overflow: inherit;
+}
+.detail ul li div.doc,
+.detail ul li.unfold div.doc {
+	-moz-transition: opacity 1s ease;
+	-webkit-transition: opacity 1s ease;
 }
 
 .detail ul li div.doc p {
