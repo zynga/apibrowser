@@ -14,6 +14,10 @@ core.Class('api.Browser', {
 			this.init(data);
 		}, this);
 
+		this.__processor = new api.Processor({
+			showPrivate: true
+		});
+
 		this.__tree = {};
 		this.__index = {};
 
@@ -154,16 +158,11 @@ core.Class('api.Browser', {
 		show: function(namespace, id) {
 
 			var entry = this.__index[namespace + '.' + id];
-			if (
-				entry === undefined
-				|| this.__base === undefined
-			) {
-				return false;
-			}
-
-
 			document.location.hash = '!' + namespace + '/' + id;
 
+			if (entry === undefined) {
+				entry = this.__index[namespace + '.' + id] = {};
+			}
 
 			if (
 				entry.data === undefined
@@ -172,110 +171,14 @@ core.Class('api.Browser', {
 				var file = this.__base + '/' + namespace + '.' + id + '.json';
 				this.load(file, function(status, json) {
 
-					var data = null;
-					try {
-						data = JSON.parse(json);
-					} catch(e) {
-						console.warn('Invalid JSON', file);
-					}
-
-					if (data !== null) {
-						entry.data = this.__process(data);
-						this.__renderTemplate(entry);
-					}
+					entry.data = this.__processor.processJSON(json);
+					this.__renderTemplate(entry);
 
 				}, this);
 
 			} else {
 				this.__renderTemplate(entry);
 			}
-
-//			console.log('showing', namespace, id, this.__index[namespace + '.' + id]);
-
-		},
-
-
-		__process: function(data) {
-
-			var i, l;
-
-
-			data['constructor'].params = this.__processParams(data['constructor'].params);
-
-
-			if (data.members !== undefined) {
-
-				data.members = this.__processObjectToArray(data.members);
-
-
-				for (i = 0, l = data.members.length; i < l; i++) {
-					data.members[i].params = this.__processParams(data.members[i].params);
-				}
-
-			}
-
-
-			if (data.statics !== undefined) {
-
-				data.statics = this.__processObjectToArray(data.statics);
-
-				for (i = 0, l = data.statics.length; i < l; i++) {
-					data.statics[i].params = this.__processParams(data.statics[i].params);
-				}
-
-			}
-
-
-			return data;
-
-		},
-
-		__processParams: function(params) {
-
-			var arr = [],
-				id;
-
-			for (id in params) {
-				arr.push({});
-			}
-
-			for (id in params) {
-
-				var pos = params[id].position;
-
-				if (pos !== undefined) {
-
-					var data = params[id];
-					data.name = id;
-					if (data.type instanceof Array) {
-						data.type = data.type.join(' | ');
-					} else {
-						data.type = 'undefined';
-					}
-					arr[pos] = data;
-
-				}
-
-			}
-
-
-			return arr;
-
-		},
-
-		__processObjectToArray: function(obj) {
-
-			var arr = [];
-
-			for (var id in obj) {
-
-				var data = obj[id];
-				data.name = id;
-				arr.push(data);
-
-			}
-
-			return arr;
 
 		},
 
@@ -301,8 +204,6 @@ core.Class('api.Browser', {
 
 			var content = document.getElementById('content');
 			content.innerHTML = html;
-
-			console.log(entry.data);
 
 		}
 
