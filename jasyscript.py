@@ -46,7 +46,7 @@ def build():
     
     # Write API data
     writer = ApiWriter(session)
-    writer.write("build/data")
+    writer.write("build/data", callback="apibrowser.callback")
 
     # Configure permutations
     session.setField("es5", True)
@@ -88,7 +88,7 @@ def build():
         # Compressing classes
         classes = Sorter(resolver, permutation).getSortedClasses()
         compressedCode = storeCompressed("build/script/browser-" + permutation.getChecksum() + ".js", classes,
-            permutation=permutation, optimization=optimization, formatting=formatting, bootCode="new api.Browser();")
+            permutation=permutation, optimization=optimization, formatting=formatting, bootCode="apibrowser=new api.Browser();")
 
     session.close()
 
