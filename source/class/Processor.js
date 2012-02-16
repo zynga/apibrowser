@@ -29,7 +29,12 @@ core.Class("api.Processor", {
 			data['constructor'].params = this.processParams(data['constructor'].params);
 
 
-			var exportData = {};
+			var exportData = {
+				id: data.id,
+				'constructor': data['constructor']
+			};
+
+
 			var i, l;
 
 			if (data.members !== undefined) {
