@@ -9,7 +9,7 @@ core.Class('api.Browser', {
 
 		base = base || 'data';
 
-		this.load(base + '/index.json', function(status, data) {
+		this.load(base + '/$index.json', function(status, data) {
 			this.__base = base;
 			this.init(data);
 		}, this);
@@ -23,8 +23,12 @@ core.Class('api.Browser', {
 
 
 	},
-
+	
 	members: {
+		
+		callback: function(data, id) {
+			
+		},
 
 		load: function(url, callback, scope) {
 
