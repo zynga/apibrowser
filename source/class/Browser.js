@@ -17,9 +17,11 @@ core.Class('api.Browser', {
 		// Insert HTML
 		$(document.body).append('<div id="menu"><h1>API Browser</h1><ul id="menu-tree" class="filetree"></ul></div><div id="content"></div>');
 
+		// Load stylesheet
+		core.io.StyleSheet.load(core.io.Asset.toUri("api/style.css"));
+
 		// Load initial data
 		core.io.Queue.load([
-			core.io.Asset.toUri("api/style.css"),
 			base + "/$index.jsonp",
 			base + "/$template.jsonp",
 			base + "/$search.jsonp"
