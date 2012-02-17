@@ -12,25 +12,11 @@ core.Class('api.Browser', {
 
 		var that = this;
 
-		$('#menu-tree').live('click', function(event) {
-
-			var target = $(event.target);
-
-console.log(target);
-
-			if (target.hasClass('tree-class')) {
-				that.show(target.attr('data-ns'), target.attr('data-class'));
-			} else if (target.hasClass('tree-namespace')) {
-				$(target).parent('li').toggleClass('unfold');
-			}
-
-		});
-
 		$('#content h3').live('click', function(event) {
 			$(this).parent('li').toggleClass('unfold');
 		});
 
-		$('#content a').live('click', function(event) {
+		$('a').live('click', function(event) {
 
 			var link = $(this).attr('href');
 
@@ -50,7 +36,6 @@ console.log(target);
 
 		this.__index = {};
 
-
 	},
 
 	members: {
@@ -61,8 +46,8 @@ console.log(target);
 
 			if (id == "$index") {
 
-				document.getElementById('menu-tree').innerHTML = this.__treeWalker(data, "");
-				this.open(document.location.hash);
+				$('#menu-tree').html(this.__treeWalker(data, ''));
+				this.open(document.location.hash.substr(1));
 
 			} else if (id == "$search") {
 
@@ -143,8 +128,7 @@ console.log(target);
 				data = hash.substr(1, hash.length - 1).split('.');
 
 
-				// namespace
-				params.push(data[0]);
+				params.push(data[0]); // namespace
 
 				if (data[1].match(/:/)) {
 					data = data[1].split(/:/);
@@ -163,22 +147,37 @@ console.log(target);
 
 				hash = this.__current.namespace + '.' + this.__current.id + ':' + hash.substr(1);
 
+			} else {
+				params.push(null); // namespace
+				params.push(hash); // class (id)
 			}
 
-			var success = this.show.apply(this, params);
+
+			this.showTree.apply(this, params);
+
+			var success = this.showContent.apply(this, params);
 			if (success) {
 				location.hash = hash;
 			}
 
 		},
 
-		show: function(namespace, id, method) {
+		showTree: function(namespace, id) {
+
+			var selector = "a[href='#" + namespace + "." + id + "']";
+			var entry = $('#menu-tree').find(selector);
+
+			console.log(entry, selector);
+
+		},
+
+		showContent: function(namespace, id, method) {
 
 			namespace = typeof namespace == 'string' ? namespace : null;
 			id = typeof id == 'string' ? id : null;
 			method = typeof method == 'string' ? method : null;
 
-			if (namespace == null || id == null) {
+			if (id == null) {
 				return false;
 			}
 
@@ -196,6 +195,14 @@ console.log(target);
 				entry.data === undefined
 			) {
 
+				if (namespace === null) {
+					var file = this.__base + '/' + id + '.jsonp';
+
+
+					core.io.Script.load(base + "/$index.jsonp");
+
+
+				}
 				var file = this.__base + '/' + namespace + '.' + id + '.json';
 				this.load(file, function(status, json) {
 
