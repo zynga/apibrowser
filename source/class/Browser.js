@@ -43,7 +43,6 @@ core.Class('api.Browser', {
 			$('a').live('click', function(event) {
 
 				var link = $(this).attr('href');
-
 				if (link.charAt(0) == '#') {
 					that.open(link.slice(1));
 					return false;
