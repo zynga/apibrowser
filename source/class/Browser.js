@@ -76,24 +76,6 @@ console.log(target);
 
 		},
 
-		load: function(url, callback, scope) {
-
-			var xhr = new XMLHttpRequest();
-			xhr.open('GET', url, true);
-
-			xhr.onreadystatechange = function() {
-
-				if (xhr.readyState == 4) {
-					callback.call(scope, xhr.status, xhr.responseText || xhr.responseXML);
-				}
-
-			};
-
-			xhr.send(null);
-
-		},
-
-
 		__treeWalker: function(node, base) {
 
 			var html = '';
@@ -185,7 +167,7 @@ console.log(target);
 
 			var success = this.show.apply(this, params);
 			if (success) {
-				document.location.hash = hash;
+				location.hash = hash;
 			}
 
 		},
