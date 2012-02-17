@@ -196,7 +196,6 @@ core.Class('api.Browser', {
 				var element = document.querySelector("#tree a[href='#" + current + "']");
 				if (element != null) {
 					element.parentNode.className = ' unfold';
-					element.scrollIntoView();
 				}
 
 				current += '.';
