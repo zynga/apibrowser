@@ -33,7 +33,10 @@ core.Class('api.Browser', {
 			showPrivate: true
 		});
 
-		this.__index = {};
+
+		this.__cache = {};
+		this.__currentFile = '';
+		this.__currentMethod = '';
 
 	},
 
@@ -83,6 +86,16 @@ core.Class('api.Browser', {
 			} else {
 
 				console.debug("Loaded Class: " + id);
+
+				this.__cache[id] = this.__template.render(this.__processor.process(data));
+
+				if (this.__currentFile === id) {
+					var toOpen = this.__currentFile;
+					if (this.__currentMethod) {
+						toOpen += ':' + this.__currentMethod;
+					}
+					this.open(toOpen);
+				}
 
 			}
 
@@ -146,114 +159,68 @@ core.Class('api.Browser', {
 
 			console.debug("Open: " + hash);
 
-			if (hash.match(/!/)) {
-				hash = hash.substr(1);
+			if (hash.charAt(0) === '!') {
+				hash = hash.slice(1);
 			}
 
-			var data, params = [];
-
-			if (hash.match(/\./)) {
-
-				data = hash.substr(1, hash.length - 1).split('.');
+			if (hash.charAt(0) === ':') {
+				hash = this.__currentFile + ':' + hash.slice(1);
+			}
 
 
-				params.push(data[0]); // namespace
+			this.__showTree(hash);
+			this.__showContent(hash);
 
-				if (data[1].match(/:/)) {
-					data = data[1].split(/:/);
-					params.push(data[0]); // class (id)
-					params.push(data[1]); // method
-				} else {
-					params.push(data[1]); // class (id)
+
+			location.hash = hash;
+			this.__currentFile = hash.split(/:/)[0];
+			this.__currentMethod = hash.split(/:/)[1] || '';
+
+		},
+
+		__showTree: function(hash) {
+
+			var file = hash.split(/:/)[0];
+			var segments = file.split('.');
+			var current = '';
+
+			for (var s = 0, l = segments.length; s < l; s++) {
+
+				current += segments[s];
+
+				var element = document.querySelector("#menu-tree a[href='#" + current + "']");
+				if (element != null) {
+					element.parentNode.className = ' unfold';
+					element.scrollIntoView();
 				}
 
+				current += '.';
 
-			} else if (hash.match(/:/)) {
+			}
 
-				params.push(this.__current.namespace);
-				params.push(this.__current.id);
-				params.push(hash.substr(1));
+		},
 
-				hash = this.__current.namespace + '.' + this.__current.id + ':' + hash.substr(1);
+		__showContent: function(hash) {
+
+			var data = hash.split(/:/);
+			var file = data[0];
+			var method = data[1] || '';
+
+
+			var cacheEntry = this.__cache[file];
+
+			if (cacheEntry === undefined && this.__currentFile !== file) {
+
+				core.io.Script.load(this.__base + '/' + file + '.jsonp');
 
 			} else {
-				params.push(null); // namespace
-				params.push(hash); // class (id)
+				$('#content').html(cacheEntry);
 			}
 
 
-			this.showTree.apply(this, params);
-
-			var success = this.showContent.apply(this, params);
-			if (success) {
-				location.hash = hash;
+			if (method) {
+				// TODO: scroll and highlight method
 			}
-
-		},
-
-		showTree: function(namespace, id) {
-
-			var selector = "a[href='#" + namespace + "." + id + "']";
-			var entry = $('#menu-tree').find(selector);
-
-			console.log(entry, selector);
-
-		},
-
-		showContent: function(namespace, id, method) {
-
-			namespace = typeof namespace == 'string' ? namespace : null;
-			id = typeof id == 'string' ? id : null;
-			method = typeof method == 'string' ? method : null;
-
-			if (id == null) {
-				return false;
-			}
-
-			var entry = this.__index[namespace + '.' + id];
-
-			if (entry === undefined) {
-				entry = this.__index[namespace + '.' + id] = {
-					namespace: namespace,
-					id: id
-				};
-			}
-
-
-			if (
-				entry.data === undefined
-			) {
-
-				if (namespace === null) {
-					var file = this.__base + '/' + id + '.jsonp';
-
-
-//					core.io.Script.load(base + "/$index.jsonp");
-
-
-				}
-				var file = this.__base + '/' + namespace + '.' + id + '.json';
-				this.load(file, function(status, json) {
-
-					entry.data = this.__processor.processJSON(json);
-					this.__current = entry;
-					this.__render(entry);
-
-				}, this);
-
-			} else {
-				this.__current = entry;
-				this.__render(entry);
-			}
-
-
-			return true;
-
-		},
-
-		__render: function(entry) {
-
-			$('#content').html(this.__template.render(entry.data));
 
 		}
 

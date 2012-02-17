@@ -16,15 +16,7 @@ core.Class("api.Processor", {
 
 	members: {
 
-		processJSON: function(json) {
-
-			var data = null;
-			try {
-				data = JSON.parse(json)
-			} catch (e) {
-				throw 'Invalid JSON';
-			}
-
+		process: function(data) {
 
 			data['constructor'].params = this.processParams(data['constructor'].params);
 
@@ -51,8 +43,7 @@ core.Class("api.Processor", {
 
 		processDoc: function(html) {
 
-			console.log('Processing Doc String', html);
-
+			// TODO: Verify if doc processing is necessary
 			return html;
 
 		},
