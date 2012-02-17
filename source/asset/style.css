@@ -1,3 +1,8 @@
+ul, ol, p{
+	margin: 0;
+	padding: 0;
+}
+
 html, body {
 	margin: 0;
 	padding: 0;
@@ -28,56 +33,40 @@ h1 {
 	padding: 0;
 }
 
+
+
 /*
  *	Menu area
  */
 
-#menu {
-	background: #fff;
-	-moz-border-radius: 10px;
-	-webkit-border-radius: 10px;
-	-moz-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
-	-webkit-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);	
-	position: absolute;
-	top: 30px;
-	left: 30px;
-	width: 170px;
-	min-height: 500px;
-}
-
-#menu h1 {
-	background: #eee;
-	margin: 0;
-	font-size: 1.1em;
-	padding: 0.5em;
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
-	margin-bottom: 10px;
-}
-
-#menu-tree {
+#tree {
 	font-size: 16px;
+	background: #fff;
+	width: 170px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	overflow: auto;
 }
 
-#menu ul,
-#menu li {
-	margin: 0;
-	padding: 0;
+#tree ul,
+#tree li {
 	list-style: none;
 }
 
-#menu ul {
+#tree ul {
 	border-bottom: 3px solid #ddd;
 	padding-bottom: 0.5em;
 	margin-left: 0.5em;
 	margin-bottom: 1em;
 }
 
-#menu li {
+#tree li {
 	line-height: 16px;
 }
 
-#menu a {
+#tree a {
 	display: block;
 	padding-left: 35px;
 	color: #222;
@@ -87,23 +76,23 @@ h1 {
 	text-decoration: none;
 }
 
-#menu-tree li ul {
+#tree li ul {
 	display: none;
 }
 
-#menu-tree li.unfold > ul {
+#tree li.unfold > ul {
 	display: block;
 }
 
-#menu-tree .tree-namespace {
+#tree .tree-namespace {
 	background-image: url('namespace.png');
 }
 
-#menu-tree li.unfold > a.tree-namespace {
+#tree li.unfold > a.tree-namespace {
 	background-image: url('namespace_unfold.png');
 }
 
-#menu-tree .tree-class {
+#tree .tree-class {
 	background-image: url('class.png');
 }
 
