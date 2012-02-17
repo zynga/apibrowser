@@ -63,7 +63,6 @@ core.Class('api.Browser', {
 				console.debug("Loaded Index");
 				
 				document.getElementById('menu-tree').innerHTML = this.__treeWalker(data, "");
-				this.open(location.hash);
 				
 			} else if (id == "$template") {
 
