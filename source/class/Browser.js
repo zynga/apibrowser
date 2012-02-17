@@ -68,8 +68,7 @@ core.Class('api.Browser', {
 
 			this.__tree = data;
 
-			var html = this.__walk(data, "");
-			document.getElementById('menu-tree').innerHTML = html;
+			document.getElementById('menu-tree').innerHTML = this.__treeWalker(data, "");
 
 			if (!this.__initialized) {
 
@@ -107,7 +106,7 @@ core.Class('api.Browser', {
 		},
 
 
-		__walk: function(node, base) {
+		__treeWalker: function(node, base) {
 
 			var that = this;
 			var html = '';
@@ -150,7 +149,7 @@ core.Class('api.Browser', {
 
 				if (entry.$type === "Package") {
 
-					html += '<li><div class="tree-namespace" data-ns="' + name + '">' + key + '</div><ul>' + this.__walk(entry, name) + '</ul></li>';
+					html += '<li><div class="tree-namespace" data-ns="' + name + '">' + key + '</div><ul>' + this.__treeWalker(entry, name) + '</ul></li>';
 					
 				} else {
 
