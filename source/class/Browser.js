@@ -36,19 +36,15 @@ core.Class('api.Browser', {
 			
 			var that = this;
 
-			$('#menu-tree').live('click', function(event) {
-
-			});
-
-			$('#content h3').live('click', function(event) {
+			$('h3').live('click', function(event) {
 				$(this).parent('li').toggleClass('unfold');
 			});
 
-			$('#content a').live('click', function(event) {
+			$('a').live('click', function(event) {
 
 				var link = $(this).attr('href');
 
-				if (link.substr(0, 1) == '#') {
+				if (link.charAt(0) == '#') {
 					that.open(link.substr(1));
 					return false;
 				}
