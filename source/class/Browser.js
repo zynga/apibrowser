@@ -1,35 +1,34 @@
 /**
  * The main class of the API Browser
  *
- * #asset(apibrowser/*)
+ * #asset(api/*)
  */
 core.Class('api.Browser', {
 
 	construct: function(base) {
 
+		// Store data path
 		base = base || 'data';
+
 		this.__base = base;
-
-		var that = this;
-
-		$('#content h3').live('click', function(event) {
-			$(this).parent('li').toggleClass('unfold');
-		});
-
-		$('a').live('click', function(event) {
-
-			var link = $(this).attr('href');
-
-			if (link.substr(0, 1) == '#') {
-				that.open(link.substr(1));
-				return false;
-			}
-
-		});
-
 
 		core.io.Script.load(base + "/$index.jsonp");
 
+
+		// Insert HTML
+		$(document.body).append('<div id="menu"><h1>API Browser</h1><ul id="menu-tree" class="filetree"></ul></div><div id="content"></div>');
+
+		// Load stylesheet
+		core.io.StyleSheet.load(core.io.Asset.toUri("api/style.css"));
+
+		// Load initial data
+		core.io.Queue.load([
+			base + "/$view.jsonp",
+			base + "/$index.jsonp",
+			base + "/$search.jsonp"
+		], this.__onLoad, this, false, "js");
+
+		// Initialize data processor
 		this.__processor = new api.Processor({
 			showPrivate: true
 		});
@@ -40,22 +39,50 @@ core.Class('api.Browser', {
 
 	members: {
 
-		callback: function(data, id) {
+		__onLoad : function() {
 
-			console.debug("Successfully loaded: " + id);
+			var that = this;
+
+			$('h3').live('click', function(event) {
+				$(this).parent('li').toggleClass('unfold');
+			});
+
+			$('a').live('click', function(event) {
+
+				var link = $(this).attr('href');
+				if (link.charAt(0) == '#') {
+					that.open(link.slice(1));
+					return false;
+				}
+
+			});
+
+			// Open opener URL
+			this.open(location.hash.slice(1));
+
+		},
+
+
+		callback: function(data, id) {
 
 			if (id == "$index") {
 
-				$('#menu-tree').html(this.__treeWalker(data, ''));
-				this.open(document.location.hash.substr(1));
+				console.debug("Loaded Index");
+
+				document.getElementById('menu-tree').innerHTML = this.__treeWalker(data, "");
+
+			} else if (id == "$view") {
+
+				console.debug("Loaded View");
+				this.__template = core.template.Compiler.compile(data.template);
 
 			} else if (id == "$search") {
 
-
+				console.debug("Loaded Search Index");
 
 			} else {
 
-
+				console.debug("Loaded Class: " + id);
 
 			}
 
@@ -116,6 +143,8 @@ core.Class('api.Browser', {
 		},
 
 		open: function(hash) {
+
+			console.debug("Open: " + hash);
 
 			if (hash.match(/!/)) {
 				hash = hash.substr(1);
@@ -199,7 +228,7 @@ core.Class('api.Browser', {
 					var file = this.__base + '/' + id + '.jsonp';
 
 
-					core.io.Script.load(base + "/$index.jsonp");
+//					core.io.Script.load(base + "/$index.jsonp");
 
 
 				}
@@ -224,22 +253,7 @@ core.Class('api.Browser', {
 
 		__render: function(entry) {
 
-			if (!this.__template) {
-
-				this.load('template.mustache', function(status, mustache) {
-					this.__template = mustache;
-					this.__render(entry);
-				}, this);
-
-				return;
-
-			}
-
-
-			var template = core.template.Compiler.compile(this.__template);
-			var html = template.render(entry.data);
-
-			$('#content').html(html);
+			$('#content').html(this.__template.render(entry.data));
 
 		}
 
