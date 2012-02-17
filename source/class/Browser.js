@@ -10,13 +10,41 @@ core.Class('api.Browser', {
 		base = base || 'data';
 		this.__base = base;
 
+		var that = this;
+
+		$('#menu-tree').live('click', function(event) {
+
+			var target = $(event.target);
+			if (target.hasClass('tree-class')) {
+				that.show(target.attr('data-ns'), target.attr('data-class'));
+			} else if (target.hasClass('tree-namespace')) {
+				$(target).parent('li').toggleClass('unfold');
+			}
+
+		});
+
+		$('#content h3').live('click', function(event) {
+			$(this).parent('li').toggleClass('unfold');
+		});
+
+		$('#content a').live('click', function(event) {
+
+			var link = $(this).attr('href');
+
+			if (link.substr(0, 1) == '#') {
+				that.open(link.substr(1));
+				return false;
+			}
+
+		});
+		
+
 		core.io.Script.load(base + "/$index.jsonp");
 
 		this.__processor = new api.Processor({
 			showPrivate: true
 		});
 
-		this.__tree = {};
 		this.__index = {};
 
 
@@ -30,8 +58,8 @@ core.Class('api.Browser', {
 
 			if (id == "$index") {
 				
-				console.debug(data);
-				this.init(data);
+				document.getElementById('menu-tree').innerHTML = this.__treeWalker(data, "");
+				this.open(document.location.hash);
 				
 			} else if (id == "$search") {
 				
@@ -52,56 +80,13 @@ core.Class('api.Browser', {
 
 			xhr.onreadystatechange = function() {
 
-				if (xhr.readyState === 4) {
+				if (xhr.readyState == 4) {
 					callback.call(scope, xhr.status, xhr.responseText || xhr.responseXML);
 				}
 
 			};
 
 			xhr.send(null);
-
-		},
-
-		init: function(data) {
-
-			var that = this;
-
-			this.__tree = data;
-
-			document.getElementById('menu-tree').innerHTML = this.__treeWalker(data, "");
-
-			if (!this.__initialized) {
-
-				$('#menu-tree').live('click', function(event) {
-
-					var target = $(event.target);
-					if (target.hasClass('tree-class')) {
-						that.show(target.attr('data-ns'), target.attr('data-class'));
-					} else if (target.hasClass('tree-namespace')) {
-						$(target).parent('li').toggleClass('unfold');
-					}
-
-				});
-
-				$('#content h3').live('click', function(event) {
-					$(this).parent('li').toggleClass('unfold');
-				});
-
-				$('#content a').live('click', function(event) {
-
-					var link = $(this).attr('href');
-
-					if (link.substr(0, 1) === '#') {
-						that.open(link.substr(1));
-						return false;
-					}
-
-				});
-
-				this.__initialized = true;
-				this.open(document.location.hash);
-
-			}
 
 		},
 
@@ -144,7 +129,7 @@ core.Class('api.Browser', {
 				var entry = node[key];
 				var name = base ? base + "." + key : key;
 
-				if (entry.$type === "Package") {
+				if (entry.$type == "Package") {
 
 					html += '<li><div class="tree-namespace" data-name="' + name + '">' + key + '</div><ul>' + this.__treeWalker(entry, name) + '</ul></li>';
 					
@@ -165,7 +150,6 @@ core.Class('api.Browser', {
 			if (hash.match(/!/)) {
 				hash = hash.substr(1);
 			}
-
 
 			var data, params = [];
 
@@ -197,7 +181,7 @@ core.Class('api.Browser', {
 			}
 
 			var success = this.show.apply(this, params);
-			if (success === true) {
+			if (success) {
 				document.location.hash = hash;
 			}
 
@@ -205,11 +189,11 @@ core.Class('api.Browser', {
 
 		show: function(namespace, id, method) {
 
-			namespace = typeof namespace === 'string' ? namespace : null;
-			id = typeof id === 'string' ? id : null;
-			method = typeof method === 'string' ? method : null;
+			namespace = typeof namespace == 'string' ? namespace : null;
+			id = typeof id == 'string' ? id : null;
+			method = typeof method == 'string' ? method : null;
 
-			if (namespace === null || id === null) {
+			if (namespace == null || id == null) {
 				return false;
 			}
 
@@ -248,7 +232,7 @@ core.Class('api.Browser', {
 
 		__render: function(entry) {
 
-			if (this.__template === undefined) {
+			if (!this.__template) {
 
 				this.load('template.mustache', function(status, mustache) {
 					this.__template = mustache;
