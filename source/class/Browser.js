@@ -38,13 +38,6 @@ core.Class('api.Browser', {
 
 			$('#menu-tree').live('click', function(event) {
 
-				var target = $(event.target);
-				if (target.hasClass('tree-class')) {
-					that.show(target.attr('data-ns'), target.attr('data-class'));
-				} else if (target.hasClass('tree-namespace')) {
-					$(target).parent('li').toggleClass('unfold');
-				}
-
 			});
 
 			$('#content h3').live('click', function(event) {
@@ -87,7 +80,6 @@ core.Class('api.Browser', {
 				
 				console.debug("Loaded Class: " + id);
 				
-				
 			}
 
 		},
@@ -96,30 +88,30 @@ core.Class('api.Browser', {
 
 			var html = '';
 
-			var filter = function(value) { 
-				return value.charAt(0) != "$"; 
+			var filter = function(value) {
+				return value.charAt(0) != "$";
 			};
-			
+
 			var comparator = function(a, b) {
 
 				if (node[a].$type == node[b].$type) {
-					
+
 					return a > b ? 1 : -1;
-					
+
 				} else if (node[a].$type == "Package") {
-					
+
 					return -1;
-					
+
 				} else if (node[b].$type == "Package") {
-					
+
 					return 1;
-					
+
 				} else {
-					
+
 					return 0;
-					
+
 				}
-				
+
 			}
 
 			var keys = Object.keys(node).filter(filter).sort(comparator);
@@ -132,11 +124,11 @@ core.Class('api.Browser', {
 
 				if (entry.$type == "Package") {
 
-					html += '<li><div class="tree-namespace" data-name="' + name + '">' + key + '</div><ul>' + this.__treeWalker(entry, name) + '</ul></li>';
-					
+					html += '<li><a class="tree-namespace" href="#' + name + '">' + key + '</a><ul>' + this.__treeWalker(entry, name) + '</ul></li>';
+
 				} else {
 
-					html += '<li><div class="tree-class" data-name="' + name + '">' + key + '</div></li>';
+					html += '<li><a class="tree-class" href="#' + name + '">' + key + '</a></li>';
 
 				}
 

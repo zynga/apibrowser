@@ -77,12 +77,14 @@ h1 {
 	line-height: 16px;
 }
 
-#menu div {
+#menu a {
+	display: block;
 	padding-left: 35px;
 	color: #222;
 	background-repeat: no-repeat;
 	background-position: 0px 0px;
 	line-height: 30px;
+	text-decoration: none;
 }
 
 #menu-tree li ul {
@@ -97,7 +99,7 @@ h1 {
 	background-image: url('namespace.png');
 }
 
-#menu-tree li.unfold > div.tree-namespace {
+#menu-tree li.unfold > a.tree-namespace {
 	background-image: url('namespace_unfold.png');
 }
 
