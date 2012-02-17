@@ -14,9 +14,14 @@ core.Class('api.Browser', {
 
 		core.io.Script.load(base + "/$index.jsonp");
 
+		this.__treeElem = document.createElement("ul");
+		this.__treeElem.id = "tree";
 
-		// Insert HTML
-		$(document.body).append('<div id="menu"><h1>API Browser</h1><ul id="menu-tree" class="filetree"></ul></div><div id="content"></div>');
+		this.__contentElem = document.createElement("div");
+		this.__contentElem.id = "content";
+
+		document.body.appendChild(this.__treeElem);
+		document.body.appendChild(this.__contentElem);
 
 		// Load stylesheet
 		core.io.StyleSheet.load(core.io.Asset.toUri("api/style.css"));
@@ -72,7 +77,7 @@ core.Class('api.Browser', {
 
 				console.debug("Loaded Index");
 
-				document.getElementById('menu-tree').innerHTML = this.__treeWalker(data, "");
+				this.__treeElem.innerHTML = this.__treeWalker(data, "");
 
 			} else if (id == "$view") {
 
@@ -188,10 +193,9 @@ core.Class('api.Browser', {
 
 				current += segments[s];
 
-				var element = document.querySelector("#menu-tree a[href='#" + current + "']");
+				var element = document.querySelector("#tree a[href='#" + current + "']");
 				if (element != null) {
 					element.parentNode.className = ' unfold';
-					element.scrollIntoView();
 				}
 
 				current += '.';
@@ -220,7 +224,6 @@ core.Class('api.Browser', {
 
 			if (method) {
 				// TODO: scroll and highlight method
-				method;
 			}
 
 		}
