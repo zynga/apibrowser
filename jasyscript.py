@@ -52,16 +52,7 @@ def build():
     includedByKernel = storeKernel("%s/script/kernel.js" % dist, session, assets=assets, formatting=formatting, debug=True)
 
     # Copy files from source
-    for staticFile in [
-        "index.html",
-        "style.css",
-        "style.small.css",
-        "template.mustache",
-        "class.png",
-        "namespace.png",
-        "namespace_unfold.png"
-    ]:
-        updateFile("source/%s" % staticFile, "%s/%s" % (dist, staticFile))
+    updateFile("source/index.html", "%s/index.html" % dist)
 
     # Rewrite template as jsonp
     jsonTemplate = json.dumps({ "template" : open("source/template.mustache").read() })
