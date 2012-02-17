@@ -8,11 +8,9 @@ core.Class('api.Browser', {
 	construct: function(base) {
 
 		base = base || 'data';
+		this.__base = base;
 
-		this.load(base + '/index.json', function(status, data) {
-			this.__base = base;
-			this.init(data);
-		}, this);
+		core.io.Script.load(base + "/$index.jsonp");
 
 		this.__processor = new api.Processor({
 			showPrivate: true
@@ -27,6 +25,23 @@ core.Class('api.Browser', {
 	members: {
 
 		callback: function(data, id) {
+			
+			console.debug("Loaded: " + id);
+
+			if (id == "$index") {
+				
+				console.debug(data);
+				this.init(data);
+				
+			} else if (id == "$search") {
+				
+				
+				
+			} else {
+				
+				
+				
+			}
 
 		},
 
@@ -47,61 +62,47 @@ core.Class('api.Browser', {
 
 		},
 
-		init: function(json) {
+		init: function(data) {
 
-			var data = null,
-				that = this;
+			var that = this;
 
-			try {
-				data = JSON.parse(json);
-			} catch(e) {
-				throw 'Invalid JSON';
-			}
+			this.__tree = data;
 
+			var html = this.walk();
+			document.getElementById('menu-tree').innerHTML = html;
 
-			if (Object.prototype.toString.call(data) === '[object Object]') {
+			if (!this.__initialized) {
 
-				this.__tree = data;
+				$('#menu-tree').live('click', function(event) {
 
-				var html = this.walk();
-				document.getElementById('menu-tree').innerHTML = html;
+					var target = $(event.target);
+					if (target.hasClass('tree-class')) {
+						that.show(target.attr('data-ns'), target.attr('data-class'));
+					} else if (target.hasClass('tree-namespace')) {
+						$(target).parent('li').toggleClass('unfold');
+					}
 
-				if (!this.__initialized) {
+				});
 
-					$('#menu-tree').live('click', function(event) {
+				$('#content h3').live('click', function(event) {
+					$(this).parent('li').toggleClass('unfold');
+				});
 
-						var target = $(event.target);
-						if (target.hasClass('tree-class')) {
-							that.show(target.attr('data-ns'), target.attr('data-class'));
-						} else if (target.hasClass('tree-namespace')) {
-							$(target).parent('li').toggleClass('unfold');
-						}
+				$('#content a').live('click', function(event) {
 
-					});
+					var link = $(this).attr('href');
 
-					$('#content h3').live('click', function(event) {
-						$(this).parent('li').toggleClass('unfold');
-					});
+					if (link.substr(0, 1) === '#') {
+						that.open(link.substr(1));
+						return false;
+					}
 
-					$('#content a').live('click', function(event) {
+				});
 
-						var link = $(this).attr('href');
-
-						if (link.substr(0, 1) === '#') {
-							that.open(link.substr(1));
-							return false;
-						}
-
-					});
-
-					this.__initialized = true;
-					this.open(document.location.hash);
+				this.__initialized = true;
+				this.open(document.location.hash);
 
 
-				}
-
-			} else {
-				throw 'Invalid JSON data';
 			}
 
 		},
@@ -142,7 +143,7 @@ core.Class('api.Browser', {
 				var newHref = href + id;
 
 				var entry = tree[id];
-				if (entry.type === undefined) {
+				if (entry.$type === "Package") {
 
 					html += this.__getHTML('folder', 'start', newHref, href);
 					html += this.walk(entry, newHref, html);
