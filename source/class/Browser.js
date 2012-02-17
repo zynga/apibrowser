@@ -108,7 +108,6 @@ core.Class('api.Browser', {
 
 		__treeWalker: function(node, base) {
 
-			var that = this;
 			var html = '';
 
 			var filter = function(value) { 
@@ -145,15 +144,13 @@ core.Class('api.Browser', {
 				var entry = node[key];
 				var name = base ? base + "." + key : key;
 
-				console.debug("NAME: " + name)
-
 				if (entry.$type === "Package") {
 
-					html += '<li><div class="tree-namespace" data-ns="' + name + '">' + key + '</div><ul>' + this.__treeWalker(entry, name) + '</ul></li>';
+					html += '<li><div class="tree-namespace" data-name="' + name + '">' + key + '</div><ul>' + this.__treeWalker(entry, name) + '</ul></li>';
 					
 				} else {
 
-					html += '<li><div class="tree-class" data-ns="' + name + '" data-class="' + name + '">' + key + '</div></li>';
+					html += '<li><div class="tree-class" data-name="' + name + '">' + key + '</div></li>';
 
 				}
 
