@@ -6,67 +6,86 @@
 core.Class('api.Browser', {
 
 	construct: function(base) {
+		
+		// Store data path
+		if (!base) {
+			base = "data";
+		}
 
-		base = base || 'data';
 		this.__base = base;
 
-		var that = this;
-
-		$('#menu-tree').live('click', function(event) {
-
-			var target = $(event.target);
-			if (target.hasClass('tree-class')) {
-				that.show(target.attr('data-ns'), target.attr('data-class'));
-			} else if (target.hasClass('tree-namespace')) {
-				$(target).parent('li').toggleClass('unfold');
-			}
-
-		});
-
-		$('#content h3').live('click', function(event) {
-			$(this).parent('li').toggleClass('unfold');
-		});
-
-		$('#content a').live('click', function(event) {
-
-			var link = $(this).attr('href');
-
-			if (link.substr(0, 1) == '#') {
-				that.open(link.substr(1));
-				return false;
-			}
-
-		});
+		// Load initial data
+		core.io.Queue.load([
+			base + "/$index.jsonp",
+			base + "/$template.jsonp",
+			base + "/$search.jsonp"
+		], this.__onLoad, this, false, "js");
 		
-
-		core.io.Script.load(base + "/$index.jsonp");
-
+		// Initialize data processor
 		this.__processor = new api.Processor({
 			showPrivate: true
 		});
 
 		this.__index = {};
 
-
 	},
 
 	members: {
+		
+		__onLoad : function() {
+			
+			var that = this;
+
+			$('#menu-tree').live('click', function(event) {
+
+				var target = $(event.target);
+				if (target.hasClass('tree-class')) {
+					that.show(target.attr('data-ns'), target.attr('data-class'));
+				} else if (target.hasClass('tree-namespace')) {
+					$(target).parent('li').toggleClass('unfold');
+				}
+
+			});
+
+			$('#content h3').live('click', function(event) {
+				$(this).parent('li').toggleClass('unfold');
+			});
+
+			$('#content a').live('click', function(event) {
+
+				var link = $(this).attr('href');
+
+				if (link.substr(0, 1) == '#') {
+					that.open(link.substr(1));
+					return false;
+				}
+
+			});
+			
+		},
+		
 
 		callback: function(data, id) {
 			
-			console.debug("Successfully loaded: " + id);
-
 			if (id == "$index") {
+				
+				console.debug("Loaded Index");
 				
 				document.getElementById('menu-tree').innerHTML = this.__treeWalker(data, "");
 				this.open(location.hash);
 				
+			} else if (id == "$template") {
+
+				console.debug("Loaded Template");
+				this.__template = core.template.Compiler.compile(data.template);
+				
 			} else if (id == "$search") {
 				
-				
+				console.debug("Loaded Search Index");
 				
 			} else {
 				
+				console.debug("Loaded Class: " + id);
 				
 				
 			}
@@ -214,20 +233,7 @@ core.Class('api.Browser', {
 
 		__render: function(entry) {
 
-			if (!this.__template) {
-
-				this.load('template.mustache', function(status, mustache) {
-					this.__template = mustache;
-					this.__render(entry);
-				}, this);
-
-				return;
-
-			}
-
-
-			var template = core.template.Compiler.compile(this.__template);
-			var html = template.render(entry.data);
+			var html = this.__template.render(entry.data);
 
 			$('#content').html(html);
 

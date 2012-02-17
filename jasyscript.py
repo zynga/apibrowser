@@ -1,56 +1,46 @@
 #!/usr/bin/env jasy
 
-import shutil
+import shutil, json
+
+dist = "build"
 
 
-#
-# Utils
-#
+session = Session()
+session.addProject(Project("../core/"))
+session.addProject(Project("."))
 
-def getSession():
-    session = Session()
-    session.addProject(Project("../core/"))
-    session.addProject(Project("."))
+# Configure permutations
+session.setField("es5", True)
+session.permutateField("debug")
 
-    return session
+# Optimizer configuration
+optimization = Optimization("variables", "declarations", "blocks", "privates")
 
 
-
-#
-# Tasks
-#
 
 @task
 def clean():
     logging.info("Clearing cache...")
-    session = getSession()
     session.clearCache()
-    session.close()
 
 
 @task
 def distclean():
     logging.info("Clearing cache...")
-    session = getSession()
     session.clearCache()
-    session.close()
 
-    if os.path.exists("build"):
+    if os.path.exists(dist):
         logging.info("Deleting build folder...")
-        shutil.rmtree("build")
+        shutil.rmtree(dist)
 
 
 @task
 def build():
-    session = getSession()
+    dist = "build"
     
     # Write API data
     writer = ApiWriter(session)
-    writer.write("build/data", callback="apibrowser.callback")
-
-    # Configure permutations
-    session.setField("es5", True)
-    session.permutateField("debug")
+    writer.write("%s/data" % dist, callback="apibrowser.callback")
 
     # Prepare assets
     resolver = Resolver(session.getProjects())
@@ -59,7 +49,7 @@ def build():
     formatting = Formatting('semicolon', 'comma')
 
     # Write kernel script
-    includedByKernel = storeKernel("build/script/kernel.js", session, assets=assets, formatting=formatting, debug=True)
+    includedByKernel = storeKernel("%s/script/kernel.js" % dist, session, assets=assets, formatting=formatting, debug=True)
 
     # Copy files from source
     for staticFile in [
@@ -71,11 +61,11 @@ def build():
         "namespace.png",
         "namespace_unfold.png"
     ]:
-        updateFile("source/%s" % staticFile, "build/%s" % staticFile)
+        updateFile("source/%s" % staticFile, "%s/%s" % (dist, staticFile))
 
-    # Compiler configuration
-    optimization = Optimization("variables", "declarations", "blocks")
-
+    # Rewrite template as jsonp
+    jsonTemplate = json.dumps({ "template" : open("source/template.mustache").read() })
+    writeFile("%s/data/$template.jsonp" % dist, "apibrowser.callback(%s, '$template')" % jsonTemplate)
 
     # Process every possible permutation
     for permutation in session.getPermutations():
@@ -87,9 +77,7 @@ def build():
 
         # Compressing classes
         classes = Sorter(resolver, permutation).getSortedClasses()
-        compressedCode = storeCompressed("build/script/browser-" + permutation.getChecksum() + ".js", classes,
+        compressedCode = storeCompressed("%s/script/browser-%s.js" % (dist, permutation.getChecksum()), classes,
             permutation=permutation, optimization=optimization, formatting=formatting, bootCode="apibrowser=new api.Browser();")
 
-    session.close()
 
- 
