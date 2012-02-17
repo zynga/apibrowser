@@ -1,7 +1,7 @@
 /**
  * The main class of the API Browser
  *
- * #asset(apibrowser/*)
+ * #asset(api/*)
  */
 core.Class('api.Browser', {
 
@@ -13,9 +13,13 @@ core.Class('api.Browser', {
 		}
 
 		this.__base = base;
+		
+		// Insert HTML
+		$(document.body).append('<div id="menu"><h1>API Browser</h1><ul id="menu-tree" class="filetree"></ul></div><div id="content"></div>');
 
 		// Load initial data
 		core.io.Queue.load([
+			core.io.Asset.toUri("api/style.css"),
 			base + "/$index.jsonp",
 			base + "/$template.jsonp",
 			base + "/$search.jsonp"
