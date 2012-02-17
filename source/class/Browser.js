@@ -26,7 +26,7 @@ core.Class('api.Browser', {
 
 		callback: function(data, id) {
 			
-			console.debug("Loaded: " + id);
+			console.debug("Successfully loaded: " + id);
 
 			if (id == "$index") {
 				
@@ -146,6 +146,8 @@ core.Class('api.Browser', {
 				var entry = node[key];
 				var name = base ? base + "." + key : key;
 
+				console.debug("NAME: " + name)
+
 				if (entry.$type === "Package") {
 
 					html += '<li><div class="tree-namespace" data-ns="' + name + '">' + key + '</div><ul>' + this.__walk(entry, name) + '</ul></li>';
@@ -197,8 +199,6 @@ core.Class('api.Browser', {
 				hash = this.__current.namespace + '.' + this.__current.id + ':' + hash.substr(1);
 
 			}
-
-console.log(hash, params);
 
 			var success = this.show.apply(this, params);
 			if (success === true) {
