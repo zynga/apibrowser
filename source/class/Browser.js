@@ -45,7 +45,7 @@ core.Class('api.Browser', {
 				var link = $(this).attr('href');
 
 				if (link.charAt(0) == '#') {
-					that.open(link.substr(1));
+					that.open(link.slice(1));
 					return false;
 				}
 
