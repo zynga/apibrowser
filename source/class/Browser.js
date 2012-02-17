@@ -68,7 +68,7 @@ core.Class('api.Browser', {
 
 			this.__tree = data;
 
-			var html = this.walk();
+			var html = this.__walk(data, "");
 			document.getElementById('menu-tree').innerHTML = html;
 
 			if (!this.__initialized) {
@@ -102,57 +102,59 @@ core.Class('api.Browser', {
 				this.__initialized = true;
 				this.open(document.location.hash);
 
-
 			}
 
 		},
 
-		__getHTML: function(type, what, name, namespace) {
 
-			var html = '';
-
-			namespace = namespace.substr(0, namespace.length - 1);
-
-			if (type === 'folder') {
-				if (what === 'start') {
-					html += '<li><div class="tree-namespace" data-ns="' + namespace + '">' + name + '</div><ul>';
-				} else if (what === 'end') {
-					html += '</ul></li>';
-				}
-			} else if (type === 'file') {
-				html += '<li><div class="tree-class" data-ns="' + namespace + '" data-class="' + name + '">' + name + '</div></li>';
-            }
-
-
-			return html;
-
-
-		},
-
-		walk: function(tree, href) {
+		__walk: function(node, base) {
 
 			var that = this;
-
-			tree = tree === undefined ? this.__tree : tree;
-			href = href === undefined ? '' : href + '.';
-
 			var html = '';
 
-			for (var id in tree) {
+			var filter = function(value) { 
+				return value.charAt(0) != "$"; 
+			};
+			
+			var comparator = function(a, b) {
 
-				var newHref = href + id;
+				console.debug(a, b)
+				
+				if (node[a].$type == node[b].$type) {
+					
+					return a > b ? 1 : -1;
+					
+				} else if (node[a].$type == "Package") {
+					
+					return -1;
+					
+				} else if (node[b].$type == "Package") {
+					
+					return 1;
+					
+				} else {
+					
+					return 0;
+					
+				}
+				
+			}
 
-				var entry = tree[id];
+			var keys = Object.keys(node).filter(filter).sort(comparator);
+
+			for (var i=0, l=keys.length; i<l; i++) {
+
+				var key = keys[i];
+				var entry = node[key];
+				var name = base ? base + "." + key : key;
+
 				if (entry.$type === "Package") {
 
-					html += this.__getHTML('folder', 'start', newHref, href);
-					html += this.walk(entry, newHref, html);
-					html += this.__getHTML('folder', 'end', newHref, href);
-
+					html += '<li><div class="tree-namespace" data-ns="' + name + '">' + key + '</div><ul>' + this.__walk(entry, name) + '</ul></li>';
+					
 				} else {
 
-					this.__index[href + id] = entry;
-					html += this.__getHTML('file', null, id, href);
+					html += '<li><div class="tree-class" data-ns="' + name + '" data-class="' + name + '">' + key + '</div></li>';
 
 				}
 
