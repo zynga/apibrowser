@@ -22,8 +22,8 @@ core.Class('api.Browser', {
 
 		// Load initial data
 		core.io.Queue.load([
+			base + "/$view.jsonp",
 			base + "/$index.jsonp",
-			base + "/$template.jsonp",
 			base + "/$search.jsonp"
 		], this.__onLoad, this, false, "js");
 		
@@ -70,9 +70,9 @@ core.Class('api.Browser', {
 				
 				document.getElementById('menu-tree').innerHTML = this.__treeWalker(data, "");
 				
-			} else if (id == "$template") {
+			} else if (id == "$view") {
 
-				console.debug("Loaded Template");
+				console.debug("Loaded View");
 				this.__template = core.template.Compiler.compile(data.template);
 				
 			} else if (id == "$search") {
@@ -230,9 +230,7 @@ core.Class('api.Browser', {
 
 		__render: function(entry) {
 
-			var html = this.__template.render(entry.data);
-
-			$('#content').html(html);
+			$('#content').html(this.__template.render(entry.data));
 
 		}
 
