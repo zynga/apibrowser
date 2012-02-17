@@ -23,6 +23,7 @@ core.Class("api.Processor", {
 
 			var exportData = {
 				id: data.id,
+				main: data.main,
 				'constructor': data['constructor']
 			};
 
