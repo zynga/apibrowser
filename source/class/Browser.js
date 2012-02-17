@@ -9,7 +9,7 @@ core.Class('api.Browser', {
 
 		base = base || 'data';
 
-		this.load(base + '/$index.json', function(status, data) {
+		this.load(base + '/index.json', function(status, data) {
 			this.__base = base;
 			this.init(data);
 		}, this);
@@ -23,11 +23,11 @@ core.Class('api.Browser', {
 
 
 	},
-	
+
 	members: {
-		
+
 		callback: function(data, id) {
-			
+
 		},
 
 		load: function(url, callback, scope) {
@@ -163,11 +163,16 @@ core.Class('api.Browser', {
 
 		open: function(hash) {
 
+			if (hash.match(/!/)) {
+				hash = hash.substr(1);
+			}
+
+
 			var data, params = [];
 
 			if (hash.match(/\./)) {
 
-				data = hash.substr(2, hash.length - 1).split('.');
+				data = hash.substr(1, hash.length - 1).split('.');
 
 
 				// namespace
@@ -192,6 +197,7 @@ core.Class('api.Browser', {
 
 			}
 
+console.log(hash, params);
 
 			var success = this.show.apply(this, params);
 			if (success === true) {
