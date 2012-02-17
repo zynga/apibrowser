@@ -220,7 +220,7 @@ core.Class('api.Browser', {
 
 			if (method) {
 				// TODO: scroll and highlight method
-				void;
+				null;
 			}
 
 		}
