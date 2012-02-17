@@ -118,8 +118,6 @@ core.Class('api.Browser', {
 			
 			var comparator = function(a, b) {
 
-				console.debug(a, b)
-				
 				if (node[a].$type == node[b].$type) {
 					
 					return a > b ? 1 : -1;
