@@ -50,6 +50,9 @@ core.Class('api.Browser', {
 
 			});
 			
+			// Open opener URL
+			this.open(location.hash.slice(1));
+			
 		},
 		
 
@@ -134,6 +137,8 @@ core.Class('api.Browser', {
 		},
 
 		open: function(hash) {
+			
+			console.debug("Open: " + hash);
 
 			if (hash.match(/!/)) {
 				hash = hash.substr(1);
