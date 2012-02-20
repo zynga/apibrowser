@@ -10,6 +10,7 @@
 {{&main.doc}}
 </div>
 
+{{?statics}}
 <div class="statics">
 	<h2>Statics</h2>
 	<ul>
@@ -33,33 +34,34 @@
 		{{/statics}}
 	</ul>
 </div>
+{{/statics}}
 
-<div class="constructor">
 {{#constructor}}
-	{{id}} ({{#params}}
-		{{#position}} , {{/position}}
-		<span class="param">{{name}}<sub>{{type}}</sub></span>
-	{{/params}})
+	<div class="constructor">
+		{{id}} ({{#params}}
+			{{#position}} , {{/position}}
+			<span class="param">{{name}}<sub>{{type}}</sub></span>
+		{{/params}})
+	</div>
 {{/constructor}}
-</div>
 
-{{#hasProperties}}
+{{?properties}}
 	<div class="properties">
 		<h2>Properties</h2>
 		{{#properties}}
 			<li>{{name}}</li>
 		{{/properties}}
 	</div>
-{{/hasProperties}}
+{{/properties}}
 
-{{#hasEvents}}
+{{?events}}
 	<div class="events">
 		<h2>Events</h2>
 		{{#events}}
 			<li>{{name}}</li>
 		{{/events}}
 	</div>
-{{/hasEvents}}
+{{/events}}
 
 {{?members}}
 	<div class="members">
