@@ -53,7 +53,9 @@ core.Class('api.Browser', {
 
 			$('h3').live('click', function(event) {
 				var item = $(this).parent('li');
-				that.open(item.attr('data-hash'));
+				if (item.attr('data-hash')) {
+					that.open(item.attr('data-hash'));
+				}
 			});
 
 			$('a').live('click', function(event) {
@@ -216,7 +218,7 @@ core.Class('api.Browser', {
 			var method = data[1] || '';
 
 			var cacheEntry = this.__cache[file];
-			if (cacheEntry != null && this.__currentFile !== file) {
+			if (cacheEntry === undefined && this.__currentFile !== file) {
 
 				core.io.Script.load(this.__base + '/' + file + '.jsonp');
 
