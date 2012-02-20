@@ -151,7 +151,7 @@ core.Class('api.Browser', {
 
 				if (entry.$type == "Package") {
 
-					html += '<li><a class="tree-namespace" href="#' + name + '">' + key + '</a><ul>' + this.__treeWalker(entry, name) + '</ul></li>';
+					html += '<li><a class="tree-package" href="#' + name + '">' + key + '</a><ul>' + this.__treeWalker(entry, name) + '</ul></li>';
 
 				} else {
 
@@ -200,7 +200,7 @@ core.Class('api.Browser', {
 
 				var element = document.querySelector("#tree a[href='#" + current + "']");
 				if (element != null) {
-					element.parentNode.className = ' unfold';
+					element.parentNode.className = ' open';
 				}
 
 				current += '.';
@@ -228,7 +228,7 @@ core.Class('api.Browser', {
 
 			if (method) {
 				// TODO: scroll and highlight method
-				$('#content').find("li[data-hash='\\:" + method + "']").addClass('unfold');
+				$('#content').find("li[data-hash='\\:" + method + "']").addClass('open');
 			}
 
 		}
