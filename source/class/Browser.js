@@ -39,9 +39,7 @@ core.Class('api.Browser', {
 		], this.__onLoad, this, false, "js");
 
 		// Initialize data processor
-		this.__processor = new api.Processor({
-			showPrivate: true
-		});
+		this.__processor = new api.Processor();
 
 
 		this.__cache = {};

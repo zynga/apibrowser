@@ -1,66 +1,89 @@
 
-<div id="heading">
-	<h1>
-		<span class="icon"></span>
-		{{id}}
-		<small>
-			{{#constructor}} (
-			{{#params}}
-	   			{{#position}} , {{/position}}
-				<span class="param">{{name}}<sub>{{type}}</sub></span>
-			{{/params}}
-			) {{/constructor}}
-		</small>
-	</h1>
+<div class="heading">
+	<h1>{{id}}</h1>
 </div>
 
 <div class="meta">
-	Implements <a href="#">Renderer</a>.
-	Inherits from <a href="#">BaseRenderer</a>, <a href="#">ExtraClass</a> and <a href="#">Class</a>.
 </div>
 
-<div id="description">
+<div class="description">
 {{&main.doc}}
 </div>
 
-<h2>Statics</h2>
-<ul>
-	{{#statics}}
-	<li data-hash=":{{name}}">
-		<h3>
-			{{name}}
-			<span class="params">(
-			{{#params}}
-			{{#position}} , {{/position}}
-				<span class="param">
-					{{name}}
-					<span class="type"> {{type}} </span>
-				</span>
-				{{/params}}
-			)</span>
-		</h3>
-		<span class="return-value">{{returns}}{{^returns}}-{{/returns}}</span>
-		<div class="doc">{{&doc}}</div>
-	</li>
-	{{/statics}}
-</ul>
-
-<h2>Members</h2>
-<ul>
-	{{#members}}
-	<li data-hash=":{{name}}">
-		<h3>
-			{{name}}
-			<span class="params">
+<div class="statics">
+	<h2>Statics</h2>
+	<ul>
+		{{#statics}}
+		<li data-hash=":{{name}}">
+			<h3>
+				{{name}}
+				<span class="params">(
 				{{#params}}
 				{{#position}} , {{/position}}
-				<span class="type">{{type}}</span> {{.}}
-				{{/params}}
-			</span>
-		</h3>
-		<span class="return-value">{{returns}}{{^returns}}-{{/returns}}</span>
-		<div class="doc">{{&doc}}</div>
-	</li>
-	{{/members}}
-</ul>
+					<span class="param">
+						{{name}}
+						<span class="type"> {{type}} </span>
+					</span>
+					{{/params}}
+				)</span>
+			</h3>
+			<span class="return-value">{{returns}}{{^returns}}-{{/returns}}</span>
+			<div class="doc">{{&doc}}</div>
+		</li>
+		{{/statics}}
+	</ul>
+</div>
+
+<div class="constructor">
+{{#constructor}}
+	{{id}} ({{#params}}
+		{{#position}} , {{/position}}
+		<span class="param">{{name}}<sub>{{type}}</sub></span>
+	{{/params}})
+{{/constructor}}
+</div>
+
+{{#hasProperties}}
+	<div class="properties">
+		<h2>Properties</h2>
+		{{#properties}}
+			<li>{{name}}</li>
+		{{/properties}}
+	</div>
+{{/hasProperties}}
+
+{{#hasEvents}}
+	<div class="events">
+		<h2>Events</h2>
+		{{#events}}
+			<li>{{name}}</li>
+		{{/events}}
+	</div>
+{{/hasEvents}}
+
+{{?members}}
+	<div class="members">
+		<h2>Members</h2>
+		<ul>
+			{{#members}}
+			<li data-hash=":{{name}}">
+				<h3>
+					{{name}}
+					<span class="params">
+						{{#params}}
+						{{#position}} , {{/position}}
+						<span class="type">{{type}}</span> {{.}}
+						{{/params}}
+					</span>
+				</h3>
+				<span class="return-value">{{returns}}{{^returns}}-{{/returns}}</span>
+				<div class="doc">{{&doc}}</div>
+			</li>
+			{{/members}}
+		</ul>
+	</div>
+{{/members}}
+
+
+
 

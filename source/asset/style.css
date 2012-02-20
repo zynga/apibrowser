@@ -9,6 +9,14 @@ body {
 	-webkit-text-size-adjust: none;
 }
 
+h2{
+	font-size: 30px;
+}
+
+h3{
+	font-size: 24px;
+}
+
 
 /* 
 ========================================================================
@@ -83,4 +91,12 @@ body {
 	bottom: 0;
 }
 
+.statics, 
+.properties, 
+.events, 
+.members{
+	background: #eee;
+	border-top: 1px solid #efe;
+	border-bottom: #ede;
+}
 

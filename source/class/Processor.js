@@ -18,38 +18,25 @@ core.Class("api.Processor", {
 
 		process: function(data) {
 
-			data['constructor'].params = this.processParams(data['constructor'].params);
+			data['constructor'].params = this.__processParams(data['constructor'].params);
 
-
-			var exportData = {
-				id: data.id,
-				main: data.main,
-				'constructor': data['constructor']
-			};
-
-
-			var i, l;
-
-			if (data.members !== undefined) {
-				exportData.members = this.processMethods(data.members);
+			if (data.members != null) {
+				data.members = this.__processSection(data.members);
+				data.hasMembers = true;
 			}
 
-			if (data.statics !== undefined) {
-				exportData.statics = this.processMethods(data.statics);
+			if (data.statics != null) {
+				data.statics = this.__processSection(data.statics);
+				data.hasStatics = true;
 			}
+		
 
-			return exportData;
-
-		},
-
-		processDoc: function(html) {
-
-			// TODO: Verify if doc processing is necessary
-			return html;
+			return data;
 
 		},
+		
 
-		processMethods: function(object) {
+		__processSection: function(object) {
 
 			var arr = [];
 
@@ -58,12 +45,8 @@ core.Class("api.Processor", {
 				var data = object[id];
 				data.name = id;
 
-				if (data.params !== undefined) {
-					data.params = this.processParams(data.params);
-				}
-
-				if (data.doc !== undefined) {
-					data.doc = this.processDoc(data.doc);
+				if (data.params != null) {
+					data.params = this.__processParams(data.params);
 				}
 
 				arr.push(data);
@@ -74,7 +57,8 @@ core.Class("api.Processor", {
 
 		},
 
-		processParams: function(params) {
+
+		__processParams: function(params) {
 
 			var arr = [],
 				id;
@@ -87,7 +71,7 @@ core.Class("api.Processor", {
 
 				var pos = params[id].position;
 
-				if (pos !== undefined) {
+				if (pos != null) {
 
 					var data = params[id];
 					data.name = id;
