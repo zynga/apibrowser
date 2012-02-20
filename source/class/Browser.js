@@ -215,10 +215,8 @@ core.Class('api.Browser', {
 			var file = data[0];
 			var method = data[1] || '';
 
-
 			var cacheEntry = this.__cache[file];
-
-			if (cacheEntry === undefined && this.__currentFile !== file) {
+			if (cacheEntry != null && this.__currentFile !== file) {
 
 				core.io.Script.load(this.__base + '/' + file + '.jsonp');
 
