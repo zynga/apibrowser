@@ -1,7 +1,7 @@
 
 core.Class('api.test.Extended', {
 
-	includes: [ api.test.Base ],
+	include: [ api.test.Base ],
 
 	construct: function(color, weight) {
 
