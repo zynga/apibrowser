@@ -1,5 +1,4 @@
 /**
- * The main class of the API Browser
  *
  * #asset(api/*)
  */
@@ -41,6 +40,7 @@ core.Class('api.Browser', {
 
 		this.__cache = {};
 		this.__currentFile = '';
+		this.__currentHTML = '';
 		this.__currentMethod = '';
 
 	},
@@ -52,7 +52,8 @@ core.Class('api.Browser', {
 			var that = this;
 
 			$('h3').live('click', function(event) {
-				$(this).parent('li').toggleClass('unfold');
+				var item = $(this).parent('li');
+				that.open(item.attr('data-hash'));
 			});
 
 			$('a').live('click', function(event) {
@@ -217,13 +218,15 @@ core.Class('api.Browser', {
 
 				core.io.Script.load(this.__base + '/' + file + '.jsonp');
 
-			} else {
+			} else if (this.__currentHTML !== file){
 				$('#content').html(cacheEntry);
+				this.__currentHTML = file; // current file !== html content (initial load!)
 			}
 
 
 			if (method) {
 				// TODO: scroll and highlight method
+				$('#content').find("li[data-hash='\\:" + method + "']").addClass('unfold');
 			}
 
 		}
