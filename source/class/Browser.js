@@ -66,7 +66,11 @@ core.Class('api.Browser', {
 
 			});
 
-			// Open opener URL
+			window.onhashchange = function() {
+				that.open(location.hash.slice(1));
+			};
+
+			// Open initial hash
 			this.open(location.hash.slice(1));
 
 		},
