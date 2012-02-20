@@ -15,7 +15,7 @@ core.Class('api.Browser', {
 
 		this.__headElem = document.createElement("div");
 		this.__headElem.id = "head";
-		this.__headElem.innerHTML = "API Browser";
+		this.__headElem.innerHTML = "API Documentation";
 
 		this.__treeElem = document.createElement("ul");
 		this.__treeElem.id = "tree";
