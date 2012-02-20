@@ -18,18 +18,19 @@ core.Class("api.Processor", {
 
 		process: function(data) {
 
-			data['constructor'].params = this.__processParams(data['constructor'].params);
+			if ("constructor" in data) {
+				data["constructor"].params = this.__processParams(data["constructor"].params);
+			}
 
-			if (data.members != null) {
+			if ("members" in data) {
 				data.members = this.__processSection(data.members);
-				data.hasMembers = true;
 			}
 
-			if (data.statics != null) {
+			if ("statics" in data) {
 				data.statics = this.__processSection(data.statics);
-				data.hasStatics = true;
 			}
-		
+			
+			console.debug("Data: ", data);
 
 			return data;
 

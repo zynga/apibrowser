@@ -15,9 +15,9 @@ core.Class('api.Browser', {
 
 		this.__headElem = document.createElement("div");
 		this.__headElem.id = "head";
-		this.__headElem.innerHTML = "API Browser";
+		this.__headElem.innerHTML = "API Documentation";
 
-		this.__treeElem = document.createElement("ul");
+		this.__treeElem = document.createElement("div");
 		this.__treeElem.id = "tree";
 
 		this.__contentElem = document.createElement("div");
@@ -87,7 +87,7 @@ core.Class('api.Browser', {
 
 				console.debug("Loaded Index");
 
-				this.__treeElem.innerHTML = this.__treeWalker(data, "");
+				this.__treeElem.innerHTML = "<ul>" + this.__treeWalker(data, "") + "</ul>";
 
 			} else if (id == "$view") {
 

@@ -4,9 +4,51 @@
 </div>
 
 <div class="meta">
+	{{?uses}}
+		<h2>Uses</h2>
+		<ul>
+		{{#uses}}
+			<li><a href="#{{.}}">{{.}}</a></li>
+		{{/uses}}
+		</ul>
+	{{/uses}}
+	
+	{{?implements}}
+		<h2>Implements</h2>
+		<ul>
+		{{#implements}}
+			<li><a href="#{{.}}">{{.}}</a></li>
+		{{/implements}}
+		</ul>
+	{{/implements}}
+	{{?implementedBy}}
+		<h2>Implemented By</h2>
+		<ul>
+		{{#implementedBy}}
+			<li><a href="#{{.}}">{{.}}</a></li>
+		{{/implementedBy}}
+		</ul>
+	{{/implementedBy}}
+		
+	{{?includes}}
+		<h2>Includes</h2>
+		<ul>
+		{{#includes}}
+			<li><a href="#{{.}}">{{.}}</a></li>
+		{{/includes}}
+		</ul>
+	{{/includes}}
+	{{?includedBy}}
+		<h2>Included By</h2>
+		<ul>
+		{{#includedBy}}
+			<li><a href="#{{.}}">{{.}}</a></li>
+		{{/includedBy}}
+		</ul>
+	{{/includedBy}}
 </div>
 
-<div class="description">
+<div class="description doc">
 {{&main.doc}}
 </div>
 
@@ -18,17 +60,21 @@
 		<li id="{{name}}">
 			<h3>
 				{{name}}
-				<span class="params">(
-				{{#params}}
-				{{#position}} , {{/position}}
-					<span class="param">
-						{{name}}
-						<span class="type"> {{type}} </span>
-					</span>
-					{{/params}}
-				)</span>
+				{{?params}}
+					<span class="params">(
+					{{#params}}
+					{{#position}} , {{/position}}
+						<span class="param">
+							{{name}}
+							<span class="type"> {{type}} </span>
+						</span>
+						{{/params}}
+					)</span>
+				{{/params}}
+				{{?returns}}
+					<span class="returns">&#8594; {{returns}}</span>
+				{{/returns}}
 			</h3>
-			<span class="return-value">{{returns}}{{^returns}}-{{/returns}}</span>
 			<div class="doc">{{&doc}}</div>
 		</li>
 		{{/statics}}
@@ -37,6 +83,7 @@
 {{/statics}}
 
 {{#constructor}}
+	<h2>Constructor</h2>
 	<div class="constructor">
 		{{id}} ({{#params}}
 			{{#position}} , {{/position}}
@@ -50,10 +97,10 @@
 		<h2>Properties</h2>
 		<ul>
 		{{#properties}}
-			<li id="{{name}}">
-				<h3>{{name}}</h3>
+		<li id="{{name}}">
+				<h3>{{name}} ({{type}})</h3>
 				<div class="doc">{{&doc}}</div>
-			</li>
+		</li>
 		{{/properties}}
 		</ul>
 	</div>
@@ -63,7 +110,7 @@
 	<div class="events">
 		<h2>Events</h2>
 		{{#events}}
-			<li>{{name}}</li>
+			<li>{{name}} ({{type}})</li>
 		{{/events}}
 	</div>
 {{/events}}

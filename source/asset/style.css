@@ -9,6 +9,10 @@ body {
 	-webkit-text-size-adjust: none;
 }
 
+h1{
+	font-size: 50px;
+}
+
 h2{
 	font-size: 30px;
 }
@@ -17,12 +21,28 @@ h3{
 	font-size: 24px;
 }
 
+code{
+	font-family: "Inconsolata-g", "Consolas", monospace;
+	font-size: 14px;
+	border: 1px solid red;
+}
+
 
 /* 
 ========================================================================
    HEAD 
 ========================================================================
 */
+
+#head{
+	background: #d50000;
+	height: 50px;
+	line-height: 50px;
+	color: #eee;
+	font-size: 30px;
+	text-indent: 30px;
+	text-shadow: 0px 1px 1px rgba(0,0,0,0.5);
+}
 
 
 
@@ -35,12 +55,16 @@ h3{
 #tree {
 	width: 250px;
 	position: absolute;
-	top: 0;
+	top: 50px;
 	left: 0;
 	bottom: 0;
 	overflow: auto;
 	background: #121212;
 	color: #999;
+}
+
+#tree ul{
+	padding-left: 20px;
 }
 
 #tree a {
@@ -86,17 +110,94 @@ h3{
 #content {
 	position: absolute;
 	left: 250px;
-	top: 0;
+	top: 50px;
 	right: 0;
 	bottom: 0;
+	overflow: auto;
+	
 }
 
-.statics, 
-.properties, 
-.events, 
-.members{
+#content ul{
+	
+}
+
+#content .statics, 
+#content .properties, 
+#content .events, 
+#content .members{
 	background: #eee;
 	border-top: 1px solid #efe;
 	border-bottom: #ede;
 }
 
+#content .statics .doc,
+#content .properties .doc,
+#content .events .doc,
+#content .members .doc{
+	display: none;
+}
+
+#content .statics .open .doc,
+#content .properties .open .doc,
+#content .events .open .doc,
+#content .members .open .doc{
+	display: block;
+}
+
+#content .statics .returns,
+#content .properties .returns,
+#content .events .returns,
+#content .members .returns{
+	font-style: italic;
+}
+
+#content .returns,
+#content .params{
+	font-size: 14px;
+}
+
+
+
+/* 
+========================================================================
+   CONTENT :: DOC
+========================================================================
+*/
+
+#content .doc p,
+#content .doc ul,
+#content .doc ol{
+	margin: 10px 0;
+}
+
+#content .doc ul{
+	list-style: square;
+	padding-left: 28px;
+}
+
+#content .doc pre{
+	border: 1px solid #777;
+}
+
+#content .doc table{
+	width: 100%;
+	border: 1px solid #777;
+}
+
+#content .doc table th,
+#content .doc table td{
+	text-align: left;
+	font-size: 14px;
+}
+
+#content .doc table th{
+	font-weight: bold;
+	color: #777;
+}
+
+
+/* 
+========================================================================
+   CONTENT :: CODE
+========================================================================
+*/
