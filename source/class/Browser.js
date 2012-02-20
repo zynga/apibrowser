@@ -13,12 +13,17 @@ core.Class('api.Browser', {
 
 		core.io.Script.load(base + "/$index.jsonp");
 
+		this.__headElem = document.createElement("div");
+		this.__headElem.id = "head";
+		this.__headElem.innerHTML = "API Browser";
+
 		this.__treeElem = document.createElement("ul");
 		this.__treeElem.id = "tree";
 
 		this.__contentElem = document.createElement("div");
 		this.__contentElem.id = "content";
 
+		document.body.appendChild(this.__headElem);
 		document.body.appendChild(this.__treeElem);
 		document.body.appendChild(this.__contentElem);
 
