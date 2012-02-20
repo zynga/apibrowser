@@ -38,7 +38,7 @@
 	<h2>Statics<span>Returns</span></h2>
 	<ul>
 		{{#statics}}
-		<li>
+		<li data-hash=":{{name}}">
 			<span class="line-number">{{line}}</span>
 			<h3>
 				{{name}}
@@ -64,7 +64,7 @@
 	<h2>Members<span>Returns</span></h2>
 	<ul>
 		{{#members}}
-		<li>
+		<li data-hash=":{{name}}">
 			<span class="line-number">{{line}}</span>
 			<h3>
 				{{name}}
