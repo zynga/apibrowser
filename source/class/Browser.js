@@ -53,7 +53,9 @@ core.Class('api.Browser', {
 
 			$('h3').live('click', function(event) {
 				var item = $(this).parent('li');
-				that.open(item.attr('data-hash'));
+				if (item.attr('data-hash')) {
+					that.open(item.attr('data-hash'));
+				}
 			});
 
 			$('a').live('click', function(event) {
