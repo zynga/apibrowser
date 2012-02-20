@@ -27,6 +27,11 @@ core.Class('api.Browser', {
 		document.body.appendChild(this.__treeElem);
 		document.body.appendChild(this.__contentElem);
 
+		// Feature Test
+		if (core.bom.Style.property("maskImage")) {
+			document.documentElement.className += " maskImage";
+		}
+
 		// Load stylesheet
 		core.io.StyleSheet.load(core.io.Asset.toUri("api/reset.css"));
 		core.io.StyleSheet.load(core.io.Asset.toUri("api/style.css"));

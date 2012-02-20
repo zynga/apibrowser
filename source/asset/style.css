@@ -69,11 +69,11 @@ code{
 
 #tree a {
 	display: block;
-	padding-left: 35px;
+	padding-left: 32px;
 	color: inherit;
 	background-repeat: no-repeat;
 	background-position: 0px 0px;
-	line-height: 30px;
+	line-height: 32px;
 	text-decoration: none;
 }
 
@@ -85,18 +85,23 @@ code{
 	display: block;
 }
 
-#tree a.tree-package {
-	background-image: url('package.png');
+#tree .tree-package {
+	background-image: url('glyphicons_144_folder_open.png');
 	font-weight: bold;
 }
 
-#tree li.open > a.tree-package {
-	background-image: url('package-open.png');
+#tree > ul > li > a.tree-package{
+	background-image: url('glyphicons_020_home.png');
 }
 
-#tree a.tree-class {
-	background-image: url('class.png');
+#tree .tree-class {
+	background-image: url('glyphicons_036_file.png');
 }
+
+
+
+
+
 
 
 
