@@ -42,7 +42,6 @@ code{
 	font-size: 30px;
 	text-indent: 30px;
 	text-shadow: 0px 1px 1px rgba(0,0,0,0.5);
-	-webkit-box-shadow: 0px 2px 15px rgba(0,0,0,0.5);
 }
 
 
@@ -176,6 +175,25 @@ code{
 	padding-left: 28px;
 }
 
+#content .doc pre{
+	border: 1px solid #777;
+}
+
+#content .doc table{
+	width: 100%;
+	border: 1px solid #777;
+}
+
+#content .doc table th,
+#content .doc table td{
+	text-align: left;
+	font-size: 14px;
+}
+
+#content .doc table th{
+	font-weight: bold;
+	color: #777;
+}
 
 
 /* 

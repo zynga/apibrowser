@@ -52,8 +52,6 @@
 {{&main.doc}}
 </div>
 
-
-
 {{?statics}}
 <div class="statics">
 	<h2>Statics</h2>
@@ -74,7 +72,7 @@
 					)</span>
 				{{/params}}
 				{{?returns}}
-					<span class="returns">-> {{returns}}</span>
+					<span class="returns">&#8594; {{returns}}</span>
 				{{/returns}}
 			</h3>
 			<div class="doc">{{&doc}}</div>
@@ -98,7 +96,7 @@
 	<div class="properties">
 		<h2>Properties</h2>
 		{{#properties}}
-			<li>{{name}}</li>
+			<li>{{name}} ({{type}})</li>
 		{{/properties}}
 	</div>
 {{/properties}}
@@ -107,7 +105,7 @@
 	<div class="events">
 		<h2>Events</h2>
 		{{#events}}
-			<li>{{name}}</li>
+			<li>{{name}} ({{type}})</li>
 		{{/events}}
 	</div>
 {{/events}}
