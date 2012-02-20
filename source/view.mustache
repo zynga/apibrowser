@@ -20,17 +20,21 @@
 		<li data-hash=":{{name}}">
 			<h3>
 				{{name}}
-				<span class="params">(
-				{{#params}}
-				{{#position}} , {{/position}}
-					<span class="param">
-						{{name}}
-						<span class="type"> {{type}} </span>
-					</span>
-					{{/params}}
-				)</span>
+				{{?params}}
+					<span class="params">(
+					{{#params}}
+					{{#position}} , {{/position}}
+						<span class="param">
+							{{name}}
+							<span class="type"> {{type}} </span>
+						</span>
+						{{/params}}
+					)</span>
+				{{/params}}
+				{{?returns}}
+					<span class="returns">-> {{returns}}</span>
+				{{/returns}}
 			</h3>
-			<span class="return-value">{{returns}}{{^returns}}-{{/returns}}</span>
 			<div class="doc">{{&doc}}</div>
 		</li>
 		{{/statics}}

@@ -123,3 +123,17 @@ code{
 	border-bottom: #ede;
 }
 
+.statics .doc,
+.properties .doc,
+.events .doc,
+.members .doc{
+	display: none;
+}
+
+.statics .returns,
+.properties .returns,
+.events .returns,
+.members .returns{
+	font-style: italic;
+}
+
