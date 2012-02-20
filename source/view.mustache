@@ -15,7 +15,7 @@
 	<h2>Statics</h2>
 	<ul>
 		{{#statics}}
-		<li data-hash=":{{name}}">
+		<li id="{{name}}">
 			<h3>
 				{{name}}
 				<span class="params">(
@@ -48,9 +48,14 @@
 {{?properties}}
 	<div class="properties">
 		<h2>Properties</h2>
+		<ul>
 		{{#properties}}
-			<li>{{name}}</li>
+			<li id="{{name}}">
+				<h3>{{name}}</h3>
+				<div class="doc">{{&doc}}</div>
+			</li>
 		{{/properties}}
+		</ul>
 	</div>
 {{/properties}}
 
@@ -68,7 +73,7 @@
 		<h2>Members</h2>
 		<ul>
 			{{#members}}
-			<li data-hash=":{{name}}">
+			<li id="{{name}}">
 				<h3>
 					{{name}}
 					<span class="params">
