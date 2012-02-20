@@ -23,6 +23,7 @@ core.Class('api.Browser', {
 		document.body.appendChild(this.__contentElem);
 
 		// Load stylesheet
+		core.io.StyleSheet.load(core.io.Asset.toUri("api/reset.css"));
 		core.io.StyleSheet.load(core.io.Asset.toUri("api/style.css"));
 
 		// Load initial data

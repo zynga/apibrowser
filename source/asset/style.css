@@ -68,7 +68,7 @@ html, body {
 }
 
 #tree li.open > a.tree-package {
-	background-image: url('package_open.png');
+	background-image: url('package-open.png');
 }
 
 #tree .tree-class {
