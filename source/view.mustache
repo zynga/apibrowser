@@ -4,6 +4,48 @@
 </div>
 
 <div class="meta">
+	{{?uses}}
+		<h2>Uses</h2>
+		<ul>
+		{{#uses}}
+			<li><a href="#{{.}}">{{.}}</a></li>
+		{{/uses}}
+		</ul>
+	{{/uses}}
+	
+	{{?implements}}
+		<h2>Implements</h2>
+		<ul>
+		{{#implements}}
+			<li><a href="#{{.}}">{{.}}</a></li>
+		{{/implements}}
+		</ul>
+	{{/implements}}
+	{{?implementedBy}}
+		<h2>Implemented By</h2>
+		<ul>
+		{{#implementedBy}}
+			<li><a href="#{{.}}">{{.}}</a></li>
+		{{/implementedBy}}
+		</ul>
+	{{/implementedBy}}
+		
+	{{?includes}}
+		<h2>Includes</h2>
+		<ul>
+		{{#includes}}
+			<li><a href="#{{.}}">{{.}}</a></li>
+		{{/includes}}
+		</ul>
+	{{/includes}}
+	{{?includedBy}}
+		<h2>Included By</h2>
+		<ul>
+		{{#includedBy}}
+			<li><a href="#{{.}}">{{.}}</a></li>
+		{{/includedBy}}
+		</ul>
+	{{/includedBy}}
 </div>
 
 <div class="description">

@@ -9,6 +9,10 @@ body {
 	-webkit-text-size-adjust: none;
 }
 
+h1{
+	font-size: 50px;
+}
+
 h2{
 	font-size: 30px;
 }
@@ -114,26 +118,41 @@ code{
 	
 }
 
-.statics, 
-.properties, 
-.events, 
-.members{
+#content ul{
+	
+}
+
+#content .statics, 
+#content .properties, 
+#content .events, 
+#content .members{
 	background: #eee;
 	border-top: 1px solid #efe;
 	border-bottom: #ede;
 }
 
-.statics .doc,
-.properties .doc,
-.events .doc,
-.members .doc{
+#content .statics .doc,
+#content .properties .doc,
+#content .events .doc,
+#content .members .doc{
 	display: none;
 }
 
-.statics .returns,
-.properties .returns,
-.events .returns,
-.members .returns{
+#content .statics .open .doc,
+#content .properties .open .doc,
+#content .events .open .doc,
+#content .members .open .doc{
+	display: block;
+}
+
+#content .statics .returns,
+#content .properties .returns,
+#content .events .returns,
+#content .members .returns{
 	font-style: italic;
 }
 
+#content .returns,
+#content .params{
+	font-size: 14px;
+}
