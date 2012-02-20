@@ -37,7 +37,8 @@ code{
 	color: #eee;
 	font-size: 30px;
 	text-indent: 30px;
-	text-shadow: 0px 1px 1px rgba(0,0,0,0.4);
+	text-shadow: 0px 1px 1px rgba(0,0,0,0.5);
+	-webkit-box-shadow: 0px 2px 15px rgba(0,0,0,0.5);
 }
 
 
@@ -57,6 +58,10 @@ code{
 	overflow: auto;
 	background: #121212;
 	color: #999;
+}
+
+#tree ul{
+	padding-left: 20px;
 }
 
 #tree a {

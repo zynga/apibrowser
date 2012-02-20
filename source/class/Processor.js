@@ -29,6 +29,8 @@ core.Class("api.Processor", {
 			if ("statics" in data) {
 				data.statics = this.__processSection(data.statics);
 			}
+			
+			console.debug("Data: ", data);
 
 			return data;
 
