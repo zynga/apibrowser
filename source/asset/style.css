@@ -128,17 +128,23 @@ code{
 	
 }
 
+#content ul.params{
+	display: inline-block;
+}
+
 #content ul.params li{
 	display: inline-block;
 }
 
-#content ul.params li:after{
-	content: ", ";
-	
+#content span.types{
+	font-size: 12px;
 }
 
-#content ul.params{
-	border: 1px solid black;
+#content ul.types{
+	display: inline-block;
+}
+
+#content ul.types li{
 	display: inline-block;
 }
 
