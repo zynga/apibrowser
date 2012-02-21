@@ -55,6 +55,10 @@ core.Class("api.Processor", {
 				if (data.params != null) {
 					data.params = this.__processParams(data.params);
 				}
+				
+				if (data.type == "Function") {
+					data.isFunction = true;
+				}
 
 				arr.push(data);
 

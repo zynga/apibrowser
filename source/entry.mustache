@@ -1,16 +1,22 @@
 <li id="{{name}}">
 	<h3>
 		{{name}}
-		{{?params}}
-			(<ul class="params">
-			{{#params}}
-				<li>{{name}}{{>type}}</li>
+		{{#isFunction}}
+			{{?params}}
+				(<ul class="params">
+				{{#params}}
+					<li>{{name}}{{>type}}</li>
+				{{/params}}
+				</ul>)
 			{{/params}}
-			</ul>)
-		{{/params}}
-		{{?returns}}
-			<span class="returns">&#8594; {{returns}}</span>
-		{{/returns}}
+			{{^params}}(){{/params}}
+			{{?returns}}
+				<span class="returns">&#8594; {{returns}}</span>
+			{{/returns}}
+		{{/isFunction}}
+		{{^isFunction}}
+			<span class="returns">&#8594; {{type}}</span>
+		{{/isFunction}}
 	</h3>
 	<div class="doc">{{&doc}}</div>
 </li>
