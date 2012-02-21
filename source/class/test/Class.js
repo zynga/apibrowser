@@ -4,7 +4,7 @@
  * demos. It shows you how to use the {core}
  * JavaScript framework.
  */
-core.Class('api.test.Base', {
+core.Class('api.test.Class', {
 
 	/**
 	 * The constructor will use a @color {#properties.color}
@@ -18,7 +18,8 @@ core.Class('api.test.Base', {
 	properties: {
 
 		/**
-		 * This @color should be a {String}
+		 * This @color {String} can either contain
+		 * a hexadecimal value or a color name
 		 */
 		color: {
 			type: "String",
