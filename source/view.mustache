@@ -5,46 +5,66 @@
 
 <div class="meta">
 	{{?uses}}
-		<h2>Uses</h2>
-		<ul>
-		{{#uses}}
-			<li><a href="#{{.}}">{{.}}</a></li>
-		{{/uses}}
-		</ul>
+		<div class="section">
+			<strong>Uses:</strong>
+			<ul>
+			{{#uses}}
+				<li><a href="#{{.}}">{{.}}</a></li>
+			{{/uses}}
+			</ul>
+		</div>
 	{{/uses}}
+	{{?usedBy}}
+		<div class="section">
+			<strong>Used by:</strong>
+			<ul>
+			{{#usedBy}}
+				<li><a href="#{{.}}">{{.}}</a></li>
+			{{/usedBy}}
+			</ul>
+		</div>
+	{{/usedBy}}
 	
 	{{?implements}}
-		<h2>Implements</h2>
-		<ul>
-		{{#implements}}
-			<li><a href="#{{.}}">{{.}}</a></li>
-		{{/implements}}
-		</ul>
+		<div class="section">
+			<strong>Implements:</strong>
+			<ul>
+			{{#implements}}
+				<li><a href="#{{.}}">{{.}}</a></li>
+			{{/implements}}
+			</ul>
+		</div>
 	{{/implements}}
 	{{?implementedBy}}
-		<h2>Implemented By</h2>
-		<ul>
-		{{#implementedBy}}
-			<li><a href="#{{.}}">{{.}}</a></li>
-		{{/implementedBy}}
-		</ul>
+		<div class="section">
+			<strong>Implemented by:</strong>
+			<ul>
+			{{#implementedBy}}
+				<li><a href="#{{.}}">{{.}}</a></li>
+			{{/implementedBy}}
+			</ul>
+		</div>
 	{{/implementedBy}}
 		
 	{{?includes}}
-		<h2>Includes</h2>
-		<ul>
-		{{#includes}}
-			<li><a href="#{{.}}">{{.}}</a></li>
-		{{/includes}}
-		</ul>
+		<div class="section">
+			<strong>Includes:</strong>
+			<ul>
+			{{#includes}}
+				<li><a href="#{{.}}">{{.}}</a></li>
+			{{/includes}}
+			</ul>
+		</div>
 	{{/includes}}
 	{{?includedBy}}
-		<h2>Included By</h2>
-		<ul>
-		{{#includedBy}}
-			<li><a href="#{{.}}">{{.}}</a></li>
-		{{/includedBy}}
-		</ul>
+		<div class="section">
+			<strong>Included by:</strong>
+			<ul>
+			{{#includedBy}}
+				<li><a href="#{{.}}">{{.}}</a></li>
+			{{/includedBy}}
+			</ul>
+		</div>
 	{{/includedBy}}
 </div>
 

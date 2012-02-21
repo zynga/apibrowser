@@ -1,6 +1,6 @@
 body {
 	font-family: "Helvetica Neue", Helvetica, Arial;
-	color: #111;
+	color: #333;
 	background: #f8fafb;
 	font-size: 16px;
 	line-height: 1.8;
@@ -15,17 +15,21 @@ h1{
 
 h2{
 	font-size: 40px;
-	font-family: Georgia, serif;
+	font-family: Georgia, Times, "Times New Roman", serif
 }
 
 h3{
-	font-size: 20px;
+	font-size: 22px;
 }
 
 code{
 	font-family: "Inconsolata-g", "Consolas", monospace;
 	font-size: 14px;
 	border: 1px solid red;
+}
+
+a{
+	color: #276a94;
 }
 
 
@@ -129,10 +133,9 @@ code{
 }
 
 #content > div{
-	background: #eee;
 	border-top: 1px solid #efe;
-	border-bottom: #ede;
-	padding: 24px;
+	border-bottom: 1px solid #efe;
+	padding: 0 24px;
 }
 
 #content .returns,
@@ -141,7 +144,6 @@ code{
 }
 
 #content .returns{
-	font-style: italic;
 }
 
 #content ul.params{
@@ -178,7 +180,25 @@ code{
 	display: block;
 }
 
+#content .meta{
+	font-size: 14px;
+}
 
+#content .meta .section *{
+	display: inline;
+}
+
+#content .meta .section strong{
+	font-weight: bold;
+}
+
+#content .meta .section li:after{
+	content: ",";
+}
+
+#content .meta .section li:last-child:after{
+	content: "";
+}
 
 
 
