@@ -57,7 +57,7 @@
 	<h2>Statics</h2>
 	<ul>
 		{{#statics}}
-		<li data-hash=":{{name}}">
+		<li id="{{name}}">
 			<h3>
 				{{name}}
 				{{?params}}
@@ -95,9 +95,24 @@
 {{?properties}}
 	<div class="properties">
 		<h2>Properties</h2>
-		{{#properties}}
-			<li>{{name}} ({{type}})</li>
+		<ul>
+			{{#properties}}
+			<li id="{{name}}">
+				<h3>{{name}} ({{type}})</h3>
+				<div class="doc">{{&doc}}</div>
+				{{?origin}}
+				<div class="origin">
+					inherited from:
+					<ul>
+					{{#origin}}
+						<li><a href="#{{.}}">{{.}}</a></li>
+					{{/origin}}
+					</ul>
+				</div>
+				{{/origin}}
+			</li>
 		{{/properties}}
+		</ul>
 	</div>
 {{/properties}}
 
@@ -115,7 +130,7 @@
 		<h2>Members</h2>
 		<ul>
 			{{#members}}
-			<li data-hash=":{{name}}">
+			<li id="{{name}}">
 				<h3>
 					{{name}}
 					<span class="params">

@@ -55,10 +55,9 @@ core.Class('api.Browser', {
 
 			var that = this;
 
-			$('h3').live('click', function(event) {
-				var item = $(this).parent('li');
-				if (item.attr('data-hash')) {
-					that.open(item.attr('data-hash'));
+			$('li').live('click', function(event) {
+				if (this.id) {
+					that.open(':' + this.id);
 				}
 			});
 
@@ -219,7 +218,7 @@ core.Class('api.Browser', {
 
 			var data = hash.split(/:/);
 			var file = data[0];
-			var method = data[1] || '';
+			var property = data[1] || '';
 
 
 			var cacheEntry = this.__cache[file];
@@ -231,9 +230,13 @@ core.Class('api.Browser', {
 			}
 
 
-			if (method) {
-				// TODO: scroll and highlight method
-				$('#content').find("li[data-hash='\\:" + method + "']").addClass('open');
+			if (property) {
+
+				var element = document.getElementById(property);
+				if (element) {
+					element.className = 'open';
+				}
+
 			}
 
 		}

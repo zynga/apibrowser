@@ -22,6 +22,10 @@ core.Class("api.Processor", {
 				data["constructor"].params = this.__processParams(data["constructor"].params);
 			}
 
+			if ("properties" in data) {
+				data.properties = this.__processSection(data.properties);
+			}
+
 			if ("members" in data) {
 				data.members = this.__processSection(data.members);
 			}
@@ -29,13 +33,13 @@ core.Class("api.Processor", {
 			if ("statics" in data) {
 				data.statics = this.__processSection(data.statics);
 			}
-			
+
 			console.debug("Data: ", data);
 
 			return data;
 
 		},
-		
+
 
 		__processSection: function(object) {
 
