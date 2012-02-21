@@ -1,12 +1,16 @@
 body {
 	font-family: "Helvetica Neue", Helvetica, Arial;
-	color: #333;
+	color: #666;
 	background: #f8fafb;
-	font-size: 16px;
+	font-size: 18px;
 	line-height: 1.8;
 	
 	/* Prevent font scaling in landscape */
 	-webkit-text-size-adjust: none;
+}
+
+h1, h2, h3{
+	line-height: 1.3;
 }
 
 h1{
@@ -15,11 +19,12 @@ h1{
 
 h2{
 	font-size: 40px;
-	font-family: Georgia, Times, "Times New Roman", serif
+	font-family: Georgia, Times, "Times New Roman", serif;
+	text-shadow: 0px 2px 2px rgba(255,255,255,0.5);
 }
 
 h3{
-	font-size: 22px;
+	font-size: 24px;
 }
 
 code{
@@ -137,7 +142,7 @@ a{
 	border-bottom: 1px solid #e2e8eb;
 	padding: 0 24px;
 	
-	background: -webkit-linear-gradient(top, white, #f8fafb 60px);
+	background: -webkit-linear-gradient(top, white, #f8fafb 80px);
 }
 
 #content > div+div{
@@ -145,11 +150,9 @@ a{
 }
 
 #content .returns,
-#content .params{
+#content .params,
+#content .types{
 	font-size: 14px;
-}
-
-#content .returns{
 }
 
 #content ul.params{
@@ -158,10 +161,6 @@ a{
 
 #content ul.params li{
 	display: inline-block;
-}
-
-#content span.types{
-	font-size: 12px;
 }
 
 #content ul.types{
