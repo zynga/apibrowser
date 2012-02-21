@@ -227,7 +227,7 @@ core.Class('api.Browser', {
 
 			var data = hash.split(/~/);
 			var file = data[0];
-			var item = data[1] || '';
+			var rawItem = data[1] || null;
 
 
 			var cacheEntry = this.__cache[file];
@@ -239,7 +239,24 @@ core.Class('api.Browser', {
 			}
 
 
-			if (item) {
+			if (rawItem) {
+
+				var type;
+				if (rawItem.match(/:/)) {
+					item = rawItem.split(/:/)[0];
+					type = rawItem.split(/:/)[1];
+				} else {
+					item = rawItem;
+					type = null;
+				}
+
+
+				// TODO:
+				// If type !== null, try to getElementById(type + '-' + item),
+				// If type === null, try to get elements for "event-", "static-", "property-" etc.
+				// and select the first one found.
+				//
+				// This needs changes in template as well.
 
 				var element = document.getElementById(item);
 				if (element) {
