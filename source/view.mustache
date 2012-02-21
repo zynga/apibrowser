@@ -111,19 +111,7 @@
 		<h2>Members</h2>
 		<ul>
 			{{#members}}
-			<li id="{{name}}">
-				<h3>
-					{{name}}
-					<span class="params">
-						{{#params}}
-						{{#position}} , {{/position}}
-						<span class="type">{{type}}</span> {{.}}
-						{{/params}}
-					</span>
-				</h3>
-				<span class="return-value">{{returns}}{{^returns}}-{{/returns}}</span>
-				<div class="doc">{{&doc}}</div>
-			</li>
+				{{> entry}}
 			{{/members}}
 		</ul>
 	</div>
