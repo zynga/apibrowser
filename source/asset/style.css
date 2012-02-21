@@ -133,9 +133,15 @@ a{
 }
 
 #content > div{
-	border-top: 1px solid #efe;
-	border-bottom: 1px solid #efe;
+	border-top: 1px solid #e2e8eb;
+	border-bottom: 1px solid #e2e8eb;
 	padding: 0 24px;
+	
+	background: -webkit-linear-gradient(top, white, #f8fafb 60px);
+}
+
+#content > div+div{
+	border-top-color: #fff;
 }
 
 #content .returns,

@@ -68,9 +68,23 @@
 	{{/includedBy}}
 </div>
 
-<div class="description doc">
-{{&main.doc}}
+{{?main.doc}}
+	<div class="description doc">
+	{{&main.doc}}
+	</div>
+{{/main.doc}}
+
+{{?constructor}}
+<div class="constructor">
+	{{#constructor}}
+	<h2>Constructor</h2>
+		{{id}} ({{#params}}
+			{{#position}} , {{/position}}
+			<span class="param">{{name}}<sub>{{type}}</sub></span>
+		{{/params}})
+	{{/constructor}}
 </div>
+{{/constructor}}
 
 {{?statics}}
 <div class="statics">
@@ -82,16 +96,6 @@
 	</ul>
 </div>
 {{/statics}}
-
-{{#constructor}}
-	<h2>Constructor</h2>
-	<div class="constructor">
-		{{id}} ({{#params}}
-			{{#position}} , {{/position}}
-			<span class="param">{{name}}<sub>{{type}}</sub></span>
-		{{/params}})
-	</div>
-{{/constructor}}
 
 {{?properties}}
 	<div class="properties">
