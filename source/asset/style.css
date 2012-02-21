@@ -1,6 +1,6 @@
 body {
-	font-family: "Helvetica Neue", Helvetica, Arial;
-	color: #666;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #444;
 	background: #f8fafb;
 	font-size: 18px;
 	line-height: 1.8;
@@ -9,8 +9,9 @@ body {
 	-webkit-text-size-adjust: none;
 }
 
-h1, h2, h3{
+h1, h2{
 	line-height: 1.3;
+	color: #666;
 }
 
 h1{
@@ -117,10 +118,6 @@ a{
 
 
 
-
-
-
-
 /* 
 ========================================================================
    CONTENT 
@@ -148,10 +145,28 @@ a{
 	border-top-color: #fff;
 }
 
-#content .returns,
+#content h3{
+	color: ;
+}
+
+#content li.open{
+	border-left: 8px solid #1a5482;
+	padding-left: 10px;
+	margin-left: -18px;
+	background: #eff5f8;
+}
+
 #content .params,
+#content .returns{
+	color: #999;
+}
+
 #content .types{
-	font-size: 14px;
+	color: #ccc;
+}
+
+#content .types a{
+	color: inherit;
 }
 
 #content ul.params{

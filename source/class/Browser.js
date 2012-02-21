@@ -4,14 +4,7 @@
  */
 core.Class('api.Browser', {
 
-	construct: function(base) {
-
-		// Store data path
-		base = base || 'data';
-
-		this.__base = base;
-
-		core.io.Script.load(base + "/$index.jsonp");
+	construct: function() {
 
 		this.__headElem = document.createElement("div");
 		this.__headElem.id = "head";
@@ -33,11 +26,11 @@ core.Class('api.Browser', {
 
 		// Load initial data
 		core.io.Queue.load([
-			base + "/$view.jsonp",
-			base + "/$entry.jsonp",
-			base + "/$type.jsonp",
-			base + "/$index.jsonp",
-			base + "/$search.jsonp"
+			"tmpl/view.jsonp",
+			"tmpl/entry.jsonp",
+			"tmpl/type.jsonp",
+			"data/$index.jsonp",
+			"data/$search.jsonp"
 		], this.__onLoad, this, false, "js");
 
 		// Initialize data processor
@@ -85,26 +78,27 @@ core.Class('api.Browser', {
 
 		callback: function(data, id) {
 
-			if (id == "$index") {
+			if (id == "view.tmpl") {
+
+				console.debug("Loaded View Template");
+				this.__viewTmpl = core.template.Compiler.compile(data.template);
+
+			} else if (id == "entry.tmpl") {
+
+				console.debug("Loaded Entry Template");
+				this.__entryTmpl = core.template.Compiler.compile(data.template);
+				
+			} else if (id == "type.tmpl") {
+
+				console.debug("Loaded Type Template");
+				this.__typeTmpl = core.template.Compiler.compile(data.template);
+					
+			} else if (id == "$index") {
 
 				console.debug("Loaded Index");
 
 				this.__treeElem.innerHTML = "<ul>" + this.__treeWalker(data, "") + "</ul>";
 
-			} else if (id == "$view") {
-
-				console.debug("Loaded View Template");
-				this.__viewTmpl = core.template.Compiler.compile(data.template);
-
-			} else if (id == "$entry") {
-
-				console.debug("Loaded Entry Template");
-				this.__entryTmpl = core.template.Compiler.compile(data.template);
-				
-			} else if (id == "$type") {
-
-				console.debug("Loaded Type Template");
-				this.__typeTmpl = core.template.Compiler.compile(data.template);
 					
 			} else if (id == "$search") {
 
@@ -238,7 +232,7 @@ core.Class('api.Browser', {
 
 			var cacheEntry = this.__cache[file];
 			if (cacheEntry === undefined && this.__currentFile !== file) {
-				core.io.Script.load(this.__base + '/' + file + '.jsonp');
+				core.io.Script.load('data/' + file + '.jsonp');
 			} else if (cacheEntry !== undefined && this.__currentHTML !== file){
 				$('#content').html(cacheEntry);
 				this.__currentHTML = file; // current file !== html content (initial load!)
