@@ -19,7 +19,9 @@ core.Class("api.Processor", {
 		process: function(data) {
 
 			if ("constructor" in data) {
-				data["constructor"].params = this.__processParams(data["constructor"].params);
+				if (data["constructor"].params) {
+					data["constructor"].params = this.__processParams(data["constructor"].params);
+				}
 			}
 
 			if ("properties" in data) {
@@ -64,35 +66,16 @@ core.Class("api.Processor", {
 
 
 		__processParams: function(params) {
-
-			var arr = [],
-				id;
-
-			for (id in params) {
-				arr.push({});
+			
+			var result = new Array(Object.keys(params).length);
+			
+			for (var name in params) {
+				var entry = params[name];
+				entry.name = name;
+				result[entry.position] = entry;
 			}
 
-			for (id in params) {
-
-				var pos = params[id].position;
-
-				if (pos != null) {
-
-					var data = params[id];
-					data.name = id;
-					if (data.type instanceof Array) {
-						data.type = data.type.join(' | ');
-					} else {
-						data.type = 'undefined';
-					}
-					arr[pos] = data;
-
-				}
-
-			}
-
-
-			return arr;
+			return result;
 
 		}
 
