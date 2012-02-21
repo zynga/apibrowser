@@ -35,7 +35,7 @@ code{
 */
 
 #head{
-	background: #d50000;
+	background: #276a94;
 	height: 50px;
 	line-height: 50px;
 	color: #eee;
@@ -60,19 +60,22 @@ code{
 	bottom: 0;
 	overflow: auto;
 	background: #121212;
-	color: #999;
+	color: #a1aaaf;
 }
 
-#tree ul{
+#tree > ul{
+	padding: 10px;
+}
+
+#tree ul ul{
 	padding-left: 20px;
 }
 
 #tree a {
 	display: block;
-	padding-left: 32px;
+	padding-left: 24px;
 	color: inherit;
 	background-repeat: no-repeat;
-	background-position: 0px 0px;
 	line-height: 32px;
 	text-decoration: none;
 }
@@ -87,15 +90,18 @@ code{
 
 #tree .tree-package {
 	background-image: url('glyphicons_144_folder_open.png');
+	background-position: 0px 7px;
 	font-weight: bold;
 }
 
 #tree > ul > li > a.tree-package{
 	background-image: url('glyphicons_020_home.png');
+	background-position: 0px 7px;
 }
 
 #tree .tree-class {
 	background-image: url('glyphicons_036_file.png');
+	background-position: 4px 7px;
 }
 
 
