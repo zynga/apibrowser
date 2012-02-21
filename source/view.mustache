@@ -57,25 +57,7 @@
 	<h2>Statics</h2>
 	<ul>
 		{{#statics}}
-		<li id="{{name}}">
-			<h3>
-				{{name}}
-				{{?params}}
-					(<ul class="params">
-					{{#params}}
-						<li>
-							{{name}}
-							<a href="#{{type}}" class="type">{{type}}</a>
-						</li>
-						{{/params}}
-					</ul>)
-				{{/params}}
-				{{?returns}}
-					<span class="returns">&#8594; {{returns}}</span>
-				{{/returns}}
-			</h3>
-			<div class="doc">{{&doc}}</div>
-		</li>
+			{{> entry}}
 		{{/statics}}
 	</ul>
 </div>

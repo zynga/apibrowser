@@ -34,6 +34,7 @@ core.Class('api.Browser', {
 		// Load initial data
 		core.io.Queue.load([
 			base + "/$view.jsonp",
+			base + "/$entry.jsonp",
 			base + "/$index.jsonp",
 			base + "/$search.jsonp"
 		], this.__onLoad, this, false, "js");
@@ -91,9 +92,14 @@ core.Class('api.Browser', {
 
 			} else if (id == "$view") {
 
-				console.debug("Loaded View");
-				this.__template = core.template.Compiler.compile(data.template);
+				console.debug("Loaded View Template");
+				this.__viewTmpl = core.template.Compiler.compile(data.template);
 
+			} else if (id == "$entry") {
+
+				console.debug("Loaded Entry Template");
+				this.__entryTmpl = core.template.Compiler.compile(data.template);
+				
 			} else if (id == "$search") {
 
 				console.debug("Loaded Search Index");
@@ -102,7 +108,9 @@ core.Class('api.Browser', {
 
 				console.debug("Loaded Class: " + id);
 
-				this.__cache[id] = this.__template.render(this.__processor.process(data));
+				this.__cache[id] = this.__viewTmpl.render(this.__processor.process(data), {
+					entry : this.__entryTmpl
+				});
 
 				if (this.__currentFile === id) {
 					var toOpen = this.__currentFile;
