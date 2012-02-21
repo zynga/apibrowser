@@ -17,6 +17,10 @@ core.Class("api.Processor", {
 	members: {
 
 		process: function(data) {
+			
+			var splittedName = data.id.split(".");
+			data.basename = splittedName.pop();
+			data.namespace = splittedName.join(".");
 
 			if ("constructor" in data) {
 				if (data["constructor"].params) {
@@ -35,6 +39,8 @@ core.Class("api.Processor", {
 			if ("statics" in data) {
 				data.statics = this.__processSection(data.statics);
 			}
+
+
 
 			console.debug("Data: ", data);
 
