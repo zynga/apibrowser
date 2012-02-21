@@ -128,8 +128,18 @@ code{
 	
 }
 
-#content ul{
+#content ul.params li{
+	display: inline-block;
+}
+
+#content ul.params li:after{
+	content: ", ";
 	
+}
+
+#content ul.params{
+	border: 1px solid black;
+	display: inline-block;
 }
 
 #content .statics, 

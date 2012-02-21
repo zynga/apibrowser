@@ -4,11 +4,8 @@
 		{{?params}}
 			(<ul class="params">
 			{{#params}}
-				<li>
-					{{name}}
-					<a href="#{{type}}" class="type">{{type}}</a>
-				</li>
-				{{/params}}
+				<li>{{name}}{{>type}}</li>
+			{{/params}}
 			</ul>)
 		{{/params}}
 		{{?returns}}

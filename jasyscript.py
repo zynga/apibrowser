@@ -55,7 +55,7 @@ def build():
     updateFile("source/index.html", "%s/index.html" % dist)
 
     # Rewrite template as jsonp
-    for tmpl in ["view", "entry"]:
+    for tmpl in ["view", "entry", "type"]:
         jsonTemplate = json.dumps({ "template" : open("source/%s.mustache" % tmpl).read() })
         writeFile("%s/data/$%s.jsonp" % (dist, tmpl), "apibrowser.callback(%s, '$%s')" % (jsonTemplate, tmpl))
 
