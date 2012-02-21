@@ -96,11 +96,21 @@
 	<div class="properties">
 		<h2>Properties</h2>
 		<ul>
-		{{#properties}}
-		<li id="{{name}}">
+			{{#properties}}
+			<li id="{{name}}">
 				<h3>{{name}} ({{type}})</h3>
 				<div class="doc">{{&doc}}</div>
-		</li>
+				{{?origin}}
+				<div class="origin">
+					inherited from:
+					<ul>
+					{{#origin}}
+						<li><a href="#{{.}}">{{.}}</a></li>
+					{{/origin}}
+					</ul>
+				</div>
+				{{/origin}}
+			</li>
 		{{/properties}}
 		</ul>
 	</div>
