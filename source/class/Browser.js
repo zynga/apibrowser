@@ -39,8 +39,8 @@ core.Class('api.Browser', {
 
 		this.__cache = {};
 		this.__currentFile = '';
+		this.__currentItem = '';
 		this.__currentHTML = '';
-		this.__currentMethod = '';
 
 	},
 
@@ -52,7 +52,7 @@ core.Class('api.Browser', {
 
 			$('li').live('click', function(event) {
 				if (this.id) {
-					that.open(':' + this.id);
+					that.open('~' + this.id);
 				}
 			});
 
@@ -87,19 +87,19 @@ core.Class('api.Browser', {
 
 				console.debug("Loaded Entry Template");
 				this.__entryTmpl = core.template.Compiler.compile(data.template);
-				
+
 			} else if (id == "type.tmpl") {
 
 				console.debug("Loaded Type Template");
 				this.__typeTmpl = core.template.Compiler.compile(data.template);
-					
+
 			} else if (id == "$index") {
 
 				console.debug("Loaded Index");
 
 				this.__treeElem.innerHTML = "<ul>" + this.__treeWalker(data, "") + "</ul>";
 
-					
+
 			} else if (id == "$search") {
 
 				console.debug("Loaded Search Index");
@@ -115,8 +115,8 @@ core.Class('api.Browser', {
 
 				if (this.__currentFile === id) {
 					var toOpen = this.__currentFile;
-					if (this.__currentMethod) {
-						toOpen += ':' + this.__currentMethod;
+					if (this.__currentItem) {
+						toOpen += '~' + this.__currentItem;
 					}
 					this.open(toOpen);
 				}
@@ -187,8 +187,8 @@ core.Class('api.Browser', {
 				hash = hash.slice(1);
 			}
 
-			if (hash.charAt(0) === ':') {
-				hash = this.__currentFile + ':' + hash.slice(1);
+			if (hash.charAt(0) === '~') {
+				hash = this.__currentFile + '~' + hash.slice(1);
 			}
 
 
@@ -197,14 +197,14 @@ core.Class('api.Browser', {
 
 
 			location.hash = hash;
-			this.__currentFile = hash.split(/:/)[0];
-			this.__currentMethod = hash.split(/:/)[1] || '';
+			this.__currentFile = hash.split(/~/)[0];
+			this.__currentItem = hash.split(/~/)[1] || '';
 
 		},
 
 		__showTree: function(hash) {
 
-			var file = hash.split(/:/)[0];
+			var file = hash.split(/~/)[0];
 			var segments = file.split('.');
 			var current = '';
 
@@ -225,9 +225,9 @@ core.Class('api.Browser', {
 
 		__showContent: function(hash) {
 
-			var data = hash.split(/:/);
+			var data = hash.split(/~/);
 			var file = data[0];
-			var property = data[1] || '';
+			var item = data[1] || '';
 
 
 			var cacheEntry = this.__cache[file];
@@ -239,9 +239,9 @@ core.Class('api.Browser', {
 			}
 
 
-			if (property) {
+			if (item) {
 
-				var element = document.getElementById(property);
+				var element = document.getElementById(item);
 				if (element) {
 					element.className = 'open';
 				}
