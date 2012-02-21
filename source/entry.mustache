@@ -2,14 +2,16 @@
 	<h3>
 		{{name}}
 		{{#isFunction}}
-			{{?params}}
-				(<ul class="params">
-				{{#params}}
-					<li>{{name}}{{>type}}</li>
+			<span class="params">
+				{{?params}}
+					(<ul class="params">
+					{{#params}}
+						<li>{{name}}{{>type}}</li>
+					{{/params}}
+					</ul>)
 				{{/params}}
-				</ul>)
-			{{/params}}
-			{{^params}}(){{/params}}
+				{{^params}}(){{/params}}
+			</span>
 			{{?returns}}
 				<span class="returns">&#8594; {{returns}}</span>
 			{{/returns}}

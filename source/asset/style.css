@@ -2,7 +2,7 @@ body {
 	font-family: "Helvetica Neue", Helvetica, Arial;
 	color: #111;
 	background: #f8fafb;
-	font-size: 18px;
+	font-size: 16px;
 	line-height: 1.8;
 	
 	/* Prevent font scaling in landscape */
@@ -14,11 +14,12 @@ h1{
 }
 
 h2{
-	font-size: 30px;
+	font-size: 40px;
+	font-family: Georgia, serif;
 }
 
 h3{
-	font-size: 24px;
+	font-size: 20px;
 }
 
 code{
@@ -125,7 +126,22 @@ code{
 	right: 0;
 	bottom: 0;
 	overflow: auto;
-	
+}
+
+#content > div{
+	background: #eee;
+	border-top: 1px solid #efe;
+	border-bottom: #ede;
+	padding: 24px;
+}
+
+#content .returns,
+#content .params{
+	font-size: 14px;
+}
+
+#content .returns{
+	font-style: italic;
 }
 
 #content ul.params{
@@ -148,15 +164,6 @@ code{
 	display: inline-block;
 }
 
-#content .statics, 
-#content .properties, 
-#content .events, 
-#content .members{
-	background: #eee;
-	border-top: 1px solid #efe;
-	border-bottom: #ede;
-}
-
 #content .statics .doc,
 #content .properties .doc,
 #content .events .doc,
@@ -171,17 +178,8 @@ code{
 	display: block;
 }
 
-#content .statics .returns,
-#content .properties .returns,
-#content .events .returns,
-#content .members .returns{
-	font-style: italic;
-}
 
-#content .returns,
-#content .params{
-	font-size: 14px;
-}
+
 
 
 
