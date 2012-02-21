@@ -58,11 +58,11 @@ a{
 
 #head{
 	background: #276a94;
-	height: 50px;
-	line-height: 50px;
+	height: 60px;
+	line-height: 60px;
 	color: #eee;
 	font-size: 30px;
-	text-indent: 30px;
+	text-indent: 15px;
 	text-shadow: 0px 1px 1px rgba(0,0,0,0.5);
 }
 
@@ -77,7 +77,7 @@ a{
 #tree {
 	width: 250px;
 	position: absolute;
-	top: 50px;
+	top: 60px;
 	left: 0;
 	bottom: 0;
 	overflow: auto;
@@ -138,7 +138,7 @@ a{
 #content {
 	position: absolute;
 	left: 250px;
-	top: 50px;
+	top: 60px;
 	right: 0;
 	bottom: 0;
 	overflow: auto;
