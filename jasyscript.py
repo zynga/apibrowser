@@ -57,7 +57,7 @@ def build():
     # Rewrite template as jsonp
     for tmpl in ["view", "entry", "type"]:
         jsonTemplate = json.dumps({ "template" : open("source/tmpl/%s.mustache" % tmpl).read() })
-        writeFile("%s/tmpl/%s.jsonp" % (dist, tmpl), "apibrowser.callback(%s, '%s.tmpl')" % (jsonTemplate, tmpl))
+        writeFile("%s/tmpl/%s.js" % (dist, tmpl), "apibrowser.callback(%s, '%s.tmpl')" % (jsonTemplate, tmpl))
 
     # Process every possible permutation
     for permutation in session.getPermutations():
