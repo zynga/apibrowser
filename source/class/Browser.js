@@ -38,9 +38,14 @@ core.Class('api.Browser', {
 
 
 		this.__cache = {};
-		this.__currentFile = '';
-		this.__currentItem = '';
-		this.__currentHTML = '';
+
+		// This is mostly a cache for our callback / JSONP environment
+		this.__current = {
+			type: '',
+			file: '',
+			item: '',
+			html: ''
+		};
 
 	},
 
@@ -52,7 +57,15 @@ core.Class('api.Browser', {
 
 			$('li').live('click', function(event) {
 				if (this.id) {
-					that.open('~' + this.id);
+
+					var href;
+					if (this.id.match(/-/)) {
+						href = this.id.split(/-/)[0] + ':' + that.__current.file + '~' + this.id.split(/-/)[1];
+					} else {
+						href = '~' + this.id;
+					}
+
+					that.open(href);
 				}
 			});
 
@@ -113,12 +126,19 @@ core.Class('api.Browser', {
 					type : this.__typeTmpl
 				});
 
-				if (this.__currentFile === id) {
-					var toOpen = this.__currentFile;
-					if (this.__currentItem) {
-						toOpen += '~' + this.__currentItem;
+				if (this.__current.file === id) {
+
+					var open = this.__current.file;
+					if (this.__current.type) {
+						open = this.__current.type + ':' + open;
 					}
-					this.open(toOpen);
+
+					if (this.__current.item) {
+						open += '~' + this.__current.item;
+					}
+
+					this.open(open);
+
 				}
 
 			}
@@ -188,7 +208,7 @@ core.Class('api.Browser', {
 			}
 
 			if (hash.charAt(0) === '~') {
-				hash = this.__currentFile + '~' + hash.slice(1);
+				hash = this.__current.file + '~' + hash.slice(1);
 			}
 
 
@@ -197,8 +217,17 @@ core.Class('api.Browser', {
 
 
 			location.hash = hash;
-			this.__currentFile = hash.split(/~/)[0];
-			this.__currentItem = hash.split(/~/)[1] || '';
+
+
+			if (hash.match(/:/)) {
+				this.__current.file = hash.split(/~/)[0].split(/:/)[1];
+				this.__current.type = hash.split(/:/)[0];
+			} else {
+				this.__current.file = hash.split(/~/)[0];
+				this.__current.type = '';
+			}
+
+			this.__current.item = hash.split(/~/)[1] || '';
 
 		},
 
@@ -226,41 +255,68 @@ core.Class('api.Browser', {
 		__showContent: function(hash) {
 
 			var data = hash.split(/~/);
-			var file = data[0];
-			var rawItem = data[1] || null;
+
+			var file, item;
+			if (hash.match(/:/)) {
+				file = hash.split(/~/)[0].split(/:/)[1];
+			} else {
+				file = hash.split(/~/)[0];
+			}
+
+			item = hash.split(/~/)[1] || null;
 
 
 			var cacheEntry = this.__cache[file];
-			if (cacheEntry === undefined && this.__currentFile !== file) {
+			if (cacheEntry === undefined && this.__current.file !== file) {
 				core.io.Script.load('data/' + file + '.jsonp');
-			} else if (cacheEntry !== undefined && this.__currentHTML !== file){
+			} else if (cacheEntry !== undefined && this.__current.html !== file){
 				$('#content').html(cacheEntry);
-				this.__currentHTML = file; // current file !== html content (initial load!)
+				this.__current.html = file; // current file !== html content (initial load!)
 			}
 
 
-			if (rawItem) {
+			if (item) {
 
-				var type;
-				if (rawItem.match(/:/)) {
-					item = rawItem.split(/:/)[0];
-					type = rawItem.split(/:/)[1];
-				} else {
-					item = rawItem;
-					type = null;
+				var type = null,
+					element;
+
+				if (data[0].match(/:/)) {
+					type = data[0].split(/:/)[0];
 				}
 
 
-				// TODO:
-				// If type !== null, try to getElementById(type + '-' + item),
-				// If type === null, try to get elements for "event-", "static-", "property-" etc.
-				// and select the first one found.
-				//
-				// This needs changes in template as well.
+				// Search for specified type
+				if (type !== null) {
+					element = document.getElementById(type + '-' + item);
+				}
 
-				var element = document.getElementById(item);
+				// Not found? Search for all types (first found wins)
+				if (!element || !type) {
+
+					var types = [
+						'static',
+						'member',
+						'property',
+						'event'
+					];
+
+					for (var t = 0, l = types.length; t < l; t++) {
+
+						type = types[t];
+						element = document.getElementById(type + '-' + item);
+
+						// First found wins
+						if (element) break;
+
+					}
+
+				}
+
+
 				if (element) {
 					element.className = 'open';
+				} else {
+					console.warn('Invalid item selected:', hash);
 				}
 
 			}

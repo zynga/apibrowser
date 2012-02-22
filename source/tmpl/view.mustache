@@ -95,7 +95,9 @@
 	<h2>Statics</h2>
 	<ul>
 		{{#statics}}
+		<li id="static-{{name}}">
 			{{> entry}}
+		</li>
 		{{/statics}}
 	</ul>
 </div>
@@ -106,7 +108,7 @@
 		<h2>Properties</h2>
 		<ul>
 			{{#properties}}
-			<li id="{{name}}">
+			<li id="property-{{name}}">
 				<h3>{{name}} ({{type}})</h3>
 				<div class="doc">{{&doc}}</div>
 				{{?origin}}
@@ -129,7 +131,7 @@
 	<div class="events">
 		<h2>Events</h2>
 		{{#events}}
-			<li>{{name}} ({{type}})</li>
+			<li id="event-{{name}}">{{name}} ({{type}})</li>
 		{{/events}}
 	</div>
 {{/events}}
@@ -139,7 +141,9 @@
 		<h2>Members</h2>
 		<ul>
 			{{#members}}
+			<li id="member-{{name}}">
 				{{> entry}}
+			</li>
 			{{/members}}
 		</ul>
 	</div>
