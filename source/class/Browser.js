@@ -26,11 +26,11 @@ core.Class('api.Browser', {
 
 		// Load initial data
 		core.io.Queue.load([
-			"tmpl/view.jsonp",
-			"tmpl/entry.jsonp",
-			"tmpl/type.jsonp",
-			"data/$index.jsonp",
-			"data/$search.jsonp"
+			"tmpl/view.js",
+			"tmpl/entry.js",
+			"tmpl/type.js",
+			"data/$index.js",
+			"data/$search.js"
 		], this.__onLoad, this, false, "js");
 
 		// Initialize data processor
@@ -268,7 +268,7 @@ core.Class('api.Browser', {
 
 			var cacheEntry = this.__cache[file];
 			if (cacheEntry === undefined && this.__current.file !== file) {
-				core.io.Script.load('data/' + file + '.jsonp');
+				core.io.Script.load('data/' + file + '.js');
 			} else if (cacheEntry !== undefined && this.__current.html !== file){
 				$('#content').html(cacheEntry);
 				this.__current.html = file; // current file !== html content (initial load!)

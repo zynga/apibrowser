@@ -156,8 +156,9 @@ a{
 	border-top-color: #fff;
 }
 
-#content h3{
-	color: ;
+#content .errornous{
+	color: #ac2022;
+	font-size: 50%;
 }
 
 #content li.open{

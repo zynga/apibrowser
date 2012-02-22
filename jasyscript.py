@@ -40,7 +40,7 @@ def build():
     
     # Write API data
     writer = ApiWriter(session)
-    writer.write("%s/data" % dist, callback="apibrowser.callback")
+    writer.write("%s/data" % dist, compact=False, callback="apibrowser.callback")
 
     # Prepare assets
     resolver = Resolver(session.getProjects())
@@ -57,7 +57,7 @@ def build():
     # Rewrite template as jsonp
     for tmpl in ["view", "entry", "type"]:
         jsonTemplate = json.dumps({ "template" : open("source/tmpl/%s.mustache" % tmpl).read() })
-        writeFile("%s/tmpl/%s.jsonp" % (dist, tmpl), "apibrowser.callback(%s, '%s.tmpl')" % (jsonTemplate, tmpl))
+        writeFile("%s/tmpl/%s.js" % (dist, tmpl), "apibrowser.callback(%s, '%s.tmpl')" % (jsonTemplate, tmpl))
 
     # Process every possible permutation
     for permutation in session.getPermutations():

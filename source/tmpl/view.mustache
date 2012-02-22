@@ -1,6 +1,10 @@
 
 <div class="heading">
-	<h1>{{basename}}{{?namespace}} <span class="namespace">{{namespace}}{{/namespace}}</span></h1>
+	<h1>
+		{{basename}}
+		{{?package}}<span class="namespace">{{package}}</span>{{/package}}
+		{{?errornous}}<span class="errornous">&#9888;</span>{{/errornous}}
+	</h1>
 </div>
 
 <div class="meta">
@@ -81,11 +85,8 @@
 {{?constructor}}
 <div class="constructor">
 	{{#constructor}}
-	<h2>Constructor</h2>
-		{{id}} ({{#params}}
-			{{#position}} , {{/position}}
-			<span class="param">{{name}}<sub>{{type}}</sub></span>
-		{{/params}})
+	<h2>Constructor {{?errornous}}<span class="errornous">&#9888;</span>{{/errornous}}</h2>
+		{{id}}<span class="params">({{#params}}{{#position}}, {{/position}}{{name}}{{type}}</span>{{/params}})
 	{{/constructor}}
 </div>
 {{/constructor}}
@@ -109,7 +110,11 @@
 		<ul>
 			{{#properties}}
 			<li id="property-{{name}}">
-				<h3>{{name}} ({{type}})</h3>
+				<h3>
+					{{name}} 
+					({{type}})
+					{{?errornous}}<span class="errornous">&#9888;</span>{{/errornous}}
+				</h3>
 				<div class="doc">{{&doc}}</div>
 				{{?origin}}
 				<div class="origin">
@@ -131,7 +136,10 @@
 	<div class="events">
 		<h2>Events</h2>
 		{{#events}}
-			<li id="event-{{name}}">{{name}} ({{type}})</li>
+			<li id="event-{{name}}">
+				{{name}} ({{type}})
+				{{?errornous}}<span class="errornous">&#9888;</span>{{/errornous}}
+			</li>
 		{{/events}}
 	</div>
 {{/events}}
