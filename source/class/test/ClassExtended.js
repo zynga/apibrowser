@@ -6,7 +6,12 @@
  */
 core.Class('api.test.ClassExtended', {
 
+	implement: [ api.test.Interface ],
 	include: [ api.test.Class ],
+
+	events: {
+		custom: api.test.Event
+	},
 
 	construct: function(color, weight) {
 
@@ -37,6 +42,13 @@ core.Class('api.test.ClassExtended', {
 		 * {property:#color} as its keys.
 		 */
 		testTwo: function(data) {
+
+		},
+
+		/**
+		 * This method is required for firing events
+		 */
+		fireEvent: function(type, value, old) {
 
 		}
 

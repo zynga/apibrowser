@@ -22,7 +22,8 @@ core.Class('api.test.Class', {
 		 * a hexadecimal value or a color name
 		 */
 		color: {
-			type: "String",
+			type: 'String',
+			fire: 'changeColor',
 			apply: function(value, old) {
 			}
 		}
