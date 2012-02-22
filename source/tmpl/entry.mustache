@@ -5,7 +5,10 @@
 				{{?params}}
 					(<ul class="params">
 					{{#params}}
-						<li>{{name}}{{>type}}</li>
+						<li>
+							{{name}}{{>type}}
+							{{?errornous}}<span class="errornous">&#9888;</span>{{/errornous}}
+						</li>
 					{{/params}}
 					</ul>)
 				{{/params}}
@@ -17,6 +20,7 @@
 		{{/isFunction}}
 		{{^isFunction}}
 			<span class="returns">&#8594; {{type}}</span>
+			{{?errornous}}<span class="errornous">&#9888;</span>{{/errornous}}
 		{{/isFunction}}
 	</h3>
 	<div class="doc">{{&doc}}</div>

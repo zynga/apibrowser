@@ -18,25 +18,21 @@ core.Class("api.Processor", {
 
 		process: function(data) {
 			
-			var splittedName = data.id.split(".");
-			data.basename = splittedName.pop();
-			data.namespace = splittedName.join(".");
-
-			if ("constructor" in data) {
+			if (data.hasOwnProperty("constructor")) {
 				if (data["constructor"].params) {
 					data["constructor"].params = this.__processParams(data["constructor"].params);
 				}
 			}
 
-			if ("properties" in data) {
+			if (data.hasOwnProperty("properties")) {
 				data.properties = this.__processSection(data.properties);
 			}
 
-			if ("members" in data) {
+			if (data.hasOwnProperty("members")) {
 				data.members = this.__processSection(data.members);
 			}
 
-			if ("statics" in data) {
+			if (data.hasOwnProperty("statics")) {
 				data.statics = this.__processSection(data.statics);
 			}
 
