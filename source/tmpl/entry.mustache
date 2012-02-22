@@ -7,7 +7,6 @@
 					{{#params}}
 						<li>
 							{{name}}{{>type}}
-							{{?errornous}}<span class="errornous">&#9888;</span>{{/errornous}}
 						</li>
 					{{/params}}
 					</ul>)
@@ -17,14 +16,33 @@
 			{{?returns}}
 				<span class="returns">&#8594; {{returns}}</span>
 			{{/returns}}
-			{{?from}}<span class="from">From: <a class="from" href="#{{from}}~{{name}}">{{from}}</a></span>{{/from}}
-			<span class="line">Line: {{line}}</span>
+			<div class="info">
+				{{?errornous}}<span class="errornous">&#9888;</span>{{/errornous}}
+				{{?from}}<span class="from">From: <a class="from" href="#{{fromLink}}">{{from}}</a></span>{{/from}}
+				<span class="line">Line:
+					{{?lineLink}}
+						<a href="{{lineLink}}">{{line}}</a>
+					{{/lineLink}}
+					{{^lineLink}}
+						{{line}}
+					{{/lineLink}}
+				</span>
+			</div>
 		{{/isFunction}}
 		{{^isFunction}}
 			<span class="returns">&#8594; {{type}}</span>
-			{{?errornous}}<span class="errornous">&#9888;</span>{{/errornous}}
-			{{?from}}<span class="from">From: <a class="from" href="#{{from}}~{{name}}">{{from}}</a></span>{{/from}}
-			<span class="line">Line: {{line}}</span>
+			<div class="info">
+				{{?errornous}}<span class="errornous">&#9888;</span>{{/errornous}}
+				{{?from}}<span class="from">From: <a class="from" href="#{{fromLink}}">{{from}}</a></span>{{/from}}
+				<span class="line">Line:
+					{{?lineLink}}
+						<a href="{{lineLink}}">{{line}}</a>
+					{{/lineLink}}
+					{{^lineLink}}
+						{{line}}
+					{{/lineLink}}
+				</span>
+			</div>
 		{{/isFunction}}
 	</h3>
 	<div class="doc">{{&doc}}</div>
