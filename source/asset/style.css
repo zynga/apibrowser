@@ -173,14 +173,21 @@ a{
 #content .params,
 #content .returns{
 	color: #aaa;
+	font-size: 18px;
+}
+
+#content .parens{
+	color: #82115e;
+	font-size: 24px;
 }
 
 #content .types{
-	color: #ddd;
+	color: #bfd5e5;
 }
 
 #content .types a{
 	color: inherit;
+	text-decoration: none;
 }
 
 #content .info,
