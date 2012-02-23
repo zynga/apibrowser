@@ -157,7 +157,6 @@ a{
 
 #content .errornous{
 	color: #ac2022;
-	font-size: 50%;
 }
 
 #content > div > ul > li{
@@ -201,13 +200,23 @@ a{
 }
 
 #content .info{
-	font-size: 13px;
+	font-size: 12px;
 	position: absolute;
 	top: 0;
 	right: 0;
 	background: #1a5482;
 	padding: 2px 8px;
 	color: white;
+}
+
+#content .info a{
+	color: inherit;
+	text-decoration: none;
+}
+
+#content .info code{
+	color: #ccc;
+	font-size: inherit;
 }
 
 

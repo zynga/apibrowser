@@ -3,7 +3,8 @@
 		(
 		{{#params}}
 			{{?position}}, {{/position}}
-			{{>type}}: <span class="name">{{name}}</span>
+			{{?type}}{{>type}}: {{/type}}
+			<span class="name">{{name}}</span>
 		{{/params}}
 		)
 	{{/params}}
