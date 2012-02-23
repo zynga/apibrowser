@@ -1,0 +1,16 @@
+<div class="info">
+	{{?from}}
+		<span class="from">
+			From: <a class="from" href="#{{fromLink}}"><code>{{from}}</code></a>
+		</span>
+		<span> | </span>
+	{{/from}}
+	<span class="line">
+		{{?lineLink}}
+			Line: <a href="{{lineLink}}">{{line}}</a>
+		{{/lineLink}}
+		{{^lineLink}}
+			Line: {{line}}
+		{{/lineLink}}
+	</span>
+</div>

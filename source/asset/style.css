@@ -35,14 +35,9 @@ h2{
 	text-shadow: 0px 2px 2px rgba(255,255,255,0.5);
 }
 
-h3{
-	font-size: 24px;
-}
-
 code{
 	font-family: "Inconsolata-g", "Consolas", monospace;
 	font-size: 14px;
-	border: 1px solid red;
 }
 
 a{
@@ -144,6 +139,10 @@ a{
 	overflow: auto;
 }
 
+#content h3{
+	font-size: 24px;
+}
+
 #content > div{
 	border-top: 1px solid #e2e8eb;
 	border-bottom: 1px solid #e2e8eb;
@@ -158,7 +157,10 @@ a{
 
 #content .errornous{
 	color: #ac2022;
-	font-size: 50%;
+}
+
+#content > div > ul > li{
+	position: relative;
 }
 
 #content li.open{
@@ -170,33 +172,18 @@ a{
 
 #content .params,
 #content .returns{
-	color: #999;
+	color: #aaa;
 }
 
 #content .types{
-	color: #ccc;
+	color: #ddd;
 }
 
 #content .types a{
 	color: inherit;
 }
 
-#content ul.params{
-	display: inline-block;
-}
-
-#content ul.params li{
-	display: inline-block;
-}
-
-#content ul.types{
-	display: inline-block;
-}
-
-#content ul.types li{
-	display: inline-block;
-}
-
+#content .info,
 #content .statics .doc,
 #content .properties .doc,
 #content .events .doc,
@@ -204,12 +191,42 @@ a{
 	display: none;
 }
 
+#content .open .info,
 #content .statics .open .doc,
 #content .properties .open .doc,
 #content .events .open .doc,
 #content .members .open .doc{
 	display: block;
 }
+
+#content .info{
+	font-size: 12px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	background: #1a5482;
+	padding: 2px 8px;
+	color: white;
+}
+
+#content .info a{
+	color: inherit;
+	text-decoration: none;
+}
+
+#content .info code{
+	color: #ccc;
+	font-size: inherit;
+}
+
+
+
+
+/* 
+========================================================================
+   CONTENT :: META
+========================================================================
+*/
 
 #content .meta{
 	font-size: 14px;
@@ -224,7 +241,7 @@ a{
 }
 
 #content .meta .section li:after{
-	content: ",";
+	content: ", ";
 }
 
 #content .meta .section li:last-child:after{

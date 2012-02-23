@@ -14,63 +14,63 @@
 	
 	{{?uses}}
 		<div class="section">
-			<strong>Uses:</strong>
+			<strong>Uses: </strong>
 			<ul>
-			{{#uses}}
-				<li><a href="#{{.}}">{{.}}</a></li>
-			{{/uses}}
+				{{#uses}}
+					<li><a href="#{{.}}">{{.}}</a></li>
+				{{/uses}}
 			</ul>
 		</div>
 	{{/uses}}
 	{{?usedBy}}
 		<div class="section">
-			<strong>Used by:</strong>
+			<strong>Used by: </strong>
 			<ul>
-			{{#usedBy}}
-				<li><a href="#{{.}}">{{.}}</a></li>
-			{{/usedBy}}
+				{{#usedBy}}
+					<li><a href="#{{.}}">{{.}}</a></li>
+				{{/usedBy}}
 			</ul>
 		</div>
 	{{/usedBy}}
 	
 	{{?implements}}
 		<div class="section">
-			<strong>Implements:</strong>
+			<strong>Implements: </strong>
 			<ul>
-			{{#implements}}
-				<li><a href="#{{.}}">{{.}}</a></li>
-			{{/implements}}
+				{{#implements}}
+					<li><a href="#{{.}}">{{.}}</a></li>
+				{{/implements}}
 			</ul>
 		</div>
 	{{/implements}}
 	{{?implementedBy}}
 		<div class="section">
-			<strong>Implemented by:</strong>
+			<strong>Implemented by: </strong>
 			<ul>
-			{{#implementedBy}}
-				<li><a href="#{{.}}">{{.}}</a></li>
-			{{/implementedBy}}
+				{{#implementedBy}}
+					<li><a href="#{{.}}">{{.}}</a></li>
+				{{/implementedBy}}
 			</ul>
 		</div>
 	{{/implementedBy}}
 		
 	{{?includes}}
 		<div class="section">
-			<strong>Includes:</strong>
+			<strong>Includes: </strong>
 			<ul>
-			{{#includes}}
-				<li><a href="#{{.}}">{{.}}</a></li>
-			{{/includes}}
+				{{#includes}}
+					<li><a href="#{{.}}">{{.}}</a></li>
+				{{/includes}}
 			</ul>
 		</div>
 	{{/includes}}
 	{{?includedBy}}
 		<div class="section">
-			<strong>Included by:</strong>
+			<strong>Included by: </strong>
 			<ul>
-			{{#includedBy}}
-				<li><a href="#{{.}}">{{.}}</a></li>
-			{{/includedBy}}
+				{{#includedBy}}
+					<li><a href="#{{.}}">{{.}}</a></li>
+				{{/includedBy}}
 			</ul>
 		</div>
 	{{/includedBy}}
@@ -78,30 +78,35 @@
 
 {{?main.doc}}
 	<div class="description doc">
-	{{&main.doc}}
+		{{&main.doc}}
 	</div>
 {{/main.doc}}
 
 {{?constructor}}
-<div class="constructor">
-	{{#constructor}}
-	<h2>Constructor {{?errornous}}<span class="errornous">&#9888;</span>{{/errornous}}</h2>
-		{{id}}<span class="params">({{#params}}{{#position}}, {{/position}}{{name}}{{type}}</span>{{/params}})
-	{{/constructor}}
-</div>
+	<div class="constructor">
+		{{#constructor}}
+			<h2>
+				Constructor
+				{{?errornous}}
+					<span class="errornous">&#9888;</span>
+				{{/errornous}}
+			</h2>
+			{{id}}{{>params}}
+		{{/constructor}}
+	</div>
 {{/constructor}}
 
 {{?statics}}
-<div class="statics">
-	<h2>Statics</h2>
-	<ul>
-		{{#statics}}
-		<li id="static-{{name}}">
-			{{> entry}}
-		</li>
-		{{/statics}}
-	</ul>
-</div>
+	<div class="statics">
+		<h2>Statics</h2>
+		<ul>
+			{{#statics}}
+			<li id="static-{{name}}">
+				{{> entry}}
+			</li>
+			{{/statics}}
+		</ul>
+	</div>
 {{/statics}}
 
 {{?properties}}
@@ -116,16 +121,7 @@
 					{{?errornous}}<span class="errornous">&#9888;</span>{{/errornous}}
 				</h3>
 				<div class="doc">{{&doc}}</div>
-				{{?origin}}
-				<div class="origin">
-					Included from:
-					<ul>
-					{{#origin}}
-						<li><a href="#{{.}}">{{.}}</a></li>
-					{{/origin}}
-					</ul>
-				</div>
-				{{/origin}}
+				{{>origin}}
 			</li>
 		{{/properties}}
 		</ul>
