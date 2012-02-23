@@ -1,13 +1,7 @@
 {{?type}}
 	<span class="types">
-		[
-		<ul class="types">
-			{{#type}}
-				<li>
-					<a href="#{{.}}" class="type">{{.}}</a>
-				</li>
-			{{/type}}
-		</ul>
-		]
+		{{#type}}
+			<a href="#{{.}}">{{.}}</a>
+		{{/type}}
 	</span>
 {{/type}}

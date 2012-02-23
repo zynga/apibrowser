@@ -224,7 +224,7 @@ a{
 }
 
 #content .meta .section li:after{
-	content: ",";
+	content: ", ";
 }
 
 #content .meta .section li:last-child:after{

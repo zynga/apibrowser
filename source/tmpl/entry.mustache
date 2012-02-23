@@ -5,13 +5,12 @@
 		{{?returns}}
 			<span class="returns"> &#8594; {{returns}}</span>
 		{{/returns}}
-		{{>info}}
 	{{/isFunction}}
 	{{^isFunction}}
 		<span class="returns"> &#8594; {{>type}}</span>
-		{{>info}}
 	{{/isFunction}}
 </h3>
+{{>info}}
 <div class="doc">
 	{{&doc}}
 </div>
