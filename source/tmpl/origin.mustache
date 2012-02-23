@@ -1,0 +1,21 @@
+{{?origin}}
+	<div class="origin">
+		Included from:
+		<ul>
+		{{#origin}}
+			<li><a href="#{{.}}">{{.}}</a></li>
+		{{/origin}}
+		</ul>
+	</div>
+{{/origin}}
+
+{{?overridden}}
+	<div class="origin">
+		Overridden:
+		<ul>
+		{{#overridden}}
+			<li><a href="#{{.}}">{{.}}</a></li>
+		{{/overridden}}
+		</ul>
+	</div>
+{{/overridden}}

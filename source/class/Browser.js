@@ -20,17 +20,18 @@ core.Class('api.Browser', {
 		document.body.appendChild(this.__treeElem);
 		document.body.appendChild(this.__contentElem);
 
-		// Load stylesheet
-		core.io.StyleSheet.load(core.io.Asset.toUri("api/reset.css"));
-		core.io.StyleSheet.load(core.io.Asset.toUri("api/style.css"));
-
 		// Load initial data
 		core.io.Queue.load([
+			core.io.Asset.toUri("api/reset.css"),
+			core.io.Asset.toUri("api/style.css"),
+			
 			"tmpl/view.js",
 			"tmpl/entry.js",
 			"tmpl/type.js",
 			"tmpl/params.js",
 			"tmpl/info.js",
+			"tmpl/origin.js",
+			
 			"data/$index.js",
 			"data/$search.js"
 		], this.__onLoad, this);

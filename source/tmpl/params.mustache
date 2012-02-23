@@ -1,14 +1,11 @@
 <span class="params">
 	{{?params}}
 		(
-		<ul class="params">
-			{{#params}}
-				<li>
-					{{name}}
-					{{>type}}
-				</li>
-			{{/params}}
-		</ul>
+		{{#params}}
+			{{?position}}, {{/position}}
+			<span class="name">{{name}}</span>
+			{{>type}}
+		{{/params}}
 		)
 	{{/params}}
 	{{^params}}
