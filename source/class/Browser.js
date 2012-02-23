@@ -96,7 +96,7 @@ core.Class('api.Browser', {
 			if (id.endsWith(".mustache")) {
 				
 				var templateName = id.substring(0, id.indexOf(".mustache"));
-				this.__tmpl[templateName] = core.template.Compiler.compile(data.template);
+				this.__tmpl[templateName] = core.template.Compiler.compile(data.template, true);
 
 			} else if (id == "$index") {
 

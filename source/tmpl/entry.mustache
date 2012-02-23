@@ -1,16 +1,18 @@
-	<h3>
-		{{name}}
-		{{#isFunction}}
-			{{>params}}
-			{{?returns}}
-				<span class="returns">&#8594; {{returns}}</span>
-			{{/returns}}
-			{{>info}}
-		{{/isFunction}}
-		{{^isFunction}}
-			<span class="returns">&#8594; {{type}}</span>
-			{{>info}}
-		{{/isFunction}}
-	</h3>
-	<div class="doc">{{&doc}}</div>
+<h3>
+	{{name}}
+	{{#isFunction}}
+		{{>params}}
+		{{?returns}}
+			<span class="returns"> &#8594; {{returns}}</span>
+		{{/returns}}
+		{{>info}}
+	{{/isFunction}}
+	{{^isFunction}}
+		<span class="returns"> &#8594; {{>type}}</span>
+		{{>info}}
+	{{/isFunction}}
+</h3>
+<div class="doc">
+	{{&doc}}
+</div>
 

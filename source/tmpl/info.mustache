@@ -1,6 +1,14 @@
 <div class="info">
-	{{?errornous}}<span class="errornous">&#9888;</span>{{/errornous}}
-	{{?from}}<span class="from">From: <a class="from" href="#{{fromLink}}">{{from}}</a></span>{{/from}}
+	{{?errornous}}
+		<span class="errornous">
+			&#9888;
+		</span>
+	{{/errornous}}
+	{{?from}}
+		<span class="from">
+			From: <a class="from" href="#{{fromLink}}">{{from}}</a>
+		</span>
+	{{/from}}
 	<span class="line">Line:
 		{{?lineLink}}
 			<a href="{{lineLink}}">{{line}}</a>

@@ -1,3 +1,13 @@
 {{?type}}
-<span class="types">[<ul class="types">{{#type}}<li><a href="#{{.}}" class="type">{{.}}</a></li>{{/type}}</ul>]</span>
+	<span class="types">
+		[
+		<ul class="types">
+			{{#type}}
+				<li>
+					<a href="#{{.}}" class="type">{{.}}</a>
+				</li>
+			{{/type}}
+		</ul>
+		]
+	</span>
 {{/type}}
