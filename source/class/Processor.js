@@ -19,6 +19,13 @@ core.Class("api.Processor", {
 		process: function(data) {
 			
 			if (data.hasOwnProperty("constructor")) {
+				
+				if (data.main.type == "core.Class") {
+					data["constructor"].init = "new " + data.main.name;
+				} else {
+					data["constructor"].init = data.main.name;
+				}
+
 				if (data["constructor"].params) {
 					data["constructor"].params = this.__processParams(data["constructor"].params);
 				}
@@ -35,8 +42,6 @@ core.Class("api.Processor", {
 			if (data.hasOwnProperty("statics")) {
 				data.statics = this.__processSection(data.statics);
 			}
-
-
 
 			console.debug("Data: ", data);
 

@@ -194,7 +194,11 @@ a{
 #content .statics .doc,
 #content .properties .doc,
 #content .events .doc,
-#content .members .doc{
+#content .members .doc,
+#content .statics .origin,
+#content .properties .origin,
+#content .events .origin,
+#content .members .origin{
 	display: none;
 }
 
@@ -202,7 +206,11 @@ a{
 #content .statics .open .doc,
 #content .properties .open .doc,
 #content .events .open .doc,
-#content .members .open .doc{
+#content .members .open .doc,
+#content .statics .open .origin,
+#content .properties .open .origin,
+#content .events .open .origin,
+#content .members .open .origin{
 	display: block;
 }
 
