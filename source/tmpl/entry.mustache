@@ -1,48 +1,15 @@
 	<h3>
 		{{name}}
 		{{#isFunction}}
-			<span class="params">
-				{{?params}}
-					(<ul class="params">
-					{{#params}}
-						<li>
-							{{name}}{{>type}}
-						</li>
-					{{/params}}
-					</ul>)
-				{{/params}}
-				{{^params}}(){{/params}}
-			</span>
+			{{>params}}
 			{{?returns}}
 				<span class="returns">&#8594; {{returns}}</span>
 			{{/returns}}
-			<div class="info">
-				{{?errornous}}<span class="errornous">&#9888;</span>{{/errornous}}
-				{{?from}}<span class="from">From: <a class="from" href="#{{fromLink}}">{{from}}</a></span>{{/from}}
-				<span class="line">Line:
-					{{?lineLink}}
-						<a href="{{lineLink}}">{{line}}</a>
-					{{/lineLink}}
-					{{^lineLink}}
-						{{line}}
-					{{/lineLink}}
-				</span>
-			</div>
+			{{>info}}
 		{{/isFunction}}
 		{{^isFunction}}
 			<span class="returns">&#8594; {{type}}</span>
-			<div class="info">
-				{{?errornous}}<span class="errornous">&#9888;</span>{{/errornous}}
-				{{?from}}<span class="from">From: <a class="from" href="#{{fromLink}}">{{from}}</a></span>{{/from}}
-				<span class="line">Line:
-					{{?lineLink}}
-						<a href="{{lineLink}}">{{line}}</a>
-					{{/lineLink}}
-					{{^lineLink}}
-						{{line}}
-					{{/lineLink}}
-				</span>
-			</div>
+			{{>info}}
 		{{/isFunction}}
 	</h3>
 	<div class="doc">{{&doc}}</div>

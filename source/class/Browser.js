@@ -29,14 +29,16 @@ core.Class('api.Browser', {
 			"tmpl/view.js",
 			"tmpl/entry.js",
 			"tmpl/type.js",
+			"tmpl/params.js",
+			"tmpl/info.js",
 			"data/$index.js",
 			"data/$search.js"
-		], this.__onLoad, this, false, "js");
+		], this.__onLoad, this);
 
 		// Initialize data processor
 		this.__processor = new api.Processor();
 
-
+		this.__tmpl = {};
 		this.__cache = {};
 
 		// This is mostly a cache for our callback / JSONP environment
@@ -90,41 +92,25 @@ core.Class('api.Browser', {
 
 
 		callback: function(data, id) {
-
-			if (id == "view.tmpl") {
-
-				console.debug("Loaded View Template");
-				this.__viewTmpl = core.template.Compiler.compile(data.template);
-
-			} else if (id == "entry.tmpl") {
-
-				console.debug("Loaded Entry Template");
-				this.__entryTmpl = core.template.Compiler.compile(data.template);
-
-			} else if (id == "type.tmpl") {
-
-				console.debug("Loaded Type Template");
-				this.__typeTmpl = core.template.Compiler.compile(data.template);
+			
+			if (id.endsWith(".mustache")) {
+				
+				var templateName = id.substring(0, id.indexOf(".mustache"));
+				this.__tmpl[templateName] = core.template.Compiler.compile(data.template);
 
 			} else if (id == "$index") {
 
-				console.debug("Loaded Index");
-
 				this.__treeElem.innerHTML = "<ul>" + this.__treeWalker(data, "") + "</ul>";
-
 
 			} else if (id == "$search") {
 
-				console.debug("Loaded Search Index");
+				this.__search = data;
 
 			} else {
 
 				console.debug("Loaded Class: " + id);
 
-				this.__cache[id] = this.__viewTmpl.render(this.__processor.process(data), {
-					entry : this.__entryTmpl,
-					type : this.__typeTmpl
-				});
+				this.__cache[id] = this.__tmpl.view.render(this.__processor.process(data), this.__tmpl);
 
 				if (this.__current.file === id) {
 
