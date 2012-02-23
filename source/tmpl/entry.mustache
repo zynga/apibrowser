@@ -46,4 +46,15 @@
 		{{/isFunction}}
 	</h3>
 	<div class="doc">{{&doc}}</div>
+	{{?origin}}
+	<div class="origin">
+		Included from:
+		<ul>
+		{{#origin}}
+			<li><a href="#{{.}}">{{.}}</a></li>
+		{{/origin}}
+		</ul>
+	</div>
+	{{/origin}}
+
 
