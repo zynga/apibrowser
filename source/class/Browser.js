@@ -86,9 +86,9 @@ core.Class('api.Browser', {
 
 			});
 
-//			window.onhashchange = function() {
-//				that.open(location.hash.slice(1));
-//			};
+			window.onhashchange = function() {
+				that.open(location.hash.slice(1));
+			};
 
 			// Open initial hash
 			this.open(location.hash.slice(1));
