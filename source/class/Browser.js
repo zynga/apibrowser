@@ -58,17 +58,21 @@ core.Class('api.Browser', {
 			var that = this;
 
 			$('li').live('click', function(event) {
+
 				if (this.id) {
 
-					var href;
+					var type, item;
 					if (this.id.match(/-/)) {
-						href = this.id.split(/-/)[0] + ':' + that.__current.file + '~' + this.id.split(/-/)[1];
+						type = this.id.split(/-/)[0];
+						item = this.id.split(/-/)[1];
 					} else {
-						href = '~' + this.id;
+						item = this.id;
 					}
 
-					that.open(href);
+					that.open(that.getHash(type, null, item));
+
 				}
+
 			});
 
 			$('a').live('click', function(event) {
@@ -109,23 +113,14 @@ core.Class('api.Browser', {
 
 			} else {
 
-				console.debug("Loaded Class: " + id);
+				console.debug("Loaded File: " + id);
 
 				this.__cache[id] = this.__tmpl.main.render(this.__processor.process(data), this.__tmpl);
 
+
 				if (this.__current.file === id) {
-
-					var open = this.__current.file;
-					if (this.__current.type) {
-						open = this.__current.type + ':' + open;
-					}
-
-					if (this.__current.item) {
-						open += '~' + this.__current.item;
-					}
-
-					this.open(open);
-
+					var hash = this.getHash(this.__current.type, this.__current.file, this.__current.item);
+					this.open(hash);
 				}
 
 			}
@@ -279,12 +274,14 @@ core.Class('api.Browser', {
 				|| this.__current.item !== data.item
 			) {
 
-				// Don't overwrite this.__current.html!
+				// Don't overwrite this.__current.html
+				// or this.__current.file with null!
 				this.__current.type = data.type;
-				this.__current.file = data.file;
+				this.__current.file = data.file || this.__current.file;
 				this.__current.item = data.item;
 
-				location.hash = this.getHash(data);
+
+				location.hash = this.getHash(this.__current.type, this.__current.file, this.__current.item);
 
 			}
 
