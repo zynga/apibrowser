@@ -1,4 +1,3 @@
-
 /**
  * This is a generic Interface for Mammalian Animals
  *
@@ -30,6 +29,9 @@ core.Interface('api.test.Mammalian', {
 			}
 		},
 
+		/**
+		 * All Mammalians have bones!
+		 */
 		bones: {
 			type: 'Number',
 			fire: 'breakBones',
