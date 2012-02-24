@@ -95,7 +95,7 @@ core.Class('api.test.Dog', {
 		/**
 		 * This method is required for firing events on the dog itself.
 		 *
-		 * The event @type {String}, the @value {undefined} and the @old {undefined} value.
+		 * The event @type {String}, the @value {var} and the @old {var} value.
 		 */
 		fireEvent: function(type, value, old) {
 
