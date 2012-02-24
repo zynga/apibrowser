@@ -24,6 +24,7 @@ core.Class('api.Browser', {
 		core.io.Queue.load([
 			core.io.Asset.toUri("api/reset.css"),
 			core.io.Asset.toUri("api/style.css"),
+			core.io.Asset.toUri("api/syntax.css"),
 			"tmpl/main.js",
 			"tmpl/entry.js",
 			"tmpl/type.js",
@@ -136,7 +137,7 @@ core.Class('api.Browser', {
 			};
 
 			var comparator = function(a, b) {
-				if (node[a].$type != node[b].$type) 
+				if (node[a].$type != node[b].$type)
 				{
 					if (node[a].$type == "Package") {
 						return -1;
