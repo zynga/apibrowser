@@ -1,6 +1,6 @@
 
 <div class="heading">
-	<h1>
+	<h1 type="{{main.type}}">
 		{{basename}}
 		{{?package}}<span class="namespace">{{package}}</span>{{/package}}
 		{{?errornous}}<span class="errornous">&#9888;</span>{{/errornous}}
@@ -10,6 +10,10 @@
 <div class="meta">
 	<div class="section">
 		<strong>Type:</strong> <a href="#{{main.type}}">{{main.type}}</a>
+	</div>
+	<div class="section">
+		<strong>Size: </strong> 
+		<em>Compressed:</em> {{size.compressed}}, <em>Optimized:</em> {{size.optimized}}, <em>Zipped:</em> {{size.zipped}}
 	</div>
 	
 	{{?uses}}
