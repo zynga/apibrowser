@@ -15,7 +15,12 @@
 		{{/returns}}
 	{{/isFunction}}
 	{{^isFunction}}
-		<span class="returns"> &#8594; {{>type}}</span>
+		{{?value}}
+			<span class="returns"> &#8594; {{>type}}: <code>{{value}}</code></span>
+		{{/value}}
+		{{^value}}
+			<span class="returns"> &#8594; {{>type}}</span>
+		{{/value}}
 	{{/isFunction}}
 </h3>
 {{>info}}
