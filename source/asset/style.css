@@ -173,21 +173,32 @@ a{
 #content .params,
 #content .returns{
 	color: #aaa;
+	font-size: 18px;
+}
+
+#content .parens{
+	color: #82115e;
+	font-size: 24px;
 }
 
 #content .types{
-	color: #ddd;
+	color: #bfd5e5;
 }
 
 #content .types a{
 	color: inherit;
+	text-decoration: none;
 }
 
 #content .info,
 #content .statics .doc,
 #content .properties .doc,
 #content .events .doc,
-#content .members .doc{
+#content .members .doc,
+#content .statics .origin,
+#content .properties .origin,
+#content .events .origin,
+#content .members .origin{
 	display: none;
 }
 
@@ -195,7 +206,11 @@ a{
 #content .statics .open .doc,
 #content .properties .open .doc,
 #content .events .open .doc,
-#content .members .open .doc{
+#content .members .open .doc,
+#content .statics .open .origin,
+#content .properties .open .origin,
+#content .events .open .origin,
+#content .members .open .origin{
 	display: block;
 }
 

@@ -40,7 +40,7 @@ def build():
     
     # Write API data
     writer = ApiWriter(session)
-    writer.write("%s/data" % dist, compact=False, callback="apibrowser.callback")
+    writer.write("%s/data" % dist, compact=False, callback="apibrowser.callback", showInternals=True, showPrivates=True)
 
     # Prepare assets
     resolver = Resolver(session.getProjects())
@@ -55,7 +55,7 @@ def build():
     updateFile("source/index.html", "%s/index.html" % dist)
 
     # Rewrite template as jsonp
-    for tmpl in ["view", "entry", "type", "params", "info", "origin"]:
+    for tmpl in ["main", "entry", "type", "params", "info", "origin"]:
         jsonTemplate = json.dumps({ "template" : open("source/tmpl/%s.mustache" % tmpl).read() })
         writeFile("%s/tmpl/%s.js" % (dist, tmpl), "apibrowser.callback(%s, '%s.mustache')" % (jsonTemplate, tmpl))
 

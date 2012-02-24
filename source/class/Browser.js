@@ -24,8 +24,7 @@ core.Class('api.Browser', {
 		core.io.Queue.load([
 			core.io.Asset.toUri("api/reset.css"),
 			core.io.Asset.toUri("api/style.css"),
-
-			"tmpl/view.js",
+			"tmpl/main.js",
 			"tmpl/entry.js",
 			"tmpl/type.js",
 			"tmpl/params.js",
@@ -112,7 +111,7 @@ core.Class('api.Browser', {
 
 				console.debug("Loaded Class: " + id);
 
-				this.__cache[id] = this.__tmpl.view.render(this.__processor.process(data), this.__tmpl);
+				this.__cache[id] = this.__tmpl.main.render(this.__processor.process(data), this.__tmpl);
 
 				if (this.__current.file === id) {
 

@@ -1,14 +1,14 @@
 <span class="params">
 	{{?params}}
-		(
+		<span class="parens">(</span>
 		{{#params}}
 			{{?position}}, {{/position}}
 			{{?type}}{{>type}}: {{/type}}
 			<span class="name">{{name}}</span>
 		{{/params}}
-		)
+		<span class="parens">)</span>
 	{{/params}}
 	{{^params}}
-		()
+		<span class="parens">()</span>
 	{{/params}}
 </span>
