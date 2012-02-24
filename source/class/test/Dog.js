@@ -91,6 +91,13 @@ core.Class('api.test.Dog', {
 	},
 
 	members: {
+		
+		/** Enum about a dog being fat */
+		FAT : 3,
+		/** Enum about a dog being normal */
+		NORMAL : 2,
+		/** Enum about a dog being slim */
+		SLIM : 1,
 
 		/**
 		 * This method is required for firing events on the dog itself.
