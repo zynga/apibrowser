@@ -5,6 +5,9 @@
 			{{?position}}, {{/position}}
 			{{?type}}{{>type}}: {{/type}}
 			<span class="name">{{name}}</span>
+			{{?dynamic}}<span class="dynamic">...</span>{{/dynamic}}
+			{{?optional}}<span class="dynamic">?</span>{{/optional}}
+			{{?default}}<span class="default"><code>{{default}}</code></span>{{/default}}
 		{{/params}}
 		<span class="parens">)</span>
 	{{/params}}

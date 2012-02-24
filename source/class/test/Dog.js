@@ -98,6 +98,13 @@ core.Class('api.test.Dog', {
 		NORMAL : 2,
 		/** Enum about a dog being slim */
 		SLIM : 1,
+		
+		/**
+		 * Play with the dog using arbitrary number of @objects {Object...}.
+		 */
+		play: function(objects) {
+			
+		},
 
 		/**
 		 * This method is required for firing events on the dog itself.
