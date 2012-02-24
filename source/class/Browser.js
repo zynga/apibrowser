@@ -141,26 +141,17 @@ core.Class('api.Browser', {
 			};
 
 			var comparator = function(a, b) {
-
-				if (node[a].$type == node[b].$type) {
-
-					return a == b ? 0 : a > b ? 1 : -1;
-
-				} else if (node[a].$type == "Package") {
-
-					return -1;
-
-				} else if (node[b].$type == "Package") {
-
-					return 1;
-
-				} else {
-
-					return 0;
-
+				if (node[a].$type != node[b].$type) 
+				{
+					if (node[a].$type == "Package") {
+						return -1;
+					} else if (node[b].$type == "Package") {
+						return 1;
+					}
 				}
 
-			}
+				return a == b ? 0 : a > b ? 1 : -1;
+			};
 
 			var keys = Object.keys(node).filter(filter).sort(comparator);
 
