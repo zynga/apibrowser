@@ -144,7 +144,7 @@ core.Class('api.Browser', {
 
 				if (node[a].$type == node[b].$type) {
 
-					return a > b ? 1 : -1;
+					return a == b ? 0 : a > b ? 1 : -1;
 
 				} else if (node[a].$type == "Package") {
 
