@@ -9,7 +9,9 @@
  *
  * ```
  * var myDog = new api.test.Dog('brown', true, 40, false);
+ *
  * myDog.feed(new api.test.Food(5)); // 5kg, kinda American way!
+ *
  * myDog.walk(200); // lets him walk 200m
  * ```
  */

@@ -24,14 +24,14 @@ core.Class('api.Browser', {
 		core.io.Queue.load([
 			core.io.Asset.toUri("api/reset.css"),
 			core.io.Asset.toUri("api/style.css"),
-			
+
 			"tmpl/view.js",
 			"tmpl/entry.js",
 			"tmpl/type.js",
 			"tmpl/params.js",
 			"tmpl/info.js",
 			"tmpl/origin.js",
-			
+
 			"data/$index.js",
 			"data/$search.js"
 		], this.__onLoad, this);
@@ -77,14 +77,15 @@ core.Class('api.Browser', {
 				var link = $(this).attr('href');
 				if (link.charAt(0) == '#') {
 					that.open(link.slice(1));
-					return false;
 				}
+
+				return false;
 
 			});
 
-			window.onhashchange = function() {
-				that.open(location.hash.slice(1));
-			};
+//			window.onhashchange = function() {
+//				that.open(location.hash.slice(1));
+//			};
 
 			// Open initial hash
 			this.open(location.hash.slice(1));
@@ -93,9 +94,9 @@ core.Class('api.Browser', {
 
 
 		callback: function(data, id) {
-			
+
 			if (id.endsWith(".mustache")) {
-				
+
 				var templateName = id.substring(0, id.indexOf(".mustache"));
 				this.__tmpl[templateName] = core.template.Compiler.compile(data.template, true);
 
@@ -186,42 +187,117 @@ core.Class('api.Browser', {
 
 		},
 
-		open: function(hash) {
+		getHash: function(type, file, item) {
 
-			console.debug("Open: " + hash);
+			type = type || null;
+			file = file || null;
+			item = item || null;
+
+
+			var hash = '';
+
+			// MewTwo uses confusion! ZackBoomBang!
+			if (item === null || type === null) {
+				type = '';
+			}
+
+
+			if (type) {
+				hash += type + ':';
+			}
+
+			if (file) {
+				hash += file;
+			} else {
+				hash += this.__current.file || '';
+			}
+
+			if (item) {
+				hash += '~' + item;
+			}
+
+			return hash;
+
+		},
+
+		getHashData: function(hash) {
+
+			var regex = new RegExp("((static|member|property|event)\:)?([A-Za-z0-9_\.]+)?(\~([A-Za-z0-9_]+))");
+			var tmp = hash.split(regex);
+
+			var data = {
+				type: null,
+				file: null,
+				item: null
+			};
+
+
+			// fastest access
+			if (tmp.length === 1) {
+
+				if (tmp[0]) {
+					data.file = tmp[0];
+				}
+
+				return data;
+			}
+
+
+			// ignore empty strings
+
+			if (tmp[2]) {
+				data.type = tmp[2];
+			}
+
+			if (tmp[3]) {
+				data.file = tmp[3];
+			}
+
+			if (tmp[5]) {
+				data.item = tmp[5];
+			}
+
+			return data;
+
+		},
+
+		open: function(hash) {
 
 			if (hash.charAt(0) === '!') {
 				hash = hash.slice(1);
 			}
 
-			if (hash.charAt(0) === '~') {
-				hash = this.__current.file + '~' + hash.slice(1);
+			var data = this.getHashData(hash);
+			console.log('OPEN', data);
+
+			this.__showTree(data);
+			this.__showContent(data);
+
+
+			if (
+				this.__current.type !== data.type
+				|| this.__current.file !== data.file
+				|| this.__current.item !== data.item
+			) {
+
+				// Don't overwrite this.__current.html!
+				this.__current.type = data.type;
+				this.__current.file = data.file;
+				this.__current.item = data.item;
+
+				location.hash = this.getHash(data);
+
 			}
-
-
-			this.__showTree(hash);
-			this.__showContent(hash);
-
-
-			location.hash = hash;
-
-
-			if (hash.match(/:/)) {
-				this.__current.file = hash.split(/~/)[0].split(/:/)[1];
-				this.__current.type = hash.split(/:/)[0];
-			} else {
-				this.__current.file = hash.split(/~/)[0];
-				this.__current.type = '';
-			}
-
-			this.__current.item = hash.split(/~/)[1] || '';
 
 		},
 
-		__showTree: function(hash) {
+		__showTree: function(data) {
 
-			var file = hash.split(/~/)[0];
-			var segments = file.split('.');
+			if (!data.file) {
+				return;
+			}
+
+			var segments = data.file.split('.');
 			var current = '';
 
 			for (var s = 0, l = segments.length; s < l; s++) {
@@ -239,46 +315,35 @@ core.Class('api.Browser', {
 
 		},
 
-		__showContent: function(hash) {
+		__showContent: function(data) {
 
-			var data = hash.split(/~/);
-
-			var file, item;
-			if (hash.match(/:/)) {
-				file = hash.split(/~/)[0].split(/:/)[1];
-			} else {
-				file = hash.split(/~/)[0];
+			if (!data.file) {
+				return;
 			}
 
-			item = hash.split(/~/)[1] || null;
+			var cacheEntry = this.__cache[data.file];
+			if (cacheEntry === undefined && this.__current.file !== data.file) {
 
+				core.io.Script.load('data/' + data.file + '.js');
 
-			var cacheEntry = this.__cache[file];
-			if (cacheEntry === undefined && this.__current.file !== file) {
-				core.io.Script.load('data/' + file + '.js');
-			} else if (cacheEntry !== undefined && this.__current.html !== file){
+			} else if (cacheEntry !== undefined && this.__current.html !== data.file){
+
 				$('#content').html(cacheEntry);
-				this.__current.html = file; // current file !== html content (initial load!)
+				this.__current.html = data.file; // current file !== html content (initial load!)
+
 			}
 
 
-			if (item) {
+			if (data.item) {
 
-				var type = null,
-					element;
-
-				if (data[0].match(/:/)) {
-					type = data[0].split(/:/)[0];
+				var element;
+				if (data.type !== null) {
+					element = document.getElementById(data.type + '-' + data.item);
 				}
 
-
-				// Search for specified type
-				if (type !== null) {
-					element = document.getElementById(type + '-' + item);
-				}
 
 				// Not found? Search for all types (first found wins)
-				if (!element || !type) {
+				if (!element || !data.type) {
 
 					var types = [
 						'static',
@@ -289,8 +354,8 @@ core.Class('api.Browser', {
 
 					for (var t = 0, l = types.length; t < l; t++) {
 
-						type = types[t];
-						element = document.getElementById(type + '-' + item);
+						data.type = types[t];
+						element = document.getElementById(data.type + '-' + data.item);
 
 						// First found wins
 						if (element) break;
@@ -302,8 +367,6 @@ core.Class('api.Browser', {
 
 				if (element) {
 					element.className = 'open';
-				} else {
-					console.warn('Invalid item selected:', hash);
 				}
 
 			}
