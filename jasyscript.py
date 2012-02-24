@@ -40,7 +40,7 @@ def build():
     
     # Write API data
     writer = ApiWriter(session)
-    writer.write("%s/data" % dist, compact=False, callback="apibrowser.callback")
+    writer.write("%s/data" % dist, compact=False, callback="apibrowser.callback", showInternals=True, showPrivates=True)
 
     # Prepare assets
     resolver = Resolver(session.getProjects())
