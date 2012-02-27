@@ -25,13 +25,15 @@ core.Class('api.Browser', {
 			core.io.Asset.toUri("api/reset.css"),
 			core.io.Asset.toUri("api/style.css"),
 			core.io.Asset.toUri("api/syntax.css"),
-			"tmpl/error.js",
+			
 			"tmpl/main.js",
 			"tmpl/entry.js",
 			"tmpl/type.js",
 			"tmpl/params.js",
 			"tmpl/info.js",
 			"tmpl/origin.js",
+			"tmpl/tags.js",
+			"tmpl/error.js",
 
 			"data/$index.js",
 			"data/$search.js"

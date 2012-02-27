@@ -1,0 +1,14 @@
+{{?tags}}
+	<ul class="tags">
+		{{#tags}}
+			<li>
+				<code>
+				{{name}}
+				{{#value}}
+					={{.}}
+				{{/value}}
+				</code>
+			</li>
+		{{/tags}}
+	</ul>
+{{/tags}}

@@ -16,20 +16,9 @@
 		{{?tags}}
 			<div class="section">
 				<strong>Tags: </strong> 
-				<ul class="tags">
-					{{#tags}}
-						<li>
-							<code>
-							{{name}}
-							{{#value}}
-								={{.}}
-							{{/value}}
-							</code>
-						</li>
-					{{/tags}}
-				</ul>
+				{{>tags}}
 			</div>
-		{{/tags}}	
+		{{/tags}}
 	{{/main}}
 
 	{{?size}}
@@ -171,6 +160,7 @@
 					{{?errornous}}<span class="errornous">&#9888;</span>{{/errornous}}
 				</h3>
 				<div class="doc">{{&doc}}</div>
+				{{>tags}}
 				{{>origin}}
 			</li>
 		{{/properties}}
@@ -183,7 +173,7 @@
 		<h2>Events</h2>
 		{{#events}}
 			<li id="event-{{name}}">
-				{{name}} ({{type}})
+				{{name}} ({{type}}) {{>tags}}
 				{{?errornous}}<span class="errornous">&#9888;</span>{{/errornous}}
 			</li>
 		{{/events}}
