@@ -9,11 +9,11 @@
  *
  * ```
  * var myDog = new api.test.Dog('brown', true, 40, false);
- *
  * myDog.feed(new api.test.Food(5)); // 5kg, kinda American way!
- *
  * myDog.walk(200); // lets him walk 200m
  * ```
+ *
+ * #version(1.0)
  */
 core.Class('api.test.Dog', {
 
@@ -101,8 +101,15 @@ core.Class('api.test.Dog', {
 		
 		/**
 		 * Play with the dog using arbitrary number of @objects {Object...}.
+		 * 
+		 * #awesome
 		 */
 		play: function(objects) {
+			
+		},
+		
+		/** Train the dog. #deprecated */
+		train: function() {
 			
 		},
 

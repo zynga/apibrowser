@@ -19,6 +19,28 @@
 		</div>
 	{{/size}}
 	
+	{{?permutations}}
+		<div class="section">
+			<strong>Permutations: </strong>
+			<ul>
+				{{#permutations}}
+					<li><code>{{.}}</code></li>
+				{{/permutations}}
+			</ul>
+		</div>
+	{{/permutations}}
+	
+	{{?assets}}
+		<div class="section">
+			<strong>Assets: </strong>
+			<ul>
+				{{#assets}}
+					<li><code>{{.}}</code></li>
+				{{/assets}}
+			</ul>
+		</div>
+	{{/assets}}	
+	
 	{{?uses}}
 		<div class="section">
 			<strong>Uses: </strong>
