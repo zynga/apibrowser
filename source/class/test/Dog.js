@@ -14,6 +14,8 @@
  * ```
  *
  * #version(1.0)
+ * #version(1.1)
+ * #awesome
  */
 core.Class('api.test.Dog', {
 
@@ -58,6 +60,10 @@ core.Class('api.test.Dog', {
 		// required for calculation when walking the dog :)
 		this.__initialWeight = this.getWeight();
 
+	},
+	
+	events: {
+		foo : core.Event
 	},
 
 	properties: {

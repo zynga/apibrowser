@@ -18,28 +18,42 @@ core.Class("api.Processor", {
 
 		process: function(data) {
 			
-			if (data.hasOwnProperty("construct")) {
+			if (data.construct) {
+				
+				var construct = data.construct;
 				
 				if (data.main.type == "core.Class") {
-					data.construct.init = "new " + data.main.name;
+					construct.init = "new " + data.main.name;
 				} else {
-					data.construct.init = data.main.name;
+					construct.init = data.main.name;
 				}
 
-				if (data.construct.params) {
-					data.construct.params = this.__processParams(data.construct.params);
+				if (construct.params) {
+					construct.params = this.__processParams(construct.params);
+				}
+				
+				if (construct.tags) {
+					construct.tags = this.__processTags(construct.tags);
 				}
 			}
+			
+			if (data.main && data.main.tags) {
+				data.main.tags = this.__processTags(data.main.tags);
+			}
 
-			if (data.hasOwnProperty("properties")) {
+			if (data.properties) {
 				data.properties = this.__processSection(data.properties);
 			}
 
-			if (data.hasOwnProperty("members")) {
+			if (data.events) {
+				data.events = this.__processSection(data.events);
+			}
+
+			if (data.members) {
 				data.members = this.__processSection(data.members);
 			}
 
-			if (data.hasOwnProperty("statics")) {
+			if (data.statics) {
 				data.statics = this.__processSection(data.statics);
 			}
 
@@ -49,6 +63,28 @@ core.Class("api.Processor", {
 
 		},
 
+
+		__processTags: function(object) {
+			
+			var arr = [];
+			
+			for (var id in object) {
+				
+				var entry = {};
+				var value = object[id];
+				if (value instanceof Array) {
+					entry.value = value;
+				} else {
+					entry.value = [true];
+				}
+				
+				entry.name = id;
+				arr.push(entry);
+			}
+			
+			return arr;
+			
+		},
 
 		__processSection: function(object) {
 
@@ -65,6 +101,10 @@ core.Class("api.Processor", {
 				
 				if (data.type == "Function") {
 					data.isFunction = true;
+				}
+				
+				if (data.tags) {
+					data.tags = this.__processTags(data.tags);
 				}
 
 				arr.push(data);

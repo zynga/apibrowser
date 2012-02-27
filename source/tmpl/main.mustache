@@ -11,6 +11,22 @@
 	<div class="section">
 		<strong>Type:</strong> <a href="#{{main.type}}">{{main.type}}</a>
 	</div>
+	
+	{{?main.tags}}
+		<div class="section">
+			<strong>Tags: </strong> 
+			<ul class="tags">
+				{{#main.tags}}
+					<li>
+						<code>{{name}}=</code>
+						{{#value}}
+							<code>{{.}}</code>
+						{{/value}}
+					</li>
+				{{/main.tags}}
+			</ul>
+		</div>
+	{{/main.tags}}	
 
 	{{?size}}
 		<div class="section">
