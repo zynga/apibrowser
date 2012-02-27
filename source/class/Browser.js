@@ -25,6 +25,7 @@ core.Class('api.Browser', {
 			core.io.Asset.toUri("api/reset.css"),
 			core.io.Asset.toUri("api/style.css"),
 			core.io.Asset.toUri("api/syntax.css"),
+			"tmpl/error.js",
 			"tmpl/main.js",
 			"tmpl/entry.js",
 			"tmpl/type.js",
@@ -162,6 +163,11 @@ core.Class('api.Browser', {
 					html += '<li><a class="tree-package" href="#' + name + '">' + key + '</a><ul>' + this.__treeWalker(entry, name) + '</ul></li>';
 
 				} else {
+
+					// this will let showContent know that the file / class exists
+					if (this.__cache[name] === undefined) {
+						this.__cache[name] = null;
+					}
 
 					html += '<li><a class="tree-class" href="#' + name + '">' + key + '</a></li>';
 
@@ -310,14 +316,24 @@ core.Class('api.Browser', {
 			}
 
 			var cacheEntry = this.__cache[data.file];
-			if (cacheEntry === undefined && this.__current.file !== data.file) {
+			console.log(typeof cacheEntry);
+
+
+			if (cacheEntry === null) {
 
 				core.io.Script.load('data/' + data.file + '.js');
 
-			} else if (cacheEntry !== undefined && this.__current.html !== data.file){
+			} else if (cacheEntry != null && this.__current.html !== data.file) {
 
 				$('#content').html(cacheEntry);
-				this.__current.html = data.file; // current file !== html content (initial load!)
+				this.__current.html = data.file;
+
+			} else if (cacheEntry === undefined) {
+
+				$('#content').html(this.__tmpl.error.render({
+					name: '404 - Not Found',
+					description: 'The selected File "' + data.file + '" was not found.'
+				}, this.__tmpl));
 
 			}
 
