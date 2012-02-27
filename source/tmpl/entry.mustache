@@ -9,6 +9,20 @@
 			&#9888;
 		</span>
 	{{/errornous}}
+	{{?tags}}
+		<ul class="tags">
+			{{#tags}}
+				<li>
+					<code>
+					{{name}}
+					{{#value}}
+						={{.}}
+					{{/value}}
+					</code>
+				</li>
+			{{/tags}}
+		</ul>
+	{{/tags}}
 	{{?isFunction}}
 		{{?returns}}
 			<span class="returns"> &#8594; {{returns}}</span>

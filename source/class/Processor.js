@@ -73,9 +73,7 @@ core.Class("api.Processor", {
 				var entry = {};
 				var value = object[id];
 				if (value instanceof Array) {
-					entry.value = value;
-				} else {
-					entry.value = [true];
+					entry.value = value.join("+");
 				}
 				
 				entry.name = id;

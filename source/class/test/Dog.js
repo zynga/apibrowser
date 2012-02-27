@@ -63,6 +63,7 @@ core.Class('api.test.Dog', {
 	},
 	
 	events: {
+		/** #strong */
 		foo : core.Event
 	},
 
@@ -76,7 +77,7 @@ core.Class('api.test.Dog', {
 		},
 
 		/**
-		 * All Mammalians have teeth!
+		 * All Mammalians have teeth! #std
 		 */
 		teeth: {
 			type: 'Number',

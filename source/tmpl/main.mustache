@@ -12,21 +12,25 @@
 		<strong>Type:</strong> <a href="#{{main.type}}">{{main.type}}</a>
 	</div>
 	
-	{{?main.tags}}
-		<div class="section">
-			<strong>Tags: </strong> 
-			<ul class="tags">
-				{{#main.tags}}
-					<li>
-						<code>{{name}}=</code>
-						{{#value}}
-							<code>{{.}}</code>
-						{{/value}}
-					</li>
-				{{/main.tags}}
-			</ul>
-		</div>
-	{{/main.tags}}	
+	{{#main}}
+		{{?tags}}
+			<div class="section">
+				<strong>Tags: </strong> 
+				<ul class="tags">
+					{{#tags}}
+						<li>
+							<code>
+							{{name}}
+							{{#value}}
+								={{.}}
+							{{/value}}
+							</code>
+						</li>
+					{{/tags}}
+				</ul>
+			</div>
+		{{/tags}}	
+	{{/main}}
 
 	{{?size}}
 		<div class="section">
