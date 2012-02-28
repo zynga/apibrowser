@@ -1,4 +1,5 @@
 /**
+ * The main class of the API Browser.
  *
  * #asset(api/*)
  */

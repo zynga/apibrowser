@@ -120,6 +120,31 @@
 	</div>
 {{/main.doc}}
 
+{{?errors}}
+	<div class="errors">
+		<h2>Errors</h2>
+		<ul>
+			{{#errors}}
+				<li>
+					{{?name}}
+						{{kind}} <a href="#{{kind}}:~{{name}}"><code>{{name}}</code></a>
+						{{!}} at line {{!}}
+						{{?lineLink}}
+							<a href="{{lineLink}}">{{line}}</a>
+						{{/lineLink}}
+						{{^lineLink}}
+							{{line}}
+						{{/lineLink}}
+					{{/name}}
+					{{^name}}
+						{{kind}}
+					{{/name}}
+				</li>
+			{{/errors}}
+		</ul>
+	</div>
+{{/errors}}
+
 {{?construct}}
 	<div class="constructor">
 		{{#construct}}
