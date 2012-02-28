@@ -41,21 +41,6 @@ core.Class("api.Processor", {
 				data.main.tags = this.__processTags(data.main.tags);
 			}
 
-			if (data.properties) {
-				data.properties = this.__processSection(data.properties);
-			}
-
-			if (data.events) {
-				data.events = this.__processSection(data.events);
-			}
-
-			if (data.members) {
-				data.members = this.__processSection(data.members);
-			}
-
-			if (data.statics) {
-				data.statics = this.__processSection(data.statics);
-			}
 
 			console.debug("Data: ", data);
 
@@ -83,36 +68,6 @@ core.Class("api.Processor", {
 			return arr;
 			
 		},
-
-		__processSection: function(object) {
-
-			var arr = [];
-
-			for (var id in object) {
-
-				var data = object[id];
-				data.name = id;
-
-				if (data.params != null) {
-					data.params = this.__processParams(data.params);
-				}
-				
-				if (data.type == "Function") {
-					data.isFunction = true;
-				}
-				
-				if (data.tags) {
-					data.tags = this.__processTags(data.tags);
-				}
-
-				arr.push(data);
-
-			}
-
-			return arr;
-
-		},
-
 
 		__processParams: function(params) {
 			

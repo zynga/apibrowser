@@ -40,9 +40,6 @@ core.Class('api.Browser', {
 			"data/$search.js"
 		], this.__onLoad, this);
 
-		// Initialize data processor
-		this.__processor = new api.Processor();
-
 		this.__tmpl = {};
 		this.__cache = {};
 
@@ -120,7 +117,7 @@ core.Class('api.Browser', {
 
 				console.debug("Loaded File: " + id);
 
-				this.__cache[id] = this.__tmpl.main.render(this.__processor.process(data), this.__tmpl);
+				this.__cache[id] = this.__tmpl.main.render(data, this.__tmpl);
 
 
 				if (this.__current.file === id) {
