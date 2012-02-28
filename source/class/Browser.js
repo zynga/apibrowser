@@ -315,13 +315,24 @@ core.Class('api.Browser', {
 				return;
 			}
 
-			var cacheEntry = this.__cache[data.file];
-			console.log(typeof cacheEntry);
 
+			var cacheEntry = this.__cache[data.file];
 
 			if (cacheEntry === null) {
 
-				core.io.Script.load('data/' + data.file + '.js');
+				core.io.Script.load('data/' + data.file + '.js', function(uri, error) {
+
+					if (error === true) {
+
+						$('#content').html(this.__tmpl.error.render({
+							name: '404 - Not Found',
+							description: 'The selected File "' + data.file + '" was not found.'
+						}, this.__tmpl));
+
+						this.__current.html = data.file;
+					}
+
+				}, this);
 
 			} else if (cacheEntry != null && this.__current.html !== data.file) {
 
@@ -334,6 +345,8 @@ core.Class('api.Browser', {
 					name: '404 - Not Found',
 					description: 'The selected File "' + data.file + '" was not found.'
 				}, this.__tmpl));
+
+				this.__current.html = data.file;
 
 			}
 
