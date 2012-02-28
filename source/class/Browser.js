@@ -25,7 +25,7 @@ core.Class('api.Browser', {
 			core.io.Asset.toUri("api/reset.css"),
 			core.io.Asset.toUri("api/style.css"),
 			core.io.Asset.toUri("api/syntax.css"),
-			
+
 			"tmpl/main.js",
 			"tmpl/entry.js",
 			"tmpl/type.js",
@@ -160,16 +160,16 @@ core.Class('api.Browser', {
 				var entry = node[key];
 				var name = base ? base + "." + key : key;
 
+				// this will let showContent know that the file / class exists
+				if (this.__cache[name] === undefined) {
+					this.__cache[name] = null;
+				}
+
 				if (entry.$type == "Package") {
 
 					html += '<li><a class="tree-package" href="#' + name + '">' + key + '</a><ul>' + this.__treeWalker(entry, name) + '</ul></li>';
 
 				} else {
-
-					// this will let showContent know that the file / class exists
-					if (this.__cache[name] === undefined) {
-						this.__cache[name] = null;
-					}
 
 					html += '<li><a class="tree-class" href="#' + name + '">' + key + '</a></li>';
 
