@@ -9,11 +9,13 @@
  *
  * ```
  * var myDog = new api.test.Dog('brown', true, 40, false);
- *
  * myDog.feed(new api.test.Food(5)); // 5kg, kinda American way!
- *
  * myDog.walk(200); // lets him walk 200m
  * ```
+ *
+ * #version(1.0)
+ * #version(1.1)
+ * #awesome
  */
 core.Class('api.test.Dog', {
 
@@ -59,6 +61,11 @@ core.Class('api.test.Dog', {
 		this.__initialWeight = this.getWeight();
 
 	},
+	
+	events: {
+		/** #strong */
+		foo : core.Event
+	},
 
 	properties: {
 
@@ -70,7 +77,7 @@ core.Class('api.test.Dog', {
 		},
 
 		/**
-		 * All Mammalians have teeth!
+		 * All Mammalians have teeth! #std
 		 */
 		teeth: {
 			type: 'Number',
@@ -101,8 +108,15 @@ core.Class('api.test.Dog', {
 		
 		/**
 		 * Play with the dog using arbitrary number of @objects {Object...}.
+		 * 
+		 * #awesome
 		 */
 		play: function(objects) {
+			
+		},
+		
+		/** Train the dog. #deprecated */
+		train: function() {
 			
 		},
 

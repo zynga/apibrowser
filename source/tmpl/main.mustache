@@ -8,9 +8,18 @@
 </div>
 
 <div class="meta">
-	<div class="section">
-		<strong>Type:</strong> <a href="#{{main.type}}">{{main.type}}</a>
-	</div>
+	{{#main}}
+		<div class="section">
+			<strong>Type:</strong> <a href="#{{type}}">{{type}}</a>
+		</div>
+
+		{{?tags}}
+			<div class="section">
+				<strong>Tags: </strong> 
+				{{>tags}}
+			</div>
+		{{/tags}}
+	{{/main}}
 
 	{{?size}}
 		<div class="section">
@@ -18,6 +27,28 @@
 			<em>Compressed:</em> {{size.compressed}}, <em>Optimized:</em> {{size.optimized}}, <em>Zipped:</em> {{size.zipped}}
 		</div>
 	{{/size}}
+	
+	{{?permutations}}
+		<div class="section">
+			<strong>Permutations: </strong>
+			<ul>
+				{{#permutations}}
+					<li><code>{{.}}</code></li>
+				{{/permutations}}
+			</ul>
+		</div>
+	{{/permutations}}
+	
+	{{?assets}}
+		<div class="section">
+			<strong>Assets: </strong>
+			<ul>
+				{{#assets}}
+					<li><code>{{.}}</code></li>
+				{{/assets}}
+			</ul>
+		</div>
+	{{/assets}}	
 	
 	{{?uses}}
 		<div class="section">
@@ -110,7 +141,7 @@
 		<ul>
 			{{#statics}}
 			<li id="static-{{name}}">
-				{{> entry}}
+				{{>entry}}
 			</li>
 			{{/statics}}
 		</ul>
@@ -129,6 +160,7 @@
 					{{?errornous}}<span class="errornous">&#9888;</span>{{/errornous}}
 				</h3>
 				<div class="doc">{{&doc}}</div>
+				{{>tags}}
 				{{>origin}}
 			</li>
 		{{/properties}}
@@ -141,7 +173,7 @@
 		<h2>Events</h2>
 		{{#events}}
 			<li id="event-{{name}}">
-				{{name}} ({{type}})
+				{{name}} ({{type}}) {{>tags}}
 				{{?errornous}}<span class="errornous">&#9888;</span>{{/errornous}}
 			</li>
 		{{/events}}
@@ -154,7 +186,7 @@
 		<ul>
 			{{#members}}
 			<li id="member-{{name}}">
-				{{> entry}}
+				{{>entry}}
 			</li>
 			{{/members}}
 		</ul>
