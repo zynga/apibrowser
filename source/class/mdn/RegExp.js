@@ -22,16 +22,16 @@ core.Main.addMembers("RegExp", {
 	/** {=String} The text of the pattern. */
 	source: null,
 	
-	/** Executes a search for a match in its @string {String} parameter. */
+	/** {Object} Executes a search for a match in its @string {String} parameter. */
 	exec: function(string) {},
 
-	/** Tests for a match in its @string {String} parameter. */
+	/** {Boolean} Tests for a match in its @string {String} parameter. */
 	test: function(string) {},
 
-	/** Returns an object literal representing the specified object; you can use this value to create a new object. */
+	/** {Map} Returns an object literal representing the specified object; you can use this value to create a new object. */
 	toSource: function() {},
 
-	/** Returns a string representing the specified object. */
-	toString: function() {},
+	/** {String} Returns a string representing the specified object. */
+	toString: function() {}
 	
 });
