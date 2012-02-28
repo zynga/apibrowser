@@ -14,9 +14,7 @@ core.Interface('api.test.Mammalian', {
 		 */
 		fur: {
 			type: 'Object',
-			fire: 'changeFur',
-			apply: function(value, old) {
-			}
+			fire: 'changeFur'
 		},
 
 		/**
@@ -24,9 +22,7 @@ core.Interface('api.test.Mammalian', {
 		 */
 		teeth: {
 			type: 'Number',
-			fire: 'looseTeeth',
-			apply: function(value, old) {
-			}
+			fire: 'looseTeeth'
 		},
 
 		/**
@@ -34,9 +30,7 @@ core.Interface('api.test.Mammalian', {
 		 */
 		bones: {
 			type: 'Number',
-			fire: 'breakBones',
-			apply: function(value, old) {
-			}
+			fire: 'breakBones'
 		}
 
 	}
