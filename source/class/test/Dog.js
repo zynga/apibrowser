@@ -63,12 +63,13 @@ core.Class('api.test.Dog', {
 	},
 	
 	events: {
-		/** #strong */
-		foo : core.Event
+		/** #awesome */
+		fly : core.Event
 	},
 
 	properties: {
-
+		
+		// interface implementation
 		fur: {
 			type: 'Object',
 			fire: 'changeFur',
@@ -77,7 +78,7 @@ core.Class('api.test.Dog', {
 		},
 
 		/**
-		 * All Mammalians have teeth! #std
+		 * Even dogs have teeth! #wonderful
 		 */
 		teeth: {
 			type: 'Number',
@@ -87,6 +88,7 @@ core.Class('api.test.Dog', {
 			}
 		},
 
+		// interface implementation
 		bones: {
 			type: 'Number',
 			fire: 'breakBones',
@@ -109,7 +111,7 @@ core.Class('api.test.Dog', {
 		/**
 		 * Play with the dog using arbitrary number of @objects {Object...}.
 		 * 
-		 * #awesome
+		 * #cute
 		 */
 		play: function(objects) {
 			
