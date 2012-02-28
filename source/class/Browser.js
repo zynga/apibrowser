@@ -48,7 +48,8 @@ core.Class('api.Browser', {
 			type: '',
 			file: '',
 			item: '',
-			html: ''
+			html: '',
+			hash: ''
 		};
 
 	},
@@ -59,37 +60,63 @@ core.Class('api.Browser', {
 
 			var that = this;
 
-			$('li').live('click', function(event) {
+			document.body.addEventListener('click', function(event) {
 
-				if (this.id) {
+				var element = event.target;
 
-					var type, item;
-					if (this.id.match(/-/)) {
-						type = this.id.split(/-/)[0];
-						item = this.id.split(/-/)[1];
-					} else {
-						item = this.id;
+				if (element) {
+
+					if (element.tagName === 'H3') {
+						// parentNode = LI
+						element = element.parentNode;
 					}
 
-					that.open(that.getHash(type, null, item));
+
+					if (element.tagName === 'LI') {
+
+						if (element.id) {
+
+							var type, item;
+							if (element.id.match(/-/)) {
+								type = element.id.split(/-/)[0];
+								item = element.id.split(/-/)[1];
+							} else {
+								item = element.id;
+							}
+
+							that.open(that.getHash(type, null, item));
+
+						}
+
+						event.preventDefault();
+
+					} else if (element.tagName === 'A') {
+
+						if (element.getAttribute('href')) {
+
+							var href = element.getAttribute('href');
+							if (href.charAt(0) === '#') {
+								that.open(href.slice(1));
+							}
+
+						}
+
+						event.preventDefault();
+
+					}
 
 				}
 
-			});
+			}, true);
 
-			$('a').live('click', function(event) {
-
-				var link = $(this).attr('href');
-				if (link.charAt(0) == '#') {
-					that.open(link.slice(1));
-				}
-
-				return false;
-
-			});
 
 			window.onhashchange = function() {
-				that.open(location.hash.slice(1));
+
+				var hash = location.hash.slice(1);
+				if (hash !== that.__current.hash) {
+					that.open(hash);
+				}
+
 			};
 
 			// Open initial hash
@@ -279,7 +306,8 @@ core.Class('api.Browser', {
 				this.__current.item = data.item;
 
 
-				location.hash = this.getHash(this.__current.type, this.__current.file, this.__current.item);
+				this.__current.hash = this.getHash(this.__current.type, this.__current.file, this.__current.item);
+				location.hash = this.__current.hash;
 
 			}
 
@@ -294,13 +322,28 @@ core.Class('api.Browser', {
 			var segments = data.file.split('.');
 			var current = '';
 
+
+			// Don't close opened items, just un-highlight them
+			var oldElements = document.querySelectorAll("#tree .active");
+			for (var o = 0; o < oldElements.length; o++) {
+				core.bom.ClassName.remove(oldElements[o], 'active');
+			}
+
+
 			for (var s = 0, l = segments.length; s < l; s++) {
 
 				current += segments[s];
 
 				var element = document.querySelector("#tree a[href='#" + current + "']");
 				if (element != null) {
-					element.parentNode.className = ' open';
+
+					core.bom.ClassName.add(element.parentNode, 'open');
+
+					// Highlight the deepest (= active) item
+					if (s === segments.length - 1) {
+						core.bom.ClassName.add(element.parentNode, 'active');
+					}
+
 				}
 
 				current += '.';
@@ -316,7 +359,8 @@ core.Class('api.Browser', {
 			}
 
 
-			var cacheEntry = this.__cache[data.file];
+			var content = document.getElementById('content'),
+				cacheEntry = this.__cache[data.file];
 
 			if (cacheEntry === null) {
 
@@ -324,29 +368,34 @@ core.Class('api.Browser', {
 
 					if (error === true) {
 
-						$('#content').html(this.__tmpl.error.render({
+						content.innerHTML = this.__tmpl.error.render({
 							name: '404 - Not Found',
 							description: 'The selected File "' + data.file + '" was not found.'
-						}, this.__tmpl));
+						}, this.__tmpl);
 
 						this.__current.html = data.file;
+
 					}
 
 				}, this);
 
+				return;
+
 			} else if (cacheEntry != null && this.__current.html !== data.file) {
 
-				$('#content').html(cacheEntry);
+				content.innerHTML = cacheEntry;
 				this.__current.html = data.file;
 
 			} else if (cacheEntry === undefined) {
 
-				$('#content').html(this.__tmpl.error.render({
+				content.innerHTML = this.__tmpl.error.render({
 					name: '404 - Not Found',
 					description: 'The selected File "' + data.file + '" was not found.'
-				}, this.__tmpl));
+				}, this.__tmpl);
 
 				this.__current.html = data.file;
+
+				return;
 
 			}
 
@@ -381,9 +430,19 @@ core.Class('api.Browser', {
 
 				}
 
+				var oldElements = document.querySelectorAll('li.open');
+				for (var e = 0; e < oldElements.length; e++) {
+					core.bom.ClassName.remove(oldElements[e], 'active');
+				}
+
 
 				if (element) {
-					element.className = 'open';
+					core.bom.ClassName.add(element, 'open');
+					core.bom.ClassName.add(element, 'active');
+				}
+
+				if (element && element.scrollIntoView) {
+					element.scrollIntoView();
 				}
 
 			}

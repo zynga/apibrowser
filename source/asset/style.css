@@ -77,7 +77,7 @@ a{
 	bottom: 0;
 	overflow: auto;
 	background: #121212;
-	color: #a1aaaf;
+	color: #dddddd;
 }
 
 #tree > ul{
@@ -103,6 +103,11 @@ a{
 
 #tree li.open > ul {
 	display: block;
+}
+
+#tree li.active {
+	color: #444;
+	background: #fff;
 }
 
 #tree .tree-package {
@@ -164,6 +169,13 @@ a{
 }
 
 #content li.open{
+	border-left: 8px solid #aaa;
+	padding-left: 10px;
+	margin-left: -18px;
+	background: #f9f9f9;
+}
+
+#content li.active{
 	border-left: 8px solid #1a5482;
 	padding-left: 10px;
 	margin-left: -18px;
