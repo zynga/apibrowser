@@ -75,7 +75,7 @@ a{
 */
 
 #tree {
-	width: 250px;
+	width: 280px;
 	position: absolute;
 	top: 60px;
 	left: 0;
@@ -119,6 +119,7 @@ a{
 #tree .tree-package,
 #tree .tree-item{
 	position: relative;
+	white-space: nowrap;
 }
 
 #tree .tree-package:before,
@@ -165,8 +166,6 @@ a{
 #tree li.active > .tree-item:after{
 	background: #ccc;
 	color: #666;
-	
-	
 }
 
 #tree .tree-item[data-type="core.Class"]:after{
@@ -202,7 +201,7 @@ a{
 
 #content {
 	position: absolute;
-	left: 250px;
+	left: 280px;
 	top: 60px;
 	right: 0;
 	bottom: 0;

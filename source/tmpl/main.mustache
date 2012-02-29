@@ -5,6 +5,12 @@
 		{{?package}}<span class="namespace">{{package}}</span>{{/package}}
 		{{?errornous}}<span class="errornous">&#9888;</span>{{/errornous}}
 	</h1>
+
+	{{?main.doc}}
+		<div class="description doc">
+			{{&main.doc}}
+		</div>
+	{{/main.doc}}
 </div>
 
 <div class="meta">
@@ -113,12 +119,6 @@
 		</div>
 	{{/includedBy}}
 </div>
-
-{{?main.doc}}
-	<div class="description doc">
-		{{&main.doc}}
-	</div>
-{{/main.doc}}
 
 {{?errors}}
 	<div class="errors">
