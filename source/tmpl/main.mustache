@@ -98,6 +98,7 @@
 						{{/group}}
 					</ul>
 					{{>origin}}
+					{{>info}}
 				</div>
 			</li>
 		{{/properties}}
@@ -115,7 +116,10 @@
 						{{name}} {{>tags}}
 					</h3>
 					<div class="details">
-						{{type}}
+						<div>
+							<strong>Type: </strong>{{type}}
+						</div>
+						{{>info}}
 					</div>
 				</li>
 			{{/events}}
