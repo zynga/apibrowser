@@ -2,10 +2,10 @@
 /**
  * This Dog class lets you create a Dog that you
  * can feed, walk and just do things that you
- * are used to while playing Tamagochi :)
+ * are used to while playing Tamagotchi. :)
  *
  * This example shows how to handle a brown dog that
- * is hungry and weights 40kg (and is not naked)
+ * is hungry and weights 40kg (and is not naked):
  *
  * ```
  * var myDog = new api.test.Dog('brown', true, 40, false);

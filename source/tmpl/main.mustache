@@ -13,140 +13,6 @@
 	{{/main.doc}}
 </div>
 
-<div class="meta">
-	{{#main}}
-		<div class="section">
-			<strong>Type:</strong> <a href="#{{type}}">{{type}}</a>
-		</div>
-
-		{{?tags}}
-			<div class="section">
-				<strong>Tags: </strong> 
-				{{>tags}}
-			</div>
-		{{/tags}}
-	{{/main}}
-
-	{{?size}}
-		<div class="section">
-			<strong>Size: </strong> 
-			<em>Compressed:</em> {{size.compressed}}, <em>Optimized:</em> {{size.optimized}}, <em>Zipped:</em> {{size.zipped}}
-		</div>
-	{{/size}}
-	
-	{{?permutations}}
-		<div class="section">
-			<strong>Permutations: </strong>
-			<ul>
-				{{#permutations}}
-					<li><code>{{.}}</code></li>
-				{{/permutations}}
-			</ul>
-		</div>
-	{{/permutations}}
-	
-	{{?assets}}
-		<div class="section">
-			<strong>Assets: </strong>
-			<ul>
-				{{#assets}}
-					<li><code>{{.}}</code></li>
-				{{/assets}}
-			</ul>
-		</div>
-	{{/assets}}	
-	
-	{{?uses}}
-		<div class="section">
-			<strong>Uses: </strong>
-			<ul>
-				{{#uses}}
-					<li><a href="#{{.}}">{{.}}</a></li>
-				{{/uses}}
-			</ul>
-		</div>
-	{{/uses}}
-	{{?usedBy}}
-		<div class="section">
-			<strong>Used by: </strong>
-			<ul>
-				{{#usedBy}}
-					<li><a href="#{{.}}">{{.}}</a></li>
-				{{/usedBy}}
-			</ul>
-		</div>
-	{{/usedBy}}
-	
-	{{?implements}}
-		<div class="section">
-			<strong>Implements: </strong>
-			<ul>
-				{{#implements}}
-					<li><a href="#{{.}}">{{.}}</a></li>
-				{{/implements}}
-			</ul>
-		</div>
-	{{/implements}}
-	{{?implementedBy}}
-		<div class="section">
-			<strong>Implemented by: </strong>
-			<ul>
-				{{#implementedBy}}
-					<li><a href="#{{.}}">{{.}}</a></li>
-				{{/implementedBy}}
-			</ul>
-		</div>
-	{{/implementedBy}}
-		
-	{{?includes}}
-		<div class="section">
-			<strong>Includes: </strong>
-			<ul>
-				{{#includes}}
-					<li><a href="#{{.}}">{{.}}</a></li>
-				{{/includes}}
-			</ul>
-		</div>
-	{{/includes}}
-	{{?includedBy}}
-		<div class="section">
-			<strong>Included by: </strong>
-			<ul>
-				{{#includedBy}}
-					<li><a href="#{{.}}">{{.}}</a></li>
-				{{/includedBy}}
-			</ul>
-		</div>
-	{{/includedBy}}
-</div>
-
-{{?errors}}
-	<div class="errors">
-		<h2>Errors</h2>
-		<ul>
-			{{#errors}}
-				<li>
-					<h3>
-					{{?name}}
-						{{kind}} <a href="#{{kind}}:~{{name}}">{{name}}</a>
-						{{!}} at line {{!}}
-						{{?lineLink}}
-							<a href="{{lineLink}}">{{line}}</a>
-						{{/lineLink}}
-						{{^lineLink}}
-							{{line}}
-						{{/lineLink}}
-					{{/name}}
-					{{^name}}
-						{{kind}}
-					{{/name}}
-					</h3>
-				</li>
-			{{/errors}}
-		</ul>
-	</div>
-{{/errors}}
-
 {{?construct}}
 	<div class="constructor">
 		{{#construct}}
@@ -270,3 +136,136 @@
 	</div>
 {{/members}}
 
+{{?errors}}
+	<div class="errors">
+		<h2>Errors</h2>
+		<ul>
+			{{#errors}}
+				<li>
+					<h3>
+					{{?name}}
+						{{kind}} <a href="#{{kind}}:~{{name}}">{{name}}</a>
+						{{!}} at line {{!}}
+						{{?lineLink}}
+							<a href="{{lineLink}}">{{line}}</a>
+						{{/lineLink}}
+						{{^lineLink}}
+							{{line}}
+						{{/lineLink}}
+					{{/name}}
+					{{^name}}
+						{{kind}}
+					{{/name}}
+					</h3>
+				</li>
+			{{/errors}}
+		</ul>
+	</div>
+{{/errors}}
+
+<div class="meta">
+	{{#main}}
+		<div class="section">
+			<strong>Type:</strong> <a href="#{{type}}">{{type}}</a>
+		</div>
+
+		{{?tags}}
+			<div class="section">
+				<strong>Tags: </strong> 
+				{{>tags}}
+			</div>
+		{{/tags}}
+	{{/main}}
+
+	{{?size}}
+		<div class="section">
+			<strong>Size: </strong> 
+			<em>Compressed:</em> {{size.compressed}}, <em>Optimized:</em> {{size.optimized}}, <em>Zipped:</em> {{size.zipped}}
+		</div>
+	{{/size}}
+	
+	{{?permutations}}
+		<div class="section">
+			<strong>Permutations: </strong>
+			<ul>
+				{{#permutations}}
+					<li><code>{{.}}</code></li>
+				{{/permutations}}
+			</ul>
+		</div>
+	{{/permutations}}
+	
+	{{?assets}}
+		<div class="section">
+			<strong>Assets: </strong>
+			<ul>
+				{{#assets}}
+					<li><code>{{.}}</code></li>
+				{{/assets}}
+			</ul>
+		</div>
+	{{/assets}}	
+	
+	{{?uses}}
+		<div class="section">
+			<strong>Uses: </strong>
+			<ul>
+				{{#uses}}
+					<li><a href="#{{.}}">{{.}}</a></li>
+				{{/uses}}
+			</ul>
+		</div>
+	{{/uses}}
+	{{?usedBy}}
+		<div class="section">
+			<strong>Used by: </strong>
+			<ul>
+				{{#usedBy}}
+					<li><a href="#{{.}}">{{.}}</a></li>
+				{{/usedBy}}
+			</ul>
+		</div>
+	{{/usedBy}}
+	
+	{{?implements}}
+		<div class="section">
+			<strong>Implements: </strong>
+			<ul>
+				{{#implements}}
+					<li><a href="#{{.}}">{{.}}</a></li>
+				{{/implements}}
+			</ul>
+		</div>
+	{{/implements}}
+	{{?implementedBy}}
+		<div class="section">
+			<strong>Implemented by: </strong>
+			<ul>
+				{{#implementedBy}}
+					<li><a href="#{{.}}">{{.}}</a></li>
+				{{/implementedBy}}
+			</ul>
+		</div>
+	{{/implementedBy}}
+		
+	{{?includes}}
+		<div class="section">
+			<strong>Includes: </strong>
+			<ul>
+				{{#includes}}
+					<li><a href="#{{.}}">{{.}}</a></li>
+				{{/includes}}
+			</ul>
+		</div>
+	{{/includes}}
+	{{?includedBy}}
+		<div class="section">
+			<strong>Included by: </strong>
+			<ul>
+				{{#includedBy}}
+					<li><a href="#{{.}}">{{.}}</a></li>
+				{{/includedBy}}
+			</ul>
+		</div>
+	{{/includedBy}}
+</div>
