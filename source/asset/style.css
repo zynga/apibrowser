@@ -82,7 +82,7 @@ a{
 	bottom: 0;
 	overflow: auto;
 	background: #121212;
-	color: #dddddd;
+	color: #ccc;
 }
 
 #tree > ul{
@@ -117,12 +117,12 @@ a{
 }
 
 #tree .tree-package,
-#tree .tree-class{
+#tree .tree-item{
 	position: relative;
 }
 
 #tree .tree-package:before,
-#tree .tree-class:before{
+#tree .tree-item:before{
 	font-family: "Entypo";
 	font-weight: normal;
 	position: absolute;
@@ -141,10 +141,55 @@ a{
 	content: 'H';
 }
 
-#tree .tree-class:before {
+#tree .tree-item:before {
 	content: 'D';
 	padding-left: 2px;
 }
+
+#tree .tree-item:after{
+	font-size: 10px;
+	padding: 2px 3px;
+	border-radius: 4px;
+
+	bottom: 2px;
+	left: 5px;
+	position: relative;
+	width: 12px;
+	display: inline-block;
+	line-height: 1;
+	text-align: center;
+	font-weight: bold;
+	color: #121212;
+}
+
+#tree li.active > .tree-item:after{
+	background: #ccc;
+	color: #666;
+	
+	
+}
+
+#tree .tree-item[data-type="core.Class"]:after{
+	content: "C";
+	background: #36aa1b;
+}
+
+#tree .tree-item[data-type="core.Module"]:after{
+	content: "M";
+	background: #c100aa;
+}
+
+#tree .tree-item[data-type="core.Interface"]:after{
+	content: "I";
+	background: #cb6400;
+}
+
+#tree .tree-item[data-type="Extend"]:after,
+#tree .tree-item[data-type="core.Main"]:after{
+	content: "E";
+	background: #e4c922;
+}
+
 
 
 

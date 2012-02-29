@@ -197,7 +197,7 @@ core.Class('api.Browser', {
 
 				} else {
 
-					html += '<li><a class="tree-class" href="#' + name + '">' + key + '</a></li>';
+					html += '<li><a data-type="' + entry.$type + '" class="tree-item" href="#' + name + '">' + key + '</a></li>';
 
 				}
 
