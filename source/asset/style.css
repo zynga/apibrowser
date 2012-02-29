@@ -314,10 +314,6 @@ strong{
 	line-height: 1.2;
 }
 
-#content ul.tags li:after{
-	content: "" !important;
-}
-
 #content ul.tags code{
 	font-size: inherit;
 }
@@ -354,18 +350,21 @@ strong{
 	display: inline;
 }
 
-#content .meta .section strong{
+#content .meta strong{
 	font-weight: bold;
 }
 
-#content .meta .section li:after{
+#content .meta li:after{
 	content: ", ";
 }
 
-#content .meta .section li:last-child:after{
+#content .meta li:last-child:after{
 	content: "";
 }
 
+#content .meta ul.tags li:after{
+	content: "" !important;
+}
 
 
 
@@ -423,11 +422,3 @@ strong{
 	padding-left: 8px;
 }
 
-
-
-
-/* 
-========================================================================
-   CONTENT :: CODE
-========================================================================
-*/
