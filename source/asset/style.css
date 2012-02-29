@@ -95,7 +95,7 @@ a{
 
 #tree a {
 	display: block;
-	padding-left: 24px;
+	padding-left: 28px;
 	color: inherit;
 	background-repeat: no-repeat;
 	line-height: 32px;
@@ -110,9 +110,10 @@ a{
 	display: block;
 }
 
-#tree li.active {
+#tree li.active > a {
 	color: #444;
 	background: #fff;
+	border-radius: 6px;
 }
 
 #tree .tree-package,
@@ -125,7 +126,7 @@ a{
 	font-family: "Entypo";
 	font-weight: normal;
 	position: absolute;
-	left: 0px;
+	left: 4px;
 }
 
 #tree .tree-package:before{
@@ -142,6 +143,7 @@ a{
 
 #tree .tree-class:before {
 	content: 'D';
+	padding-left: 2px;
 }
 
 
