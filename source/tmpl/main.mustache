@@ -186,24 +186,48 @@
 				<div class="details">
 					<div class="doc">{{&doc}}</div>
 					<ul class="config">
-						<li>
-							{{?type}}
-								<strong>Type: </strong>
-								<a href="#{{type}}">{{type}}</a>
-								{{?nullable}}?{{/nullable}}
-							{{/type}}
-							{{^type}}
-								<strong>Type: var</strong>
-								{{?nullable}}?{{/nullable}}
-							{{/type}}
-							{{?init}} = <code>{{init}}</code>{{/init}}
-						</li>
-						{{?fire}}
+						{{?group}}
 							<li>
-								<strong>Event: </strong>
-								<code>{{fire}}</code>
+								{{?shorthand}}
+									<strong>Group (Shorthand): </strong>
+								{{/shorthand}}
+								{{^shorthand}}
+									<strong>Group: </strong>
+								{{/shorthand}}
+								{{#group}}
+									<a href="#">{{.}}</a>
+								{{/group}}
 							</li>
-						{{/fire}}
+							{{?themeable}}
+								<li><strong>Themeable:</strong> <code>true</code></li>
+							{{/themeable}}
+						{{/group}}
+						{{^group}}
+							<li>
+								{{?type}}
+									<strong>Type: </strong>
+									<a href="#{{type}}">{{type}}</a>
+									{{?nullable}}?{{/nullable}}
+								{{/type}}
+								{{^type}}
+									<strong>Type: var</strong>
+									{{?nullable}}?{{/nullable}}
+								{{/type}}
+								{{?init}} = <code>{{init}}</code>{{/init}}
+							</li>
+							{{?fire}}
+								<li>
+									<strong>Event: </strong>
+									<code>{{fire}}</code>
+								</li>
+							{{/fire}}
+							{{?themeable}}
+								<li><strong>Themeable:</strong> <code>true</code></li>
+							{{/themeable}}
+							{{?inheritable}}
+								<li><strong>Inheritable:</strong> <code>true</code></li>
+							{{/inheritable}}
+						{{/group}}
 					</ul>
 					{{>origin}}
 				</div>
