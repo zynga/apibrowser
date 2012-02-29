@@ -178,15 +178,26 @@
 		<h2>Properties</h2>
 		<ul>
 			{{#properties}}
-			<li id="property-{{name}}">
+			<li id="property-{{name}}" {{?errornous}}class="errornous"{{/errornous}}>
 				<h3>
-					{{name}} 
-					({{type}})
-					{{?errornous}}<span class="errornous">&#9888;</span>{{/errornous}}
+					{{name}}
+					{{>tags}}
 				</h3>
-				<div class="doc">{{&doc}}</div>
-				{{>tags}}
-				{{>origin}}
+				<div class="details">
+					<div class="doc">{{&doc}}</div>
+					<ul class="config">
+						{{?type}}
+							<li>
+								<a href="#{{type}}">{{type}}</a>
+								{{?nullable}}?{{/nullable}}
+							</li>
+						{{/type}}
+						{{^type}}
+							{{?nullable}}<li>var?</li>{{/nullable}}
+						{{/type}}
+					</ul>
+					{{>origin}}
+				</div>
 			</li>
 		{{/properties}}
 		</ul>
