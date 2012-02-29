@@ -245,8 +245,12 @@
 		<ul>
 			{{#events}}
 				<li id="event-{{name}}"{{?errornous}} class="errornous"{{/errornous}}>
-					{{name}} ({{type}}) {{>tags}}
-					{{?errornous}}<span class="errornous">&#9888;</span>{{/errornous}}
+					<h3>
+						{{name}} {{>tags}}
+					</h3>
+					<div class="details">
+						{{type}}
+					</div>
 				</li>
 			{{/events}}
 		</ul>
