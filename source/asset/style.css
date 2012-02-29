@@ -44,6 +44,11 @@ a{
 	color: #276a94;
 }
 
+.icon{
+	font-family: "Entypo";
+}
+
+
 
 /* 
 ========================================================================
@@ -110,20 +115,33 @@ a{
 	background: #fff;
 }
 
+#tree .tree-package,
+#tree .tree-class{
+	position: relative;
+}
+
+#tree .tree-package:before,
+#tree .tree-class:before{
+	font-family: "Entypo";
+	font-weight: normal;
+	position: absolute;
+	left: 0px;
+}
+
+#tree .tree-package:before{
+	content: 'G';
+}
+
 #tree .tree-package {
-	background-image: url('glyphicons_144_folder_open.png');
-	background-position: 0px 7px;
 	font-weight: bold;
 }
 
-#tree > ul > li > a.tree-package{
-	background-image: url('glyphicons_020_home.png');
-	background-position: 0px 7px;
+#tree > ul > li > a.tree-package:before{
+	content: 'H';
 }
 
-#tree .tree-class {
-	background-image: url('glyphicons_036_file.png');
-	background-position: 4px 7px;
+#tree .tree-class:before {
+	content: 'D';
 }
 
 

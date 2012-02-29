@@ -23,6 +23,7 @@ core.Class('api.Browser', {
 
 		// Load initial data
 		core.io.Queue.load([
+			core.io.Asset.toUri("api/icon/stylesheet.css"),
 			core.io.Asset.toUri("api/reset.css"),
 			core.io.Asset.toUri("api/style.css"),
 			core.io.Asset.toUri("api/syntax.css"),
