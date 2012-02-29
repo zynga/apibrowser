@@ -1,14 +1,8 @@
-
 <h3>
 	{{name}}
 	{{?isFunction}}
 		{{>params}}
 	{{/isFunction}}
-	{{?errornous}}
-		<span class="errornous">
-			&#9888;
-		</span>
-	{{/errornous}}
 	{{>tags}}
 	{{?isFunction}}
 		{{?returns}}
@@ -24,9 +18,10 @@
 		{{/value}}
 	{{/isFunction}}
 </h3>
-{{>info}}
-<div class="doc">
-	{{&doc}}
-</div>
-{{>origin}}
- 
+<div class="details">
+	{{>info}}
+	<div class="doc">
+		{{&doc}}
+	</div>
+	{{>origin}}
+</div> 

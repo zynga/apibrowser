@@ -165,7 +165,7 @@
 		<h2>Statics</h2>
 		<ul>
 			{{#statics}}
-			<li id="static-{{name}}">
+			<li id="static-{{name}}" {{?errornous}}class="errornous"{{/errornous}}>
 				{{>entry}}
 			</li>
 			{{/statics}}
@@ -178,7 +178,7 @@
 		<h2>Properties</h2>
 		<ul>
 			{{#properties}}
-			<li id="property-{{name}}" {{?errornous}}class="errornous"{{/errornous}}>
+			<li id="property-{{name}}"{{?errornous}} class="errornous"{{/errornous}}>
 				<h3>
 					{{name}}
 					{{>tags}}
@@ -186,15 +186,24 @@
 				<div class="details">
 					<div class="doc">{{&doc}}</div>
 					<ul class="config">
-						{{?type}}
-							<li>
+						<li>
+							{{?type}}
+								<strong>Type: </strong>
 								<a href="#{{type}}">{{type}}</a>
 								{{?nullable}}?{{/nullable}}
+							{{/type}}
+							{{^type}}
+								<strong>Type: var</strong>
+								{{?nullable}}?{{/nullable}}
+							{{/type}}
+							{{?init}} = <code>{{init}}</code>{{/init}}
+						</li>
+						{{?fire}}
+							<li>
+								<strong>Event: </strong>
+								<code>{{fire}}</code>
 							</li>
-						{{/type}}
-						{{^type}}
-							{{?nullable}}<li>var?</li>{{/nullable}}
-						{{/type}}
+						{{/fire}}
 					</ul>
 					{{>origin}}
 				</div>
@@ -208,7 +217,7 @@
 	<div class="events">
 		<h2>Events</h2>
 		{{#events}}
-			<li id="event-{{name}}">
+			<li id="event-{{name}}"{{?errornous}} class="errornous"{{/errornous}}>
 				{{name}} ({{type}}) {{>tags}}
 				{{?errornous}}<span class="errornous">&#9888;</span>{{/errornous}}
 			</li>
@@ -221,7 +230,7 @@
 		<h2>Members</h2>
 		<ul>
 			{{#members}}
-			<li id="member-{{name}}">
+			<li id="member-{{name}}" {{?errornous}}class="errornous"{{/errornous}}>
 				{{>entry}}
 			</li>
 			{{/members}}

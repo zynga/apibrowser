@@ -1,23 +1,24 @@
 {{?origin}}
-	<h4 class="origin">
-		Included from:
+	<div class="origin">
+		<strong>Included from: </strong>
 		{{#origin}}
 			<a href="#{{.}}">{{.}}</a>
 		{{/origin}}
-	</h4>
+	</div>
 {{/origin}}
 
 {{?overridden}}
-	<h4 class="overridden">
-		Overridden from: 
+	<div class="overridden">
+		<strong>Overridden from: </strong>
 		{{#overridden}}
 			<a href="#{{.}}">{{.}}</a>
 		{{/overridden}}
-	</h4>
+	</div>
 {{/overridden}}
 
 {{?interface}}
-	<h4 class="implemented">
-		Defined by: <a href="#{{interface}}">{{interface}}</a>
-	</h4>
+	<div class="implemented">
+		<strong>Defined by: </strong>
+		<a href="#{{interface}}">{{interface}}</a>
+	</div>
 {{/interface}}
