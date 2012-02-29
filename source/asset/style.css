@@ -310,7 +310,7 @@ a{
 
 #content ul.tags li{
 	display: inline-block;
-	background: #437786;
+	background: #7e7e7e;
 	color: white;
 	text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
 	border: 1px solid #7d92a5;
@@ -319,6 +319,10 @@ a{
 	margin-left: 2px;
 	padding: 3px 6px;
 }
+
+
+
+
 
 
 
@@ -368,13 +372,8 @@ a{
 	padding-left: 28px;
 }
 
-#content .doc pre{
-	border: 1px solid #777;
-}
-
 #content .doc table{
 	width: 100%;
-	border: 1px solid #777;
 }
 
 #content .doc table th,
@@ -387,6 +386,17 @@ a{
 	font-weight: bold;
 	color: #777;
 }
+
+#content .doc .highlighttable{
+	border: 0 none;
+	background: #e4e4e4;
+}
+
+#content .doc .highlighttable .linenos{
+	background: red;
+}
+
+
 
 
 /* 
