@@ -37,7 +37,17 @@ h2{
 
 pre, code{
 	font-family: "Inconsolata-g", "Consolas", monospace;
+	background: #f2f2f2;
+}
+
+pre{
 	font-size: 14px;
+
+}
+
+code{
+	border: 1px solid;
+	
 }
 
 a{
@@ -228,25 +238,30 @@ strong{
 	border-top-color: #fff;
 }
 
-#content .errornous{
-	color: #ac2022;
+#content > div > ul > li{
+	padding-left: 20px;
+}
+
+#content > div > ul > li:before{
+	font-family: "Entypo";
+	font-weight: normal;
+	content: "P";
+	color: #999;
+	position: absolute;
+	left: 0;
+	top: 14px;
+	line-height: 1;
+}
+
+#content > div > ul > li.open:before{
+	content: "M";
 }
 
 #content > div > ul > li{
 	position: relative;
 }
 
-#content li.open{
-	border-left: 8px solid #aaa;
-	padding-left: 10px;
-	margin-left: -18px;
-	background: #f9f9f9;
-}
-
 #content li.active{
-	border-left: 8px solid #1a5482;
-	padding-left: 10px;
-	margin-left: -18px;
 	background: #eff5f8;
 }
 
@@ -403,6 +418,10 @@ strong{
 	width: 30px;
 	padding-right: 8px;
 	border-right: 1px solid white;
+}
+
+#content .doc .highlighttable .linenos pre{
+	background-color: inherit;
 }
 
 #content .doc .highlighttable .code{

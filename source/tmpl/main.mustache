@@ -126,8 +126,9 @@
 		<ul>
 			{{#errors}}
 				<li>
+					<h3>
 					{{?name}}
-						{{kind}} <a href="#{{kind}}:~{{name}}"><code>{{name}}</code></a>
+						{{kind}} <a href="#{{kind}}:~{{name}}">{{name}}</a>
 						{{!}} at line {{!}}
 						{{?lineLink}}
 							<a href="{{lineLink}}">{{line}}</a>
@@ -139,6 +140,7 @@
 					{{^name}}
 						{{kind}}
 					{{/name}}
+					</h3>
 				</li>
 			{{/errors}}
 		</ul>
@@ -240,12 +242,14 @@
 {{?events}}
 	<div class="events">
 		<h2>Events</h2>
-		{{#events}}
-			<li id="event-{{name}}"{{?errornous}} class="errornous"{{/errornous}}>
-				{{name}} ({{type}}) {{>tags}}
-				{{?errornous}}<span class="errornous">&#9888;</span>{{/errornous}}
-			</li>
-		{{/events}}
+		<ul>
+			{{#events}}
+				<li id="event-{{name}}"{{?errornous}} class="errornous"{{/errornous}}>
+					{{name}} ({{type}}) {{>tags}}
+					{{?errornous}}<span class="errornous">&#9888;</span>{{/errornous}}
+				</li>
+			{{/events}}
+		</ul>
 	</div>
 {{/events}}
 
