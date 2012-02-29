@@ -1,16 +1,11 @@
 <div class="info">
+	{{?lineLink}}
+		<strong>Line: </strong><a href="{{lineLink}}">{{line}}</a>
+	{{/lineLink}}
+	{{^lineLink}}
+		<strong>Line: </strong>{{line}}
+	{{/lineLink}}
 	{{?from}}
-		<span class="from">
-			From: <a class="from" href="#{{fromLink}}"><code>{{from}}</code></a>
-		</span>
-		<span> | </span>
+		<strong> in </strong><a class="from" href="#{{fromLink}}">{{from}}</a>
 	{{/from}}
-	<span class="line">
-		{{?lineLink}}
-			Line: <a href="{{lineLink}}">{{line}}</a>
-		{{/lineLink}}
-		{{^lineLink}}
-			Line: {{line}}
-		{{/lineLink}}
-	</span>
 </div>
