@@ -261,18 +261,22 @@ strong{
 }
 
 #content > div > ul > li{
-	padding-left: 20px;
+	padding-left: 24px;
 }
 
 #content > div > ul > li:before{
 	font-family: "Entypo";
 	font-weight: normal;
 	content: "P";
-	color: #999;
+	color: #735370;
 	position: absolute;
 	left: 0;
 	top: 14px;
 	line-height: 1;
+}
+
+#content > div > ul > li.open{
+	margin-bottom: 20px;
 }
 
 #content > div > ul > li.open:before{
@@ -283,23 +287,19 @@ strong{
 	position: relative;
 }
 
-#content li.active{
-	background: #eff5f8;
-}
-
 #content .params,
 #content .returns{
-	color: #aaa;
+	color: #666;
 	font-size: 18px;
 }
 
 #content .parens{
-	color: #82115e;
+	color: #735370;
 	font-size: 24px;
 }
 
 #content .types{
-	color: #bfd5e5;
+	color: #baa6b9;
 }
 
 #content .types a{
