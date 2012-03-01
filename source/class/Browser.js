@@ -440,10 +440,7 @@ core.Class('api.Browser', {
 				if (element) {
 					core.bom.ClassName.add(element, 'open');
 					core.bom.ClassName.add(element, 'active');
-				}
-
-				if (element && element.scrollIntoView) {
-					element.scrollIntoView();
+					core.bom.ScrollInto.scrollY(element);
 				}
 
 			}
