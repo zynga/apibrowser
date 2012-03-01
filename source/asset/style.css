@@ -97,7 +97,7 @@ strong{
 	left: 0;
 	bottom: 0;
 	overflow: auto;
-	background: #121212;
+	background: #322731;
 	color: #ccc;
 }
 
@@ -170,43 +170,47 @@ strong{
 #tree .tree-item:after{
 	font-size: 10px;
 	padding: 2px 3px;
-	border-radius: 4px;
+	border-radius: 8px;
 
 	bottom: 2px;
 	left: 5px;
 	position: relative;
-	width: 12px;
+	width: 17px;
 	display: inline-block;
-	line-height: 1;
+	line-height: 1.2;
 	text-align: center;
 	font-weight: bold;
-	color: #121212;
+	color: white;
+	text-shadow: 0px 1px 1px rgba(0,0,0,0.5);
 }
 
 #tree li.active > .tree-item:after{
-	background: #ccc;
-	color: #666;
+	background: rgba(255,255,255,0.5);
 }
 
 #tree .tree-item[data-type="core.Class"]:after{
 	content: "C";
-	background: #36aa1b;
+	background: #939a4f;
 }
 
 #tree .tree-item[data-type="core.Module"]:after{
 	content: "M";
-	background: #c100aa;
+	background: #977150;
 }
 
 #tree .tree-item[data-type="core.Interface"]:after{
 	content: "I";
-	background: #cb6400;
+	background: #519a59;
 }
 
-#tree .tree-item[data-type="Extend"]:after,
 #tree .tree-item[data-type="core.Main"]:after{
-	content: "E";
-	background: #e4c922;
+	content: "B";
+	background: #508e97;
+}
+
+#tree .tree-item[data-type="Extend"]:after{
+	content: "N";
+	background: #514d98;
 }
 
 
