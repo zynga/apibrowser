@@ -309,10 +309,26 @@ strong{
 
 #content .details{
 	display: none;
+	background: #f2e8f1;
+	border: 1px solid #b9afb8;
+	padding: 4px 16px 8px;
+}
+
+#content .details strong{
+	color: #735370;
 }
 
 #content .open .details{
 	display: block;
+}
+
+#content .details .line,
+#content .details .origin,
+#content .details .overridden,
+#content .details .implemented,
+#content .details .config{
+	font-size: 14px;
+	color: #888;
 }
 
 #content ul.tags{
