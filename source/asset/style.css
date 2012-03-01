@@ -169,21 +169,22 @@ strong{
 
 #tree .tree-item:after{
 	font-size: 10px;
-	padding: 2px 3px;
-	border-radius: 8px;
-
-	bottom: 2px;
-	left: 5px;
-	position: relative;
-	width: 17px;
-	display: inline-block;
 	line-height: 1.2;
 	text-align: center;
 	font-weight: bold;
+
+	display: inline-block;
+	position: relative;
+	bottom: 2px;
+	left: 5px;
+
+	padding: 2px 3px;
+	width: 17px;
+
+	border-radius: 8px;
+	border: 1px solid rgba(0,0,0,0.1);
 	color: white;
 	text-shadow: 0px 1px 1px rgba(0,0,0,0.5);
-	
-	border: 1px solid rgba(0,0,0,0.1);
 }
 
 #tree li.active > .tree-item:after{
@@ -202,7 +203,7 @@ strong{
 
 #tree .tree-item[data-type="core.Interface"]:after{
 	content: "I";
-	background: #519a59;
+	background: #883e3e;
 }
 
 #tree .tree-item[data-type="core.Main"]:after{
