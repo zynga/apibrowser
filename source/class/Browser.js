@@ -288,12 +288,10 @@ core.Class('api.Browser', {
 			}
 
 			var data = this.getHashData(hash);
-			console.log('OPEN', data);
 
 			this.__showTree(data);
 			this.__showContent(data);
-
-
+			
 			if (
 				this.__current.type !== data.type
 				|| this.__current.file !== data.file
