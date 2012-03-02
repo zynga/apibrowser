@@ -13,11 +13,10 @@
 </div>
 
 {{?content}}
-	<h2>Content</h2>
 	<ul class="toc">
 		{{#content}}
 			<li>
-				<h3><a href="#{name}">{{name}}</a></h3>
+				<h3><a href="#{{name}}">{{name}}</a></h3>
 				{{?summary}}
 					<p>{{summary}}</p>
 				{{/summary}}
