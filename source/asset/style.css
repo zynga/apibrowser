@@ -269,6 +269,11 @@ strong{
 	color: inherit;
 }
 
+#content .toc p{
+	font-size: 16px;
+	color: #666;
+}
+
 #content > div > ul > li{
 	padding-left: 30px;
 	padding-top: 2px;
