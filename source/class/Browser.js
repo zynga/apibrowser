@@ -64,12 +64,14 @@ core.Class('api.Browser', {
 				var element = event.target;
 
 				if (element) {
-
-					if (element.tagName === 'H3') {
-						// parentNode = LI
-						element = element.parentNode;
+					
+					element = core.dom.Node.closest(element, function(elem) {
+						return elem.tagName == "LI" || elem.tagName == "A";
+					});
+					
+					if (!element) {
+						return;
 					}
-
 
 					if (element.tagName === 'LI') {
 
