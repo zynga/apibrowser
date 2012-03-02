@@ -64,11 +64,11 @@ core.Class('api.Browser', {
 				var element = event.target;
 
 				if (element) {
-					
+
 					element = core.dom.Node.closest(element, function(elem) {
 						return elem.tagName == "LI" || elem.tagName == "A";
 					});
-					
+
 					if (!element) {
 						return;
 					}
@@ -242,7 +242,7 @@ core.Class('api.Browser', {
 
 		getHashData: function(hash) {
 
-			var regex = new RegExp("((static|member|property|event)\:)?([A-Za-z0-9_\.]+)?(\~([A-Za-z0-9_]+))");
+			var regex = new RegExp("((source|static|member|property|event)\:)?([A-Za-z0-9_\.]+)?(\~([A-Za-z0-9_]+))");
 			var tmp = hash.split(regex);
 
 			var data = {
@@ -289,9 +289,14 @@ core.Class('api.Browser', {
 
 			var data = this.getHashData(hash);
 
+ 			if (data.type === 'source') {
+				return this.__showSource(data);
+			}
+
+
 			this.__showTree(data);
 			this.__showContent(data);
-			
+
 			if (
 				this.__current.type !== data.type
 				|| this.__current.file !== data.file
@@ -440,11 +445,26 @@ core.Class('api.Browser', {
 				if (element) {
 					core.bom.ClassName.toggle(element, 'open');
 					core.bom.ClassName.add(element, 'active');
-					
+
 					core.bom.ScrollInto.scrollY(element, fileChanged ? "top" : null);
 				}
 
 			}
+
+		},
+
+		__showSource: function(data) {
+
+			if (data.type !== 'source') {
+				return false;
+			}
+
+
+			var url = 'data/' + data.file + '.html#line-' + data.item;
+			var title = 'Source of ' + data.file;
+
+			var newWindow = window.open(url, title, '');
+			newWindow.focus();
 
 		}
 
