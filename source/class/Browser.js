@@ -438,7 +438,7 @@ core.Class('api.Browser', {
 
 
 				if (element) {
-					core.bom.ClassName.add(element, 'open');
+					core.bom.ClassName.toggle(element, 'open');
 					core.bom.ClassName.add(element, 'active');
 					
 					core.bom.ScrollInto.scrollY(element, fileChanged ? "top" : null);
