@@ -6,15 +6,15 @@
 	{{>tags}}
 	{{?isFunction}}
 		{{?returns}}
-			<span class="returns"> &#8594; {{returns}}</span>
+			<span class="returns"> &#8594; <a href="#{{returns}}">{{returns}}</a></span>
 		{{/returns}}
 	{{/isFunction}}
 	{{^isFunction}}
 		{{?value}}
-			<span class="returns"> &#8594; {{>type}}: <code>{{value}}</code></span>
+			<span class="returns"> [{{>type}}: <code>{{value}}</code>]</span>
 		{{/value}}
 		{{^value}}
-			<span class="returns"> &#8594; {{>type}}</span>
+			<span class="returns"> [{{>type}}]</span>
 		{{/value}}
 	{{/isFunction}}
 	{{?summary}}
