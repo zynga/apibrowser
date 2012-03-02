@@ -384,6 +384,8 @@ strong{
 	display: inline-block;
 	font-size: 11px;
 	line-height: 1.2;
+	vertical-align: middle;
+	margin-top: -3px;
 }
 
 #content ul.tags code{
@@ -392,7 +394,7 @@ strong{
 
 #content ul.tags li{
 	display: inline-block;
-	background: #7e7e7e;
+	background: #477a9f;
 	color: white;
 	text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
 	border: 1px solid #7d92a5;
