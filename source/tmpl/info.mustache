@@ -1,11 +1,11 @@
 <div class="line">
-	<strong>Line: </strong>
-	{{?lineLink}}
-		<a href="{{lineLink}}">{{line}}</a>
-	{{/lineLink}}
+	<strong>Source at line: </strong>
+	{{?sourceLink}}
+		<a href="{{sourceLink}}">{{line}}</a>
+	{{/sourceLink}}
+	{{^sourceLink}}
 		{{line}}
-	{{^linkLink}}
-	{{/lineLink}}
+	{{/sourceLink}}
 	{{?from}}
 		<strong> in </strong><a class="from" href="#{{fromLink}}">{{from}}</a>
 	{{/from}}
