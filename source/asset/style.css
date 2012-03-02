@@ -325,7 +325,7 @@ strong{
 #content .details .line,
 #content .details .origin,
 #content .details .overridden,
-#content .details .implemented,
+#content .details .defined,
 #content .details .config{
 	font-size: 14px;
 	color: #888;

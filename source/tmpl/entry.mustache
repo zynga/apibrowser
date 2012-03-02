@@ -17,6 +17,9 @@
 			<span class="returns"> &#8594; {{>type}}</span>
 		{{/value}}
 	{{/isFunction}}
+	{{?summary}}
+		<div class="summary">{{summary}}</div>
+	{{/summary}}
 </h3>
 <div class="details">
 	<div class="doc">

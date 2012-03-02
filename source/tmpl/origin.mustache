@@ -16,9 +16,11 @@
 	</div>
 {{/overridden}}
 
-{{?interface}}
-	<div class="implemented">
+{{?defined}}
+	<div class="defined">
 		<strong>Defined by: </strong>
-		<a href="#{{interface}}">{{interface}}</a>
+		{{#defined}}
+			<a href="#{{link}}">{{name}}</a>
+		{{/defined}}
 	</div>
-{{/interface}}
+{{/defined}}

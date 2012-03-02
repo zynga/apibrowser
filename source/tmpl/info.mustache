@@ -1,7 +1,10 @@
 <div class="line">
-	<strong>Line: </strong>{{line}}
+	<strong>Line: </strong>
 	{{?lineLink}}
 		<a href="{{lineLink}}">{{line}}</a>
+	{{/lineLink}}
+		{{line}}
+	{{^linkLink}}
 	{{/lineLink}}
 	{{?from}}
 		<strong> in </strong><a class="from" href="#{{fromLink}}">{{from}}</a>
