@@ -307,6 +307,18 @@ strong{
 	text-decoration: none;
 }
 
+#content .summary{
+	white-space: nowrap;
+	font-size: 14px;
+	color: #aaa;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+#content .open .summary{
+	display: none;
+}
+
 #content .details{
 	display: none;
 	background: #f2e8f1;
