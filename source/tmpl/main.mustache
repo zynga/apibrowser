@@ -1,9 +1,8 @@
 
 <div class="heading">
-	<h1 type="{{main.type}}">
+	<h1 type="{{main.type}}"{{?errornous}} class="errornous"{{/errornous}}>
 		{{basename}}
 		{{?package}}<span class="namespace">{{package}}</span>{{/package}}
-		{{?errornous}}<span class="errornous">&#9888;</span>{{/errornous}}
 	</h1>
 
 	{{?main.doc}}
@@ -14,13 +13,10 @@
 </div>
 
 {{?construct}}
-	<div class="constructor">
+	<div class="constructor{{?errornous}} errornous{{/errornous}}">
 		{{#construct}}
 			<h2>
 				Constructor
-				{{?errornous}}
-					<span class="errornous">&#9888;</span>
-				{{/errornous}}
 			</h2>
 			{{init}}
 			{{>params}}
@@ -33,7 +29,7 @@
 		<h2>Statics</h2>
 		<ul>
 			{{#statics}}
-			<li id="static-{{name}}" {{?errornous}}class="errornous"{{/errornous}}>
+			<li id="static-{{name}}"{{?errornous}} class="errornous"{{/errornous}}>
 				{{>entry}}
 			</li>
 			{{/statics}}
