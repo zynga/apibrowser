@@ -37,8 +37,8 @@ core.Class('api.Browser', {
 			"tmpl/tags.js",
 			"tmpl/error.js",
 
-			"data/$index.js",
-			"data/$search.js"
+			"data/meta-index.js",
+			"data/meta-search.js"
 		], this.__onLoad, this);
 
 		this.__tmpl = {};
@@ -133,11 +133,11 @@ core.Class('api.Browser', {
 				var templateName = id.substring(0, id.indexOf(".mustache"));
 				this.__tmpl[templateName] = core.template.Compiler.compile(data.template, true);
 
-			} else if (id == "$index") {
+			} else if (id == "meta-index") {
 
 				this.__treeElem.innerHTML = "<ul>" + this.__treeWalker(data, "") + "</ul>";
 
-			} else if (id == "$search") {
+			} else if (id == "meta-search") {
 
 				this.__search = data;
 

@@ -2,7 +2,7 @@
 	<div class="origin">
 		<strong>Included from: </strong>
 		{{#origin}}
-			<a href="#{{.}}">{{.}}</a>
+			<a href="#{{link}}">{{name}}</a>
 		{{/origin}}
 	</div>
 {{/origin}}
@@ -11,7 +11,7 @@
 	<div class="overridden">
 		<strong>Overridden from: </strong>
 		{{#overridden}}
-			<a href="#{{.}}">{{.}}</a>
+			<a href="#{{link}}">{{name}}</a>
 		{{/overridden}}
 	</div>
 {{/overridden}}
