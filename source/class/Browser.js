@@ -363,6 +363,8 @@ core.Class('api.Browser', {
 			var content = document.getElementById('content'),
 				cacheEntry = this.__cache[data.file];
 
+			var fileChanged = this.__current.html !== data.file;
+
 			if (cacheEntry === null) {
 
 				core.io.Script.load('data/' + data.file + '.js', function(uri, error) {
@@ -382,7 +384,7 @@ core.Class('api.Browser', {
 
 				return;
 
-			} else if (cacheEntry != null && this.__current.html !== data.file) {
+			} else if (cacheEntry != null && fileChanged) {
 
 				content.innerHTML = cacheEntry;
 				this.__current.html = data.file;
@@ -440,7 +442,8 @@ core.Class('api.Browser', {
 				if (element) {
 					core.bom.ClassName.add(element, 'open');
 					core.bom.ClassName.add(element, 'active');
-					core.bom.ScrollInto.scrollY(element);
+					
+					core.bom.ScrollInto.scrollY(element, fileChanged ? "top" : null);
 				}
 
 			}
