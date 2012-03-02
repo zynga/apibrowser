@@ -1,12 +1,12 @@
 /** 
  * Creates a regular expression object for matching text with a @pattern {String} and optional @flags {String}. 
+ * 
+ * #main
  */
-core.Main.declareNamespace("RegExp", function(pattern, flags) {
-	
-});
+core.Main.declareNamespace("RegExp", function(pattern, flags) {});
 
-core.Main.addMembers("RegExp", {
-	
+core.Main.addMembers("RegExp", 
+{
 	/** {=Boolean} Whether to test the regular expression against all possible matches in a string, or only against the first. */
 	global: null,
 	
@@ -33,5 +33,4 @@ core.Main.addMembers("RegExp", {
 
 	/** {String} Returns a string representing the specified object. */
 	toString: function() {}
-	
 });
