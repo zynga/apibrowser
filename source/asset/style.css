@@ -260,6 +260,15 @@ strong{
 	border-top-color: #fff;
 }
 
+#content .toc{
+	
+}
+
+#content .toc h3 a{
+	text-decoration: none;
+	color: inherit;
+}
+
 #content > div > ul > li{
 	padding-left: 30px;
 	padding-top: 2px;

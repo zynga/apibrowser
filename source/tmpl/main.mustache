@@ -13,16 +13,18 @@
 </div>
 
 {{?content}}
-	<ul class="toc">
-		{{#content}}
-			<li>
-				<h3><a href="#{{name}}">{{name}}</a></h3>
-				{{?summary}}
-					<p>{{summary}}</p>
-				{{/summary}}
-			</li>
-		{{/content}}
-	</ul>
+	<div class="toc">
+		<ul>
+			{{#content}}
+				<li>
+					<h3><a href="#{{name}}">{{name}}</a></h3>
+					{{?summary}}
+						<p>{{summary}}</p>
+					{{/summary}}
+				</li>
+			{{/content}}
+		</ul>
+	</div>
 {{/content}}
 
 {{?construct}}
