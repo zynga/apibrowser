@@ -431,7 +431,7 @@ core.Class('api.Browser', {
 
 				}
 
-				var oldElements = document.querySelectorAll('li.open');
+				var oldElements = document.querySelectorAll('#content li.open');
 				for (var e = 0; e < oldElements.length; e++) {
 					core.bom.ClassName.remove(oldElements[e], 'active');
 				}
