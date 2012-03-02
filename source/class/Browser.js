@@ -59,8 +59,6 @@ core.Class('api.Browser', {
 
 		__onLoad : function() {
 
-			var that = this;
-
 			document.body.addEventListener('click', function(event) {
 
 				var element = event.target;
@@ -85,7 +83,7 @@ core.Class('api.Browser', {
 								item = element.id;
 							}
 
-							that.open(that.getHash(type, null, item));
+							this.open(this.getHash(type, null, item));
 
 						}
 
@@ -97,7 +95,7 @@ core.Class('api.Browser', {
 
 							var href = element.getAttribute('href');
 							if (href.charAt(0) === '#') {
-								that.open(href.slice(1));
+								this.open(href.slice(1));
 							}
 
 						}
@@ -108,17 +106,17 @@ core.Class('api.Browser', {
 
 				}
 
-			}, true);
+			}.bind(this), true);
 
 
-			window.onhashchange = function() {
+			window.addEventListener("hashchange", function() {
 
 				var hash = location.hash.slice(1);
-				if (hash !== that.__current.hash) {
-					that.open(hash);
+				if (hash !== this.__current.hash) {
+					this.open(hash);
 				}
 
-			};
+			}.bind(this), true);
 
 			// Open initial hash
 			this.open(location.hash.slice(1));
