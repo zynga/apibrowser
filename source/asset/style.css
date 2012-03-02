@@ -3,7 +3,7 @@ body {
 	color: #444;
 	background: #f8fafb;
 	font-size: 18px;
-	line-height: 1.8;
+	line-height: 1.7;
 	
 	/* Prevent font scaling in landscape */
 	-webkit-text-size-adjust: none;
@@ -261,7 +261,9 @@ strong{
 }
 
 #content > div > ul > li{
-	padding-left: 24px;
+	padding-left: 30px;
+	padding-top: 2px;
+	padding-bottom: 8px;
 }
 
 #content > div > ul > li:before{
@@ -270,13 +272,14 @@ strong{
 	content: "P";
 	color: #735370;
 	position: absolute;
-	left: 0;
-	top: 14px;
+	left: 6px;
+	top: 18px;
 	line-height: 1;
 }
 
 #content > div > ul > li.open{
-	margin-bottom: 20px;
+	margin-top: 16px;
+	margin-bottom: 16px;
 }
 
 #content > div > ul > li.open:before{
@@ -313,22 +316,27 @@ strong{
 	color: #aaa;
 	text-overflow: ellipsis;
 	overflow: hidden;
-	margin-top: -5px;
+	margin-top: -2px;
 }
 
 #content .open .summary{
 	display: none;
 }
 
-#content .details{
-	display: none;
-	background: #f2e8f1;
-	border: 1px solid #b9afb8;
-	padding: 4px 16px 8px;
+#content li.open {
+	border-left: 3px solid #baa6b9;
+	border-right: 3px solid #baa6b9;
+	border-radius: 6px;
+	margin-left: -3px;
+	background: #efebee;
 }
 
 #content .details strong{
 	color: #735370;
+}
+
+#content .details{
+	display: none;
 }
 
 #content .open .details{
@@ -414,6 +422,10 @@ strong{
 #content .doc ul,
 #content .doc ol{
 	margin: 10px 0;
+}
+
+#content .doc p:first-child{
+	margin-top: 0px;
 }
 
 #content .doc ul{
