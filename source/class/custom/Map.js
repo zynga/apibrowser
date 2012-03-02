@@ -3,5 +3,5 @@
  *
  * #main
  */
-core.Main.declareNamespace("Map", null);
+core.Main.declareNamespace("Map");
 
