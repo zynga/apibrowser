@@ -205,6 +205,9 @@ core.Class('api.Browser', {
 
 		},
 
+		/**
+		 *
+		 */
 		getHash: function(type, file, item) {
 
 			type = type || null;
@@ -238,6 +241,9 @@ core.Class('api.Browser', {
 
 		},
 
+		/**
+		 * {Map} Parses the given @hash {String} and returns a map with the keys `type`, `file` and `item`.
+		 */
 		getHashData: function(hash) {
 
 			var regex = new RegExp("((source|static|member|property|event)\:)?([A-Za-z0-9_\.]+)?(\~([A-Za-z0-9_]+))");
@@ -279,6 +285,11 @@ core.Class('api.Browser', {
 
 		},
 
+
+		/**
+		 * Opens the given @hash {String} with an optional hint @byUser {Boolean?false} whether the
+		 * action was intiated by a user event.
+		 */
 		open: function(hash, byUser) {
 
 			if (hash.charAt(0) === '!') {
