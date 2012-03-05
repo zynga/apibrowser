@@ -61,11 +61,6 @@ core.Class('api.test.Dog', {
 		this.__initialWeight = this.getWeight();
 
 	},
-	
-	events: {
-		/** #awesome */
-		fly : core.Event
-	},
 
 	properties: {
 		
