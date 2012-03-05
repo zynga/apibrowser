@@ -363,6 +363,7 @@ core.Class('api.Browser', {
 					// Highlight the deepest (= active) item
 					if (s === segments.length - 1) {
 						core.bom.ClassName.add(element.parentNode, 'active');
+						core.bom.ScrollInto.scrollY(element);
 					}
 
 				}
