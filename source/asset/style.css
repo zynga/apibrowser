@@ -424,10 +424,10 @@ strong{
 
 #content ul.tags{
 	display: inline-block;
-	font-size: 11px;
-	line-height: 1.2;
+	font-size: 12px;
+	line-height: 1.1;
 	vertical-align: middle;
-	margin-top: -3px;
+	margin-top: -4px;
 }
 
 #content ul.tags code{
@@ -436,14 +436,22 @@ strong{
 
 #content ul.tags li{
 	display: inline-block;
-	background: #477a9f;
 	color: white;
-	text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
-	border: 1px solid #7d92a5;
+	cursor: default;
+	
+	-webkit-box-shadow: 0px 1px 1px rgba(0,0,0,0.2);
+	-moz-box-shadow: 0px 1px 1px rgba(0,0,0,0.2);
+	-ms-box-shadow: 0px 1px 1px rgba(0,0,0,0.2);
+	box-shadow: 0px 1px 1px rgba(0,0,0,0.2);
+	
+	border: 1px solid #ace2f9;
+	color: #00abfa;
+	background: #e1f1f8;
+	
 	border-radius: 6px;
 	margin-right: 2px;
 	margin-left: 2px;
-	padding: 3px 6px;
+	padding: 2px 4px;
 }
 
 
