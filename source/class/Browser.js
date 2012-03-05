@@ -85,7 +85,7 @@ core.Class('api.Browser', {
 								item = element.id;
 							}
 
-							this.open(this.getHash(type, null, item), true);
+							this.open(this.getHash(type, null, item), event.target.tagName == "LI");
 
 						}
 
@@ -295,10 +295,10 @@ core.Class('api.Browser', {
 
 
 		/**
-		 * Opens the given @hash {String} with an optional hint @byUser {Boolean?false} whether the
-		 * action was intiated by a user event.
+		 * Opens the given @hash {String} with an optional hint @doToggle {Boolean?false} whether the
+		 * action should lead to a toggling.
 		 */
-		open: function(hash, byUser) {
+		open: function(hash, doToggle) {
 
 			if (hash.charAt(0) === '!') {
 				hash = hash.slice(1);
@@ -311,8 +311,8 @@ core.Class('api.Browser', {
 			}
 
 
-			this.__showTree(data, byUser);
-			this.__showContent(data, byUser);
+			this.__showTree(data, doToggle);
+			this.__showContent(data, doToggle);
 
 			if (
 				this.__current.type !== data.type
@@ -373,7 +373,7 @@ core.Class('api.Browser', {
 
 		},
 
-		__showContent: function(data, byUser) {
+		__showContent: function(data, doToggle) {
 
 			if (data.file) {
 
@@ -390,7 +390,7 @@ core.Class('api.Browser', {
 
 							content.innerHTML = this.__tmpl.error.render({
 								name: '404 - Not Found',
-								description: 'The selected File "' + data.file + '" was not found.'
+								description: 'The selected file "' + data.file + '" was not found.'
 							}, this.__tmpl);
 
 							this.__current.html = data.file;
@@ -401,12 +401,7 @@ core.Class('api.Browser', {
 
 					return;
 
-				} else if (cacheEntry != null && fileChanged) {
-
-					content.innerHTML = cacheEntry;
-					this.__current.html = data.file;
-
-				} else if (cacheEntry === undefined) {
+				} else if (cacheEntry == null) {
 
 					content.innerHTML = this.__tmpl.error.render({
 						name: '404 - Not Found',
@@ -417,6 +412,11 @@ core.Class('api.Browser', {
 
 					return;
 
+				} else if (fileChanged) {
+					
+					content.innerHTML = cacheEntry;
+					this.__current.html = data.file;
+					
 				}
 
 			}
@@ -428,7 +428,6 @@ core.Class('api.Browser', {
 				if (data.type !== null) {
 					element = document.getElementById(data.type + '-' + data.item);
 				}
-
 
 				// Not found? Search for all types (first found wins)
 				if (!element || !data.type) {
@@ -446,7 +445,9 @@ core.Class('api.Browser', {
 						element = document.getElementById(data.type + '-' + data.item);
 
 						// First found wins
-						if (element) break;
+						if (element) {
+							break;
+						}
 
 					}
 
@@ -460,14 +461,13 @@ core.Class('api.Browser', {
 
 				if (element) {
 
-					if (byUser === true) {
+					if (doToggle) {
 						core.bom.ClassName.toggle(element, 'open');
 					} else {
 						core.bom.ClassName.add(element, 'open');
 					}
 
 					core.bom.ClassName.add(element, 'active');
-
 					core.bom.ScrollInto.scrollY(element, fileChanged ? "top" : null);
 
 				}
