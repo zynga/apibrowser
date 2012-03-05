@@ -361,6 +361,15 @@ strong{
 	text-decoration: none;
 }
 
+#content .types a:after{
+	content: "|";
+	color: #444;
+}
+
+#content .types a:last-child:after{
+	content: "";
+}
+
 #content .summary{
 	white-space: nowrap;
 	font-size: 14px;
