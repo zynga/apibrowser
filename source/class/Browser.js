@@ -85,7 +85,7 @@ core.Class('api.Browser', {
 								item = element.id;
 							}
 
-							this.open(this.getHash(type, null, item), event.target.tagName == "LI");
+							this.open(this.buildHash(type, null, item), event.target.tagName == "LI");
 
 						}
 
@@ -151,7 +151,7 @@ core.Class('api.Browser', {
 
 
 				if (this.__current.file === id) {
-					var hash = this.getHash(this.__current.type, this.__current.file, this.__current.item);
+					var hash = this.buildHash(this.__current.type, this.__current.file, this.__current.item);
 					this.open(hash);
 				}
 
@@ -216,7 +216,7 @@ core.Class('api.Browser', {
 		 * - @file {String?current} File to open (which contains the item)
 		 * - @item {String?} Item to open
 		 */
-		getHash: function(type, file, item) {
+		buildHash: function(type, file, item) {
 
 			type = type || null;
 			file = file || null;
@@ -252,7 +252,7 @@ core.Class('api.Browser', {
 		/**
 		 * {Map} Parses the given @hash {String} and returns a map with the keys `type`, `file` and `item`.
 		 */
-		getHashData: function(hash) {
+		parseHash: function(hash) {
 
 			var regex = new RegExp("((source|static|member|property|event)\:)?([A-Za-z0-9_\.]+)?(\~([A-Za-z0-9_]+))");
 			var tmp = hash.split(regex);
@@ -304,7 +304,7 @@ core.Class('api.Browser', {
 				hash = hash.slice(1);
 			}
 
-			var data = this.getHashData(hash);
+			var data = this.parseHash(hash);
 
  			if (data.type === 'source') {
 				return this.__showSource(data);
@@ -327,7 +327,7 @@ core.Class('api.Browser', {
 				this.__current.item = data.item;
 
 
-				this.__current.hash = this.getHash(this.__current.type, this.__current.file, this.__current.item);
+				this.__current.hash = this.buildHash(this.__current.type, this.__current.file, this.__current.item);
 				location.hash = this.__current.hash;
 
 			}

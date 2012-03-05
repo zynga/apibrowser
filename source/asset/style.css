@@ -127,7 +127,7 @@ strong{
 }
 
 #tree ul ul{
-	padding-left: 20px;
+	padding-left: 24px;
 }
 
 #tree a {
@@ -148,6 +148,11 @@ strong{
 	display: block;
 }
 
+#tree li a{
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+
 #tree li.active > a {
 	color: #eee;
 	border-radius: 4px;
@@ -159,6 +164,8 @@ strong{
 
 	border-top: 1px solid #4c8ed0;
 	border-bottom: 1px solid #2a66bd;
+	padding-top: 0;
+	padding-bottom: 0;
 }
 
 #tree .tree-package,
@@ -173,7 +180,8 @@ strong{
 	font-weight: normal;
 	position: absolute;
 	left: 4px;
-	width: 22px;
+	width: 24px;
+	white-space: nowrap;
 }
 
 #tree .tree-package:before{
@@ -190,7 +198,7 @@ strong{
 
 #tree .tree-item:before {
 	content: 'D';
-	padding-left: 2px;
+	text-indent: 3px;
 }
 
 #tree .tree-item:after{
