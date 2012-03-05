@@ -85,7 +85,7 @@ core.Class('api.Browser', {
 								item = element.id;
 							}
 
-							this.open(this.getHash(type, null, item));
+							this.open(this.getHash(type, null, item), true);
 
 						}
 
@@ -279,7 +279,7 @@ core.Class('api.Browser', {
 
 		},
 
-		open: function(hash) {
+		open: function(hash, byUser) {
 
 			if (hash.charAt(0) === '!') {
 				hash = hash.slice(1);
@@ -292,8 +292,8 @@ core.Class('api.Browser', {
 			}
 
 
-			this.__showTree(data);
-			this.__showContent(data);
+			this.__showTree(data, byUser);
+			this.__showContent(data, byUser);
 
 			if (
 				this.__current.type !== data.type
@@ -354,7 +354,7 @@ core.Class('api.Browser', {
 
 		},
 
-		__showContent: function(data) {
+		__showContent: function(data, byUser) {
 
 			if (data.file) {
 
@@ -440,10 +440,17 @@ core.Class('api.Browser', {
 
 
 				if (element) {
-					core.bom.ClassName.toggle(element, 'open');
+
+					if (byUser === true) {
+						core.bom.ClassName.toggle(element, 'open');
+					} else {
+						core.bom.ClassName.add(element, 'open');
+					}
+
 					core.bom.ClassName.add(element, 'active');
 
 					core.bom.ScrollInto.scrollY(element, fileChanged ? "top" : null);
+
 				}
 
 			}
