@@ -126,6 +126,10 @@ core.Class('api.Browser', {
 		},
 
 
+		/**
+		 * Callback method which should be used for loading JSONP-like @data {Map}. The
+		 * data is identified and processed via the @id {String} given.
+		 */
 		callback: function(data, id) {
 
 			if (id.endsWith(".mustache")) {
@@ -206,7 +210,11 @@ core.Class('api.Browser', {
 		},
 
 		/**
+		 * {String} Returns a hash string from the given input parameters: 
 		 *
+		 * - @type {String?null} Type of item to link to 
+		 * - @file {String?current} File to open (which contains the item)
+		 * - @item {String?} Item to open
 		 */
 		getHash: function(type, file, item) {
 
