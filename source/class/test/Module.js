@@ -1,4 +1,4 @@
-
+/** Just a simple test module */
 core.Module('api.test.Module', {
 
 	/**
