@@ -143,8 +143,6 @@ core.Class('api.Browser', {
 
 			} else {
 
-				console.debug("Loaded File: " + id);
-
 				this.__cache[id] = this.__tmpl.main.render(data, this.__tmpl);
 
 
@@ -358,50 +356,49 @@ core.Class('api.Browser', {
 
 		__showContent: function(data) {
 
-			if (!data.file) {
-				return;
-			}
+			if (data.file) {
 
+				var content = document.getElementById('content'),
+					cacheEntry = this.__cache[data.file];
 
-			var content = document.getElementById('content'),
-				cacheEntry = this.__cache[data.file];
+				var fileChanged = this.__current.html !== data.file;
 
-			var fileChanged = this.__current.html !== data.file;
+				if (cacheEntry === null) {
 
-			if (cacheEntry === null) {
+					core.io.Script.load('data/' + data.file + '.js', function(uri, error) {
 
-				core.io.Script.load('data/' + data.file + '.js', function(uri, error) {
+						if (error === true) {
 
-					if (error === true) {
+							content.innerHTML = this.__tmpl.error.render({
+								name: '404 - Not Found',
+								description: 'The selected File "' + data.file + '" was not found.'
+							}, this.__tmpl);
 
-						content.innerHTML = this.__tmpl.error.render({
-							name: '404 - Not Found',
-							description: 'The selected File "' + data.file + '" was not found.'
-						}, this.__tmpl);
+							this.__current.html = data.file;
 
-						this.__current.html = data.file;
+						}
 
-					}
+					}, this);
 
-				}, this);
+					return;
 
-				return;
+				} else if (cacheEntry != null && fileChanged) {
 
-			} else if (cacheEntry != null && fileChanged) {
+					content.innerHTML = cacheEntry;
+					this.__current.html = data.file;
 
-				content.innerHTML = cacheEntry;
-				this.__current.html = data.file;
+				} else if (cacheEntry === undefined) {
 
-			} else if (cacheEntry === undefined) {
+					content.innerHTML = this.__tmpl.error.render({
+						name: '404 - Not Found',
+						description: 'The selected File "' + data.file + '" was not found.'
+					}, this.__tmpl);
 
-				content.innerHTML = this.__tmpl.error.render({
-					name: '404 - Not Found',
-					description: 'The selected File "' + data.file + '" was not found.'
-				}, this.__tmpl);
+					this.__current.html = data.file;
 
-				this.__current.html = data.file;
+					return;
 
-				return;
+				}
 
 			}
 
