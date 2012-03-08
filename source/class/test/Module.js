@@ -3,7 +3,7 @@ core.Module('api.test.Module', {
 
 	/**
 	 *
-	 * {Boolean|Null} This method compares @data and @data2,
+	 * {Boolean|null} This method compares @data and @data2,
 	 * if it is equals, it returns `true`. If it is not equals,
 	 * it returns `false`.
 	 *
@@ -23,7 +23,7 @@ core.Module('api.test.Module', {
 	},
 
 	/**
-	 * {Boolean|Null} This method is the opposite to {#method1} and
+	 * {Boolean|null} This method is the opposite to {#method1} and
 	 * compares @data and @data2
 	 *
 	 * It returns `false` if it is equals and `true` if
