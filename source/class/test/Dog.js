@@ -26,7 +26,7 @@ core.Class('api.test.Dog', {
 	 * This will create a new Dog for your Tamagochi environment.
 	 *
 	 * The @color {String} will set the fur color, the @hungry {Boolean}
-	 * flag lets him be hungry or not (hungry is defaulted with {true}).
+	 * flag lets him be hungry or not (hungry is defaulted with `true`).
 	 *
 	 * The dog has also a @weight {Number} that you can set. It is used
 	 * to calculate when it's hungry again if you walk the dog and it

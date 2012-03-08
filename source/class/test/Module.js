@@ -4,10 +4,10 @@ core.Module('api.test.Module', {
 	/**
 	 *
 	 * {Boolean|Null} This method compares @data and @data2,
-	 * if it is equals, it returns {True}. If it is not equals,
-	 * it returns {False}.
+	 * if it is equals, it returns `true`. If it is not equals,
+	 * it returns `false`.
 	 *
-	 * If any of @data or @data2 is missing, it will return {Null}.
+	 * If any of @data or @data2 is missing, it will return `null`.
 	 *
 	 * Hint: The opposite of {#method1} is {#method2}.
 	 *
@@ -23,13 +23,11 @@ core.Module('api.test.Module', {
 	},
 
 	/**
-	 * {Boolean|Null} This method is the opposite to {method1} and
+	 * {Boolean|Null} This method is the opposite to {#method1} and
 	 * compares @data and @data2
 	 *
-	 * It returns {False} if it is equals and {True} if
+	 * It returns `false` if it is equals and `true` if
 	 * both parameters are not equals.
-	 *
-	 * You should also take a look at {static:api.test.Module2#method1}
 	 */
 	method2: function(data, data2) {
 
