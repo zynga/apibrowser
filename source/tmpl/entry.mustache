@@ -6,7 +6,22 @@
 	{{>tags}}
 	{{?isFunction}}
 		{{?returns}}
-			<span class="returns"> &#8594; <a href="#{{returns}}">{{returns}}</a></span>
+			<span class="returns"> &#8594; {{!}}
+				{{#returns}}
+					{{?linkable}}
+						<a href="#{{name}}">
+							{{name}}
+							{{?array}}<span>[]</span>{{/array}}
+						</a>
+					{{/linkable}}
+					{{^linkable}}
+						<span>
+							{{name}}
+							{{?array}}<span>[]</span>{{/array}}
+						</span>
+					{{/linkable}}
+				{{/returns}}
+			</span>
 		{{/returns}}
 	{{/isFunction}}
 	{{^isFunction}}

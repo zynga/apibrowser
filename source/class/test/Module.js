@@ -3,7 +3,7 @@ core.Module('api.test.Module', {
 
 	/**
 	 *
-	 * {Boolean|null} This method compares @data and @data2,
+	 * {Boolean|null} This method compares @data {String[]|Foo} and @data2,
 	 * if it is equals, it returns `true`. If it is not equals,
 	 * it returns `false`.
 	 *

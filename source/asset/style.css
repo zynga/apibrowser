@@ -356,17 +356,23 @@ strong{
 	color: #baa6b9;
 }
 
-#content .types a{
+#content .types > a{
 	color: inherit;
 	text-decoration: none;
 }
 
-#content .types a:after{
+#content .returns > a:after,
+#content .returns > span:after,
+#content .types > a:after,
+#content .types > span:after{
 	content: "|";
 	color: #444;
 }
 
-#content .types a:last-child:after{
+#content .returns > a:last-child:after,
+#content .returns > span:last-child:after,
+#content .types > a:last-child:after,
+#content .types > span:last-child:after{
 	content: "";
 }
 
