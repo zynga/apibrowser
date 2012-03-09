@@ -60,6 +60,15 @@
 			<li id="property-{{name}}"{{?errornous}} class="errornous"{{/errornous}}>
 				<h3>
 					{{name}}
+					{{?type}}
+						{{!enforce space}} <span class="returns">[{{type}}
+							
+							{{?init}}
+								: <code>{{init}}</code>
+							{{/init}}
+							
+						]</span>
+					{{/type}}
 					{{>tags}}
 				</h3>
 				{{?summary}}
