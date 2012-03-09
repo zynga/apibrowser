@@ -1,10 +1,10 @@
 /** 
- * Limited {String} used for defining a valid CSS class name. Like a normal {String} but is not allowed to contain:
+ * A subset of {String} which only allows values which are a valid CSS className. Does not allow:
  *
- * - White Space
- * - Dots
+ * - any white space
+ * - special chars other than `-` and `_`
  *
- * #main
+ * #main #doconly
  */
 core.Main.declareNamespace("CSSClassName");
 
