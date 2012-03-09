@@ -6,9 +6,4 @@
  * 
  * #main
  */
-core.Main.addMembers("Element", 
-{
-	nodeType : 1,
-	childNodes : [],
-	children : []
-});
+core.Main.declareNamespace("Element", null);
