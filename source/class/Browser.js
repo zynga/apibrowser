@@ -98,6 +98,8 @@ core.Class('api.Browser', {
 							var href = element.getAttribute('href');
 							if (href.charAt(0) === '#') {
 								this.open(href.slice(1));
+							} else {
+								return;
 							}
 
 						}

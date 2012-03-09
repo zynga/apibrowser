@@ -54,8 +54,9 @@ a{
 	color: #276a94;
 }
 
+a > code,
 .returns > code,
-a > code{
+.params > .default > code{
 	background-color: transparent;
 	border: 0 none;
 }
