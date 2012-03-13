@@ -6,8 +6,6 @@ dist = "build"
 
 
 session = Session()
-session.addProject(Project("../core/"))
-session.addProject(Project("."))
 
 # Configure permutations
 session.setField("es5", True)
