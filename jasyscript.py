@@ -4,9 +4,6 @@ import shutil, json
 
 dist = "build"
 
-
-session = Session()
-
 # Configure permutations
 session.setField("es5", True)
 session.permutateField("debug")
@@ -35,17 +32,17 @@ def distclean():
 @task
 def build(dist="build"):
     # Write API data
-    writer = ApiWriter(session)
+    writer = ApiWriter()
     writer.write("%s/data" % dist, compact=False, callback="apibrowser.callback")
 
     # Prepare assets
-    resolver = Resolver(session.getProjects())
+    resolver = Resolver()
     resolver.addClassName("api.Browser")
-    assets = Asset(session, resolver.getIncludedClasses()).exportBuild()
+    assets = Asset(resolver.getIncludedClasses()).exportBuild()
     formatting = Formatting('semicolon', 'comma')
 
     # Write kernel script
-    includedByKernel = storeKernel("%s/script/kernel.js" % dist, session, assets=assets, formatting=formatting, debug=False)
+    includedByKernel = storeKernel("%s/script/kernel.js" % dist, assets=assets, formatting=formatting, debug=False)
 
     # Copy files from source
     updateFile("source/index.html", "%s/index.html" % dist)
@@ -59,7 +56,7 @@ def build(dist="build"):
     for permutation in session.getPermutations():
 
         # Resolving dependencies
-        resolver = Resolver(session.getProjects(), permutation)
+        resolver = Resolver(permutation)
         resolver.addClassName("api.Browser")
         resolver.excludeClasses(includedByKernel)
 
@@ -75,17 +72,17 @@ def source():
     dist = "source"
 
     # Write API data
-    writer = ApiWriter(session)
+    writer = ApiWriter()
     writer.write("%s/data" % dist, compact=False, callback="apibrowser.callback")
 
     # Prepare assets
-    resolver = Resolver(session.getProjects())
+    resolver = Resolver()
     resolver.addClassName("api.Browser")
-    assets = Asset(session, resolver.getIncludedClasses()).exportSource()
+    assets = Asset(resolver.getIncludedClasses()).exportSource()
     formatting = Formatting('semicolon', 'comma')
 
     # Write kernel script
-    includedByKernel = storeKernel("%s/script/kernel.js" % dist, session, assets=assets, formatting=formatting, debug=True)
+    includedByKernel = storeKernel("%s/script/kernel.js" % dist, assets=assets, formatting=formatting, debug=True)
 
     # Rewrite template as jsonp
     for tmpl in ["main", "error", "entry", "type", "params", "info", "origin", "tags"]:
@@ -96,13 +93,12 @@ def source():
     for permutation in session.getPermutations():
 
         # Resolving dependencies
-        resolver = Resolver(session.getProjects(), permutation)
+        resolver = Resolver(permutation)
         resolver.addClassName("api.Browser")
         resolver.excludeClasses(includedByKernel)
 
         # Compressing classes
         classes = Sorter(resolver, permutation).getSortedClasses()
-        compressedCode = storeSourceLoader("%s/script/browser-%s.js" % (dist, permutation.getChecksum()), classes, session,
-            bootCode="apibrowser=new api.Browser();")
+        compressedCode = storeSourceLoader("%s/script/browser-%s.js" % (dist, permutation.getChecksum()), classes, bootCode="apibrowser=new api.Browser();")
 
 
