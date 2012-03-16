@@ -4,13 +4,9 @@ import shutil, json
 
 dist = "build"
 
-# Configure permutations
+# Configure fields
 session.setField("es5", True)
 session.permutateField("debug")
-
-# Optimizer configuration
-optimization = Optimization("variables", "declarations", "blocks", "privates")
-
 
 
 @task
@@ -53,16 +49,17 @@ def build(dist="build"):
         writeFile("%s/tmpl/%s.js" % (dist, tmpl), "apibrowser.callback(%s, '%s.mustache')" % (jsonTemplate, tmpl))
 
     # Process every possible permutation
-    for permutation in session.getPermutations():
-
+    for entry in session.permutate():
+        
         # Resolving dependencies
-        resolver = Resolver(permutation)
+        resolver = Resolver()
         resolver.addClassName("api.Browser")
         resolver.excludeClasses(includedByKernel)
 
         # Compressing classes
-        classes = Sorter(resolver, permutation).getSortedClasses()
-        compressedCode = storeCompressed("%s/script/browser-%s.js" % (dist, permutation.getChecksum()), classes,
+        classes = Sorter(resolver).getSortedClasses()
+        
+        compressedCode = storeCompressed("%s/script/browser-%s.js" % (dist, getPermutation().getChecksum()), classes,
             permutation=permutation, optimization=optimization, formatting=formatting, bootCode="apibrowser=new api.Browser();")
 
 
@@ -90,7 +87,7 @@ def source():
         writeFile("%s/tmpl/%s.js" % (dist, tmpl), "apibrowser.callback(%s, '%s.mustache')" % (jsonTemplate, tmpl))
 
     # Process every possible permutation
-    for permutation in session.getPermutations():
+    for permutation in session.permutate():
 
         # Resolving dependencies
         resolver = Resolver(permutation)
