@@ -34,7 +34,7 @@ def build(dist="build"):
     resolver = Resolver()
     resolver.addClassName("api.Browser")
     assets = Asset(resolver.getIncludedClasses()).exportBuild()
-    includedByKernel = storeKernel("%s/script/kernel.js" % dist, assets=assets, formatting=formatting, debug=False)
+    includedByKernel = storeKernel("%s/script/kernel.js" % dist, assets=assets, debug=False)
 
     # Copy files from source
     updateFile("source/index.html", "%s/index.html" % dist)
@@ -54,9 +54,7 @@ def build(dist="build"):
 
         # Compressing classes
         classes = Sorter(resolver).getSortedClasses()
-        
-        compressedCode = storeCompressed("%s/script/browser-%s.js" % (dist, getPermutation().getChecksum()), classes,
-            optimization=optimization, formatting=formatting, bootCode="apibrowser=new api.Browser();")
+        compressedCode = storeCompressed("%s/script/browser-%s.js" % (dist, getPermutation().getChecksum()), classes, bootCode="apibrowser=new api.Browser();")
 
     # Write API data
     writer = ApiWriter().write("%s/data" % dist, compact=False, callback="apibrowser.callback")
