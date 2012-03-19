@@ -28,18 +28,21 @@ def distclean(dist="build"):
 @task
 def build(dist="build"):
     
+    # Setup global distribution folder
+    setDist(dist)
+    
     # Write kernel script
     resolver = Resolver().addClassName("api.Browser")
     assets = Asset(resolver.getIncludedClasses()).exportBuild()
-    includedByKernel = storeKernel("%s/script/kernel.js" % dist, assets=assets, debug=False)
+    includedByKernel = storeKernel("script/kernel.js", assets=assets, debug=False)
 
     # Copy files from source
-    updateFile("source/index.html", "%s/index.html" % dist)
+    updateFile("source/index.html", "index.html")
 
     # Rewrite template as jsonp
     for tmpl in ["main", "error", "entry", "type", "params", "info", "origin", "tags"]:
         jsonTemplate = json.dumps({ "template" : open("source/tmpl/%s.mustache" % tmpl).read() })
-        writeFile("%s/tmpl/%s.js" % (dist, tmpl), "apibrowser.callback(%s, '%s.mustache')" % (jsonTemplate, tmpl))
+        writeFile("tmpl/%s.js" % tmpl, "apibrowser.callback(%s, '%s.mustache')" % (jsonTemplate, tmpl))
         
     # Process every possible permutation
     for permutation in session.permutate():
@@ -51,10 +54,10 @@ def build(dist="build"):
 
         # Compressing classes
         classes = Sorter(resolver).getSortedClasses()
-        compressedCode = storeCompressed("%s/script/browser-%s.js" % (dist, getPermutation().getChecksum()), classes, bootCode="apibrowser=new api.Browser();")
+        compressedCode = storeCompressed("script/browser-%s.js" % (getPermutation().getChecksum()), classes, bootCode="apibrowser=new api.Browser();")
 
     # Write API data
-    writer = ApiWriter().write("%s/data" % dist, compact=False, callback="apibrowser.callback")
+    writer = ApiWriter().write("data", compact=False, callback="apibrowser.callback")
 
 
 
