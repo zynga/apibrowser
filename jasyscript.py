@@ -28,8 +28,8 @@ def distclean(dist="build"):
 @task
 def build(dist="build"):
     
-    # Setup global distribution folder
-    setDist(dist)
+    # Setup global prefix
+    setPrefix(dist)
     
     # Write kernel script
     resolver = Resolver().addClassName("api.Browser")
