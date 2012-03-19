@@ -2,8 +2,6 @@
 
 import shutil, json
 
-dist = "build"
-
 # Configure fields
 session.setField("es5", True)
 session.permutateField("debug")
@@ -18,7 +16,7 @@ def clean():
 
 
 @task
-def distclean():
+def distclean(dist="build"):
     logging.info("Clearing cache...")
     session.clearCache()
 
@@ -61,8 +59,7 @@ def build(dist="build"):
 
 
 @task
-def source():
-    dist = "source"
+def source(dist="source"):
 
     # Write kernel script
     resolver = Resolver().addClassName("api.Browser")
