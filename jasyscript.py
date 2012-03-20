@@ -11,13 +11,11 @@ formatting = Formatting('semicolon', 'comma')
 
 @task
 def clean():
-    logging.info("Clearing cache...")
     session.clearCache()
 
 
 @task
 def distclean(dist="build"):
-    logging.info("Clearing cache...")
     session.clearCache()
 
     if os.path.exists(dist):
