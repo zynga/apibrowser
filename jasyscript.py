@@ -45,11 +45,9 @@ def build():
     for permutation in session.permutate():
         
         # Resolving dependencies
-        resolver = Resolver().addClassName("apibrowser.Browser")
-        resolver.excludeClasses(includedByKernel)
+        resolver = Resolver().addClassName("apibrowser.Browser").excludeClasses(includedByKernel)
 
         # Compressing classes
-        classes = Sorter(resolver).getSortedClasses()
         storeCompressed("script/browser-%s.js" % permutation.getChecksum(), Sorter(resolver).getSortedClasses(), bootCode="new apibrowser.Browser;")
 
 
@@ -69,10 +67,9 @@ def source():
     for permutation in session.permutate():
 
         # Resolving dependencies
-        resolver = Resolver().addClassName("apibrowser.Browser")
-        resolver.excludeClasses(includedByKernel)
+        resolver = Resolver().addClassName("apibrowser.Browser").excludeClasses(includedByKernel)
 
-        # Compressing classes
+        # Building class loader
         storeSourceLoader("script/browser-%s.js" % permutation.getChecksum(), Sorter(resolver).getSortedClasses(), bootCode="new apibrowser.Browser;")
 
     # Generate API data into source folder
