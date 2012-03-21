@@ -8,9 +8,9 @@
 /**
  * The main class of the API Browser.
  *
- * #asset(api/*)
+ * #asset(apibrowser/*)
  */
-core.Class('api.Browser', {
+core.Class('apibrowser.Browser', {
 
 	construct: function() {
 
@@ -30,10 +30,10 @@ core.Class('api.Browser', {
 
 		// Load initial data
 		core.io.Queue.load([
-			core.io.Asset.toUri("api/icon/stylesheet.css"),
-			core.io.Asset.toUri("api/reset.css"),
-			core.io.Asset.toUri("api/style.css"),
-			core.io.Asset.toUri("api/syntax.css"),
+			core.io.Asset.toUri("apibrowser/icon/stylesheet.css"),
+			core.io.Asset.toUri("apibrowser/reset.css"),
+			core.io.Asset.toUri("apibrowser/style.css"),
+			core.io.Asset.toUri("apibrowser/syntax.css"),
 
 			"tmpl/main.js",
 			"tmpl/entry.js",

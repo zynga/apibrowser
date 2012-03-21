@@ -1,5 +1,5 @@
 {
-	"name": "api",
+	"name": "apibrowser",
 	"requires": [
 		"../core"
 	]

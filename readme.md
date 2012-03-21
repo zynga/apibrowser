@@ -16,7 +16,7 @@ def api():
   Task.execute("apiviewer", "build", dest="api")
 
   # Write API data
-  ApiWriter().write("api/data", callback="apibrowser.callback")
+  ApiWriter().write("apibrowser/data", callback="apibrowser.callback")
 
 ```
 

@@ -30,7 +30,7 @@ def api():
 def build():
     
     # Write kernel script
-    asset = Asset(Resolver().addClassName("api.Browser").getIncludedClasses())
+    asset = Asset(Resolver().addClassName("apibrowser.Browser").getIncludedClasses())
     includedByKernel = storeKernel("script/kernel.js", assets=asset.exportBuild())
 
     # Copy files from source
@@ -45,19 +45,19 @@ def build():
     for permutation in session.permutate():
         
         # Resolving dependencies
-        resolver = Resolver().addClassName("api.Browser")
+        resolver = Resolver().addClassName("apibrowser.Browser")
         resolver.excludeClasses(includedByKernel)
 
         # Compressing classes
         classes = Sorter(resolver).getSortedClasses()
-        storeCompressed("script/browser-%s.js" % permutation.getChecksum(), Sorter(resolver).getSortedClasses(), bootCode="apibrowser=new api.Browser();")
+        storeCompressed("script/browser-%s.js" % permutation.getChecksum(), Sorter(resolver).getSortedClasses(), bootCode="apibrowser=new apibrowser.Browser();")
 
 
 @task
 def source():
 
     # Write kernel script
-    asset = Asset(Resolver().addClassName("api.Browser").getIncludedClasses())
+    asset = Asset(Resolver().addClassName("apibrowser.Browser").getIncludedClasses())
     includedByKernel = storeKernel("script/kernel.js", assets=asset.exportSource())
 
     # Rewrite template as jsonp
@@ -69,10 +69,10 @@ def source():
     for permutation in session.permutate():
 
         # Resolving dependencies
-        resolver = Resolver().addClassName("api.Browser")
+        resolver = Resolver().addClassName("apibrowser.Browser")
         resolver.excludeClasses(includedByKernel)
 
         # Compressing classes
-        storeSourceLoader("script/browser-%s.js" % permutation.getChecksum(), Sorter(resolver).getSortedClasses(), bootCode="apibrowser=new api.Browser();")
+        storeSourceLoader("script/browser-%s.js" % permutation.getChecksum(), Sorter(resolver).getSortedClasses(), bootCode="apibrowser=new apibrowser.Browser();")
 
     ApiWriter().write("data")
