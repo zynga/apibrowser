@@ -39,7 +39,7 @@ def build():
     # Rewrite template as jsonp
     for tmpl in ["main", "error", "entry", "type", "params", "info", "origin", "tags"]:
         jsonTemplate = json.dumps({ "template" : open("source/tmpl/%s.mustache" % tmpl).read() })
-        writeFile("tmpl/%s.js" % tmpl, "apibrowser.callback(%s, '%s.mustache')" % (jsonTemplate, tmpl))
+        writeFile("tmpl/%s.js" % tmpl, "apiload(%s, '%s.mustache')" % (jsonTemplate, tmpl))
         
     # Process every possible permutation
     for permutation in session.permutate():
@@ -63,7 +63,7 @@ def source():
     # Rewrite template as jsonp
     for tmpl in ["main", "error", "entry", "type", "params", "info", "origin", "tags"]:
         jsonTemplate = json.dumps({ "template" : open("source/tmpl/%s.mustache" % tmpl).read() })
-        writeFile("tmpl/%s.js" % tmpl, "apibrowser.callback(%s, '%s.mustache')" % (jsonTemplate, tmpl))
+        writeFile("tmpl/%s.js" % tmpl, "apiload(%s, '%s.mustache')" % (jsonTemplate, tmpl))
 
     # Process every possible permutation
     for permutation in session.permutate():

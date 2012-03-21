@@ -160,7 +160,6 @@ core.Class('apibrowser.Browser', {
 
 				this.__cache[id] = this.__tmpl.main.render(data, this.__tmpl);
 
-
 				if (this.__current.file === id) {
 					var hash = this.buildHash(this.__current.type, this.__current.file, this.__current.item);
 					this.open(hash);
