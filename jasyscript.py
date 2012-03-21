@@ -23,11 +23,6 @@ def distclean():
 @task("Build the full api viewer into api folder")
 def api():
     build()
-    data()
-
-
-@task("Generates the data of the api browser itself")
-def data():
     ApiWriter().write("data")
 
 
@@ -62,7 +57,7 @@ def build():
 def source():
 
     # Write kernel script
-    assets = Asset(Resolver().addClassName("api.Browser").getIncludedClasses())
+    asset = Asset(Resolver().addClassName("api.Browser").getIncludedClasses())
     includedByKernel = storeKernel("script/kernel.js", assets=asset.exportSource())
 
     # Rewrite template as jsonp
@@ -80,4 +75,4 @@ def source():
         # Compressing classes
         storeSourceLoader("script/browser-%s.js" % permutation.getChecksum(), Sorter(resolver).getSortedClasses(), bootCode="apibrowser=new api.Browser();")
 
-    data()
+    ApiWriter().write("data")
