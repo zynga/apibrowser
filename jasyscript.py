@@ -50,7 +50,7 @@ def build():
 
         # Compressing classes
         classes = Sorter(resolver).getSortedClasses()
-        storeCompressed("script/browser-%s.js" % permutation.getChecksum(), Sorter(resolver).getSortedClasses(), bootCode="apibrowser=new apibrowser.Browser();")
+        storeCompressed("script/browser-%s.js" % permutation.getChecksum(), Sorter(resolver).getSortedClasses(), bootCode="new apibrowser.Browser;")
 
 
 @task
@@ -73,6 +73,7 @@ def source():
         resolver.excludeClasses(includedByKernel)
 
         # Compressing classes
-        storeSourceLoader("script/browser-%s.js" % permutation.getChecksum(), Sorter(resolver).getSortedClasses(), bootCode="apibrowser=new apibrowser.Browser();")
+        storeSourceLoader("script/browser-%s.js" % permutation.getChecksum(), Sorter(resolver).getSortedClasses(), bootCode="new apibrowser.Browser;")
 
+    # Generate API data into source folder
     ApiWriter().write("data")

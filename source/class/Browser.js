@@ -60,6 +60,8 @@ core.Class('apibrowser.Browser', {
 			hash: ''
 		};
 
+		window.apiload = this.callback.bind(this);
+
 	},
 
 	members: {
