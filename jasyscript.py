@@ -1,38 +1,42 @@
-#!/usr/bin/env jasy
+# API Browser
+# Copyright 2012 Zynga Inc.
 
-import shutil, json
+import json
 
-# Configure fields
 session.setField("es5", True)
 session.permutateField("debug")
 
-formatting = Formatting('semicolon', 'comma')
 
-
-@task
+@task("Clear build cache")
 def clean():
     session.clearCache()
 
 
-@task
-def distclean(dist="build"):
+@task("Clear caches and build results")
+def distclean():
     session.clearCache()
+    removeDir("build")
+    removeDir("source/script")
+    removeDir("source/data")
 
-    if os.path.exists(dist):
-        logging.info("Deleting build folder...")
-        shutil.rmtree(dist)
+
+@task("Build the full api viewer into api folder")
+def api():
+    build()
+    data()
 
 
-@task
-def build(dist="build"):
-    
-    # Setup global prefix
-    setPrefix(dist)
+@task("Generates the data of the api browser itself")
+def data():
+    ApiWriter().write("data")
+
+
+@task("Build the API viewer application")
+def build():
     
     # Write kernel script
-    resolver = Resolver().addClassName("api.Browser")
-    assets = Asset(resolver.getIncludedClasses()).exportBuild()
-    includedByKernel = storeKernel("script/kernel.js", assets=assets, debug=False)
+    asset = Asset(Resolver().addClassName("api.Browser").getIncludedClasses())
+    includedByKernel = storeKernel("script/kernel.js", assets=asset.exportBuild())
 
     # Copy files from source
     updateFile("source/index.html", "index.html")
@@ -46,45 +50,34 @@ def build(dist="build"):
     for permutation in session.permutate():
         
         # Resolving dependencies
-        resolver = Resolver()
-        resolver.addClassName("api.Browser")
+        resolver = Resolver().addClassName("api.Browser")
         resolver.excludeClasses(includedByKernel)
 
         # Compressing classes
         classes = Sorter(resolver).getSortedClasses()
-        compressedCode = storeCompressed("script/browser-%s.js" % (getPermutation().getChecksum()), classes, bootCode="apibrowser=new api.Browser();")
-
-    # Write API data
-    writer = ApiWriter().write("data", compact=False, callback="apibrowser.callback")
-
+        storeCompressed("script/browser-%s.js" % permutation.getChecksum(), Sorter(resolver).getSortedClasses(), bootCode="apibrowser=new api.Browser();")
 
 
 @task
-def source(dist="source"):
+def source():
 
     # Write kernel script
-    resolver = Resolver().addClassName("api.Browser")
-    assets = Asset(resolver.getIncludedClasses()).exportSource()
-    includedByKernel = storeKernel("%s/script/kernel.js" % dist, assets=assets, debug=True)
+    assets = Asset(Resolver().addClassName("api.Browser").getIncludedClasses())
+    includedByKernel = storeKernel("script/kernel.js", assets=asset.exportSource())
 
     # Rewrite template as jsonp
     for tmpl in ["main", "error", "entry", "type", "params", "info", "origin", "tags"]:
         jsonTemplate = json.dumps({ "template" : open("source/tmpl/%s.mustache" % tmpl).read() })
-        writeFile("%s/tmpl/%s.js" % (dist, tmpl), "apibrowser.callback(%s, '%s.mustache')" % (jsonTemplate, tmpl))
+        writeFile("tmpl/%s.js" % tmpl, "apibrowser.callback(%s, '%s.mustache')" % (jsonTemplate, tmpl))
 
     # Process every possible permutation
     for permutation in session.permutate():
 
         # Resolving dependencies
-        resolver = Resolver()
-        resolver.addClassName("api.Browser")
+        resolver = Resolver().addClassName("api.Browser")
         resolver.excludeClasses(includedByKernel)
 
         # Compressing classes
-        classes = Sorter(resolver).getSortedClasses()
-        compressedCode = storeSourceLoader("%s/script/browser-%s.js" % (dist, getPermutation().getChecksum()), classes, bootCode="apibrowser=new api.Browser();")
+        storeSourceLoader("script/browser-%s.js" % permutation.getChecksum(), Sorter(resolver).getSortedClasses(), bootCode="apibrowser=new api.Browser();")
 
-    # Write API data
-    writer = ApiWriter().write("%s/data" % dist, compact=False, callback="apibrowser.callback")
-
-
+    data()
