@@ -4,7 +4,7 @@
  * demos. It shows you how to use the {core}
  * JavaScript framework.
  */
-core.Class('api.test.Animal', {
+core.Class('apibrowser.test.Animal', {
 
 	properties: {
 
@@ -52,13 +52,13 @@ core.Class('api.test.Animal', {
 
 
 		/**
-		 * {Boolean} This method feeds the animal with @food {api.test.Food}.
+		 * {Boolean} This method feeds the animal with @food {apibrowser.test.Food}.
 		 * Remember to not overfeed your animal, because it gains {property:#weight}
 		 * everytime you feed it.
 		 */
 		feed: function(food) {
 
-			if (food instanceof api.test.Food) {
+			if (food instanceof apibrowser.test.Food) {
 
 				var newWeight = this.getWeight() + food.getWeight();
 				this.setWeight(newWeight);

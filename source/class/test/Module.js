@@ -1,5 +1,5 @@
 /** Just a simple test module */
-core.Module('api.test.Module', {
+core.Module('apibrowser.test.Module', {
 
 	/**
 	 *

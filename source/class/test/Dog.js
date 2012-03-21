@@ -8,8 +8,8 @@
  * is hungry and weights 40kg (and is not naked):
  *
  * ```
- * var myDog = new api.test.Dog('brown', true, 40, false);
- * myDog.feed(new api.test.Food(5)); // 5kg, kinda American way!
+ * var myDog = new apibrowser.test.Dog('brown', true, 40, false);
+ * myDog.feed(new apibrowser.test.Food(5)); // 5kg, kinda American way!
  * myDog.walk(200); // lets him walk 200m
  * ```
  *
@@ -17,10 +17,10 @@
  * #version(1.1)
  * #awesome
  */
-core.Class('api.test.Dog', {
+core.Class('apibrowser.test.Dog', {
 
-	implement: [ api.test.Mammalian ],
-	include: [ api.test.Animal ],
+	implement: [ apibrowser.test.Mammalian ],
+	include: [ apibrowser.test.Animal ],
 
 	/**
 	 * This will create a new Dog for your Tamagochi environment.

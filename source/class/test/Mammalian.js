@@ -3,9 +3,9 @@
  *
  * Those class of Animals have different things in
  * common - compared to other animal classes like
- * {api.test.Fish}.
+ * {apibrowser.test.Fish}.
  */
-core.Interface('api.test.Mammalian', {
+core.Interface('apibrowser.test.Mammalian', {
 
 	properties: {
 

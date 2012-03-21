@@ -22,7 +22,7 @@ def distclean():
 
 @task("Build the full api viewer into api folder")
 def api():
-    build()
+    build(prefix="api")
     ApiWriter().write("data")
 
 

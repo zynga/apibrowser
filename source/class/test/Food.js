@@ -5,11 +5,11 @@
  * animals get fat while you overfeed them :)
  *
  * ```
- * new api.test.Food(20); // will produce 20kg of food
+ * new apibrowser.test.Food(20); // will produce 20kg of food
  * ```
  *
  */
-core.Class('api.test.Food', {
+core.Class('apibrowser.test.Food', {
 
 	/**
 	 * This is just generic food in kilograms,

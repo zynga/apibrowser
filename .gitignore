@@ -1,8 +1,8 @@
 .DS_Store
 
-jasycache.db
-source/script/*
+source/script
+build
+api
 
-build/
 jasycache*
 
