@@ -273,13 +273,21 @@ strong{
 	overflow: auto;
 }
 
-#content h1 span.namespace{
+#content h1 span{
 	font-size: 16px;
 	color: #aaa;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#content h1 span.namespace{
 	position: absolute;
 	top: 0;
 	left: 0;
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#content h1 span.extension{
+	margin-left: 8px;
+	font-style: italic;
 }
 
 #content h3{

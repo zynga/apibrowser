@@ -3,6 +3,10 @@
 	<h1 type="{{main.type}}"{{?errornous}} class="errornous"{{/errornous}}>
 		{{basename}}
 		{{?package}}<span class="namespace">{{package}}</span>{{/package}}
+		
+		{{?main.extension}}
+			<span class="extension">extends <a href="#{{main.name}}">{{main.name}}</a></span>
+		{{/main.extension}}
 	</h1>
 
 	{{?main.doc}}
