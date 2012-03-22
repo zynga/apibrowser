@@ -46,7 +46,7 @@ def api():
 
 ## Authors
 
-The API Viewer is an official Zynga OpenSource project.
+The API Browser is an official Zynga OpenSource project.
 
 
 ## License

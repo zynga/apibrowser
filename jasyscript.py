@@ -30,7 +30,7 @@ def api():
 def build():
     
     # Write kernel script
-    asset = Asset(Resolver().addClassName("apibrowser.Browser").getIncludedClasses())
+    asset = AssetManager(Resolver().addClassName("apibrowser.Browser").getIncludedClasses())
     includedByKernel = storeKernel("script/kernel.js", assets=asset.exportBuild())
 
     # Copy files from source
@@ -55,7 +55,7 @@ def build():
 def source():
 
     # Write kernel script
-    asset = Asset(Resolver().addClassName("apibrowser.Browser").getIncludedClasses())
+    asset = AssetManager(Resolver().addClassName("apibrowser.Browser").getIncludedClasses())
     includedByKernel = storeKernel("script/kernel.js", assets=asset.exportSource())
 
     # Rewrite template as jsonp
