@@ -11,9 +11,13 @@ The API Browser requires to use the [Jasy](http://github.com/zynga/jasy) tooling
 Add a requires section into your `jasyproject.json`:
 
 ```json
-"requires": [
-    "../apibrowser"
-]
+{
+	
+
+	"requires": [
+	    "../apibrowser"
+	]
+}
 ```
 
 Add another task to your `jasyscript.py`:
