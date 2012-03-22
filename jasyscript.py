@@ -9,7 +9,7 @@ session.permutateField("debug")
 
 @task("Clear build cache")
 def clean():
-    session.clearCache()
+    session.clean()
 
 
 @task("Clear caches and build results")
