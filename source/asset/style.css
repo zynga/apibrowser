@@ -250,8 +250,13 @@ strong{
 }
 
 #tree .tree-item[data-type="Extend"]:after{
-	content: "N";
+	content: "E";
 	background: #3d6285;
+}
+
+#tree .tree-item[data-type="Native"]:after{
+	content: "N";
+	background: #9a306c;
 }
 
 
