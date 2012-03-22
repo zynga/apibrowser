@@ -12,11 +12,11 @@ The API Browser requires to use the [Jasy](http://github.com/zynga/jasy) tooling
 @task
 def api():
 
-  # Generate API viewer into api folder
-  Task.execute("apiviewer", "build", dest="api")
+    # Writes API data to api/data
+    ApiWriter().write("data")
 
-  # Write API data
-  ApiWriter().write("apibrowser/data", callback="apibrowser.callback")
+    # Generates API browser into api folder
+    runTask("apibrowser", "build")
 
 ```
 
