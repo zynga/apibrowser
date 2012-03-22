@@ -16,21 +16,6 @@
 	{{/main.doc}}
 </div>
 
-{{?content}}
-	<div class="toc">
-		<ul>
-			{{#content}}
-				<li>
-					<h3><a href="#{{link}}">{{name}}</a> <span class="type">{{type}}</span></h3>
-					{{?summary}}
-						<p>{{&summary}}</p>
-					{{/summary}}
-				</li>
-			{{/content}}
-		</ul>
-	</div>
-{{/content}}
-
 {{?construct}}
 	<div class="constructor{{?errornous}} errornous{{/errornous}}">
 		{{#construct}}
@@ -166,6 +151,29 @@
 		</ul>
 	</div>
 {{/members}}
+
+{{?content}}
+	<div class="toc">
+		{{?statics}}
+			<h2>Package Content</h2>
+		{{/statics}}
+		{{^statics}}
+			{{?construct}}
+				<h2>Package Content</h2>
+			{{/construct}}
+		{{/statics}}
+		<ul>
+			{{#content}}
+				<li>
+					<h3><a href="#{{link}}">{{name}}</a> <span class="type">{{type}}</span></h3>
+					{{?summary}}
+						<p>{{&summary}}</p>
+					{{/summary}}
+				</li>
+			{{/content}}
+		</ul>
+	</div>
+{{/content}}
 
 {{?errors}}
 	<div class="errors">
