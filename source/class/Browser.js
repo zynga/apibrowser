@@ -203,7 +203,7 @@ core.Class('apibrowser.Browser', {
 					this.__cache[name] = null;
 				}
 
-				if (entry.$type == "Package") {
+				if (entry.$content) {
 
 					html += '<li><a class="tree-package" href="#' + name + '">' + key + '</a><ul>' + this.__treeWalker(entry, name) + '</ul></li>';
 
