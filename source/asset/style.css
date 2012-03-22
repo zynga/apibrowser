@@ -286,6 +286,19 @@ strong{
 	font-size: 24px;
 }
 
+#content h3 > span.type{
+	font-size: 16px;
+	color: #baa6b9;
+}
+
+#content h3 > span.type:before{
+	content: "(";
+}
+
+#content h3 > span.type:after{
+	content: ")";
+}
+
 #content > div{
 	border-top: 1px solid #e2e8eb;
 	border-bottom: 1px solid #e2e8eb;

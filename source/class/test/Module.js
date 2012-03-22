@@ -1,4 +1,4 @@
-/** Just a simple test module */
+/** Just a simple test module. */
 core.Module('apibrowser.test.Module', {
 
 	/**

@@ -51,7 +51,7 @@ def build():
         storeCompressed("script/browser-%s.js" % permutation.getChecksum(), Sorter(resolver).getSortedClasses(), bootCode="new apibrowser.Browser;")
 
 
-@task
+@task("Generate source")
 def source():
 
     # Write kernel script

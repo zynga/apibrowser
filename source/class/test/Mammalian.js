@@ -1,5 +1,5 @@
 /**
- * This is a generic Interface for Mammalian Animals
+ * This is a generic Interface for mammalian animals.
  *
  * Those class of Animals have different things in
  * common - compared to other animal classes like

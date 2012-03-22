@@ -1,5 +1,5 @@
 /**
- * This is the generic Food class
+ * This is the generic Food class.
  *
  * It has only a weight property to let
  * animals get fat while you overfeed them :)
