@@ -14,7 +14,7 @@ def clean():
 
 @task("Clear caches and build results")
 def distclean():
-    session.clearCache()
+    session.clean()
     removeDir("build")
     removeDir("source/script")
     removeDir("source/data")
