@@ -131,9 +131,6 @@ core.Class('apibrowser.Browser', {
 
 			}.bind(this), true);
 
-			// Open initial hash
-			this.open(location.hash.slice(1));
-
 		},
 
 
@@ -151,6 +148,22 @@ core.Class('apibrowser.Browser', {
 			} else if (id == "meta-index") {
 
 				this.__treeElem.innerHTML = "<ul>" + this.__treeWalker(data, "") + "</ul>";
+				
+				// Open initial hash
+				if (location.hash) {
+					
+					this.open(location.hash.slice(1));
+
+				} else {
+					
+					for (var className in this.__cache) {
+						location.hash = "#" + className;
+						this.open(className);
+						break;
+					}
+					
+				}
+				
 
 			} else if (id == "meta-search") {
 
@@ -199,8 +212,8 @@ core.Class('apibrowser.Browser', {
 				var name = base ? base + "." + key : key;
 
 				// this will let showContent know that the file / class exists
-				if (this.__cache[name] === undefined) {
-					this.__cache[name] = null;
+				if (this.__cache[name] == null) {
+					this.__cache[name] = true;
 				}
 
 				if (entry.$content) {
@@ -214,7 +227,7 @@ core.Class('apibrowser.Browser', {
 				}
 
 			}
-
+			
 			return html;
 
 		},
@@ -393,7 +406,7 @@ core.Class('apibrowser.Browser', {
 
 				var fileChanged = this.__current.html !== data.file;
 
-				if (cacheEntry === null) {
+				if (cacheEntry == true) {
 
 					core.io.Script.load('data/' + data.file + '.js', function(uri, error) {
 
