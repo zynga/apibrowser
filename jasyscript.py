@@ -70,7 +70,7 @@ def source():
         resolver = Resolver().addClassName("apibrowser.Browser").excludeClasses(includedByKernel)
 
         # Building class loader
-        storeSourceLoader("script/browser-%s.js" % permutation.getChecksum(), Sorter(resolver).getSortedClasses(), bootCode="new apibrowser.Browser;")
+        storeLoader("script/browser-%s.js" % permutation.getChecksum(), Sorter(resolver).getSortedClasses(), bootCode="new apibrowser.Browser;")
 
     # Generate API data into source folder
     ApiWriter().write("data")
