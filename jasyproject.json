@@ -1,6 +1,6 @@
 {
 	"name": "apibrowser",
 	"requires": [
-		"../core"
+		"https://github.com/zynga/core.git"
 	]
 }
