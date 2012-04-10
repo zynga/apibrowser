@@ -3,7 +3,7 @@
 
 import json
 
-session.setField("es5", True)
+session.permutateField("es5")
 session.permutateField("debug")
 
 
@@ -16,6 +16,7 @@ def clean():
 def distclean():
     session.clean()
     removeDir("build")
+    removeDir("external")
     removeDir("source/script")
     removeDir("source/data")
 
