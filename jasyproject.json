@@ -1,6 +1,10 @@
 {
 	"name": "apibrowser",
-	"requires": [
-		"https://github.com/zynga/core.git"
+	"requires": 
+	[
+		{
+			"source" : "https://github.com/zynga/core.git",
+			"version" : "0.6-beta1"
+		}
 	]
 }
