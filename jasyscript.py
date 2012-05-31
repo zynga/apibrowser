@@ -59,7 +59,7 @@ def build():
 def source():
 
     # Configure assets for being loaded from source folders
-    assetManager().addSourceProfile()
+    assetManager.addSourceProfile()
 
     # Write kernel script
     includedByKernel = storeKernel("script/kernel.js", debug=True)
