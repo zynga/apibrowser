@@ -29,14 +29,17 @@ def api():
 
 @task("Build the API viewer application")
 def build():
+
+    # Configure assets for being loaded from local asset folder
+    session.getAssetManager().deploy(Resolver().addClassName("apibrowser.Browser").getIncludedClasses())
+    session.getAssetManager().addBuildProfile()
     
     # Write kernel script
-    asset = AssetManager(Resolver().addClassName("apibrowser.Browser").getIncludedClasses())
-    includedByKernel = storeKernel("script/kernel.js", assets=asset.exportBuild())
+    includedByKernel = storeKernel("script/kernel.js")
 
     # Copy files from source
     updateFile("source/index.html", "index.html")
-
+    
     # Rewrite template as jsonp
     for tmpl in ["main", "error", "entry", "type", "params", "info", "origin", "tags"]:
         jsonTemplate = json.dumps({ "template" : open("source/tmpl/%s.mustache" % tmpl).read() })
@@ -49,15 +52,17 @@ def build():
         resolver = Resolver().addClassName("apibrowser.Browser").excludeClasses(includedByKernel)
 
         # Compressing classes
-        storeCompressed("script/browser-%s.js" % permutation.getChecksum(), Sorter(resolver).getSortedClasses(), bootCode="new apibrowser.Browser;")
+        storeCompressed(resolver.getSortedClasses(), "script/browser-%s.js" % permutation.getChecksum(), "new apibrowser.Browser;")
 
 
 @task("Generate source")
 def source():
 
+    # Configure assets for being loaded from source folders
+    session.getAssetManager().addSourceProfile()
+
     # Write kernel script
-    asset = AssetManager(Resolver().addClassName("apibrowser.Browser").getIncludedClasses())
-    includedByKernel = storeKernel("script/kernel.js", assets=asset.exportSource())
+    includedByKernel = storeKernel("script/kernel.js", debug=True)
 
     # Rewrite template as jsonp
     for tmpl in ["main", "error", "entry", "type", "params", "info", "origin", "tags"]:
@@ -71,7 +76,7 @@ def source():
         resolver = Resolver().addClassName("apibrowser.Browser").excludeClasses(includedByKernel)
 
         # Building class loader
-        storeLoader("script/browser-%s.js" % permutation.getChecksum(), Sorter(resolver).getSortedClasses(), bootCode="new apibrowser.Browser;")
+        storeLoader(resolver.getSortedClasses(), "script/browser-%s.js" % permutation.getChecksum(), "new apibrowser.Browser;")
 
     # Generate API data into source folder
     ApiWriter().write("data")
