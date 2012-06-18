@@ -1,0 +1,120 @@
+body{
+	color: #666;
+	background: white;
+}
+
+h1, h2{
+	color: #000;
+	font-family: Arial, sans-serif;
+}
+
+h1{
+	font-size: 44px;
+}
+
+h2{
+	font-size: 30px;
+}
+
+h3{
+	color: #444;
+}
+
+a{
+	color: rgb(0, 159, 250);
+}
+
+pre, code{
+	background: #f2f2f2;
+	color: #666;
+}
+
+#head{
+	background: rgb(204, 41, 41);
+	border: 0 none;
+	border-bottom: 1px solid white;
+	
+	color: #fff;
+}
+
+#tree {
+	background: rgb(238, 238, 238);
+}
+
+#tree .tree-package {
+	font-weight: bold;
+	color: rgb(204, 41, 41);
+}
+
+#tree li.active > a {
+	background: white;
+	border: 0 none;
+	color: rgb(0, 159, 250);
+}
+
+#content h1 span{
+	color: #aaa;
+}
+
+#content h3 > span.type{
+	color: rgb(0, 159, 250);
+}
+
+#content > div{
+}
+
+#content > div+div{
+	border-top-color: #fff;
+}
+
+#content > div > ul > li:before{
+	color: rgb(204, 41, 41);
+}
+
+#content .params,
+#content .returns{
+	color: #555;
+}
+
+#content .parens{
+	color: #ccc;
+}
+
+#content .types{
+	color: #888;
+}
+
+#content .returns > a:after,
+#content .returns > span:after,
+#content .types > a:after,
+#content .types > span:after{
+	color: #444;
+}
+
+#content .summary{
+	color: #aaa;
+}
+
+#content li.open {
+	border-color: rgba(204, 41, 41, 0.3);
+	background: #f9f9f9;
+}
+
+#content li.open.active{
+	border-color: rgb(204, 41, 41);
+}
+
+#content .details .line,
+#content .details .origin,
+#content .details .overridden,
+#content .details .defined,
+#content .details .config{
+	color: #888;
+}
+
+#content ul.tags li{
+	color: white;
+	border-color: rgba(0, 159, 250, 0.4);
+	color: rgb(0, 159, 250);
+	background: rgb(230, 246, 255);
+}
