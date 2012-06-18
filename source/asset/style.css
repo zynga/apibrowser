@@ -34,7 +34,7 @@ pre{
 }
 
 code{
-	border: 1px solid #bbb;
+	border: 1px solid #ddd;
 	font-size: 90%;
 	padding: 2px 3px;
 	border-radius: 4px;
@@ -186,6 +186,7 @@ strong{
 	background: rgba(0,0,0,0.2);
 }
 
+/*
 #tree .tree-item[data-type="core.Class"]:after{
 	content: "C";
 	background: #939a4f;
@@ -215,6 +216,7 @@ strong{
 	content: "N";
 	background: #9a306c;
 }
+*/
 
 
 
