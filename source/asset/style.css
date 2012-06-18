@@ -186,37 +186,6 @@ strong{
 	background: rgba(0,0,0,0.2);
 }
 
-/*
-#tree .tree-item[data-type="core.Class"]:after{
-	content: "C";
-	background: #939a4f;
-}
-
-#tree .tree-item[data-type="core.Module"]:after{
-	content: "M";
-	background: #977150;
-}
-
-#tree .tree-item[data-type="core.Interface"]:after{
-	content: "I";
-	background: #883e3e;
-}
-
-#tree .tree-item[data-type="core.Main"]:after{
-	content: "B";
-	background: #508e97;
-}
-
-#tree .tree-item[data-type="Extend"]:after{
-	content: "E";
-	background: #3d6285;
-}
-
-#tree .tree-item[data-type="Native"]:after{
-	content: "N";
-	background: #9a306c;
-}
-*/
 
 
 
@@ -351,6 +320,7 @@ strong{
 	text-overflow: ellipsis;
 	overflow: hidden;
 	margin-top: -2px;
+	font-weight: normal;
 }
 
 #content .open .summary{
