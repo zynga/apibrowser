@@ -1,5 +1,16 @@
 {
 	"name": "apibrowser",
+	
+	"fields": 
+	{
+		"theme":
+		{
+			"check" : "String",
+			"default" : "original",
+			"detect" : "core.detect.Param"
+		}
+	},
+	
 	"requires": 
 	[
 		{

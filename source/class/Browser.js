@@ -27,12 +27,15 @@ core.Class('apibrowser.Browser', {
 		document.body.appendChild(this.__headElem);
 		document.body.appendChild(this.__treeElem);
 		document.body.appendChild(this.__contentElem);
+		
+		var theme = core.Env.getValue("theme");
 
 		// Load initial data
 		core.io.Queue.load([
 			core.io.Asset.toUri("apibrowser/icon/stylesheet.css"),
 			core.io.Asset.toUri("apibrowser/reset.css"),
 			core.io.Asset.toUri("apibrowser/style.css"),
+			core.io.Asset.toUri("apibrowser/theme/" + theme + ".css"),
 			core.io.Asset.toUri("apibrowser/syntax.css"),
 
 			"tmpl/main.js",
