@@ -28,7 +28,9 @@ def api():
 
 
 @task("Build the API viewer application")
-def build():
+def build(theme="original"):
+
+    session.setField("theme", theme)
 
     # Configure assets for being loaded from local asset folder
     assetManager.deploy(Resolver().addClassName("apibrowser.Browser").getIncludedClasses())
@@ -56,7 +58,9 @@ def build():
 
 
 @task("Generate source")
-def source():
+def source(theme="original"):
+    
+    session.setField("theme", theme)
 
     # Configure assets for being loaded from source folders
     assetManager.addSourceProfile()
