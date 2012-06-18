@@ -37,10 +37,6 @@ pre, code{
 	color: #ccc;
 }
 
-#tree a {
-	text-shadow: 0px 1px 1px rgba(0,0,0,0.5);
-}
-
 #tree li.active > a {
 	color: #eee;
 
@@ -51,16 +47,6 @@ pre, code{
 
 	border-top-color: #4c8ed0;
 	border-bottom-color: #2a66bd;
-}
-
-#tree .tree-item:after{
-	border: 1px solid rgba(0,0,0,0.1);
-	color: white;
-	text-shadow: 0px 1px 1px rgba(0,0,0,0.5);
-}
-
-#tree li.active > .tree-item:after{
-	background: rgba(0,0,0,0.2);
 }
 
 #content h1 span{
@@ -114,14 +100,12 @@ pre, code{
 }
 
 #content li.open {
-	border-left: 3px solid #baa6b9;
-	border-right: 3px solid #baa6b9;
+	border-color: #baa6b9;
 	background: #fff;
 }
 
 #content li.open.active{
-	border-left: 3px solid #735370;
-	border-right: 3px solid #735370;
+	border-color: #735370;
 }
 
 #content .details strong{
@@ -138,7 +122,7 @@ pre, code{
 
 #content ul.tags li{
 	color: white;
-	border: 1px solid #ace2f9;
+	border-color: #ace2f9;
 	color: #00abfa;
 	background: #e1f1f8;
 }
