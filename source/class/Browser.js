@@ -27,7 +27,7 @@ core.Class('apibrowser.Browser', {
 		document.body.appendChild(this.__headElem);
 		document.body.appendChild(this.__treeElem);
 		document.body.appendChild(this.__contentElem);
-		
+
 		var theme = core.Env.getValue("theme");
 
 		// Load initial data
@@ -151,22 +151,22 @@ core.Class('apibrowser.Browser', {
 			} else if (id == "meta-index") {
 
 				this.__treeElem.innerHTML = "<ul>" + this.__treeWalker(data, "") + "</ul>";
-				
+
 				// Open initial hash
 				if (location.hash) {
-					
+
 					this.open(location.hash.slice(1));
 
 				} else {
-					
+
 					for (var className in this.__cache) {
 						location.hash = "#" + className;
 						this.open(className);
 						break;
 					}
-					
+
 				}
-				
+
 
 			} else if (id == "meta-search") {
 
@@ -230,15 +230,15 @@ core.Class('apibrowser.Browser', {
 				}
 
 			}
-			
+
 			return html;
 
 		},
 
 		/**
-		 * {String} Returns a hash string from the given input parameters: 
+		 * {String} Returns a hash string from the given input parameters:
 		 *
-		 * - @type {String?null} Type of item to link to 
+		 * - @type {String?null} Type of item to link to
 		 * - @file {String?current} File to open (which contains the item)
 		 * - @item {String?} Item to open
 		 */
@@ -281,7 +281,7 @@ core.Class('apibrowser.Browser', {
 		parseHash: function(hash) {
 
 			var regex = new RegExp("((source|static|member|property|event)\:)?([A-Za-z0-9_\.]+)?(\~([A-Za-z0-9_]+))");
-			var tmp = hash.split(regex);
+			var tmp = unescape(hash).split(regex);
 
 			var data = {
 				type: null,
@@ -440,10 +440,10 @@ core.Class('apibrowser.Browser', {
 					return;
 
 				} else if (fileChanged) {
-					
+
 					content.innerHTML = cacheEntry;
 					this.__current.html = data.file;
-					
+
 				}
 
 			}
