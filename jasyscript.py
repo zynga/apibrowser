@@ -84,3 +84,14 @@ def source(theme="original"):
 
     # Generate API data into source folder
     ApiWriter().write("data")
+
+@task
+def server(host='127.0.0.1'):
+    """Start HTTP server"""
+
+    if jasy.__version__ < '0.8-beta1':
+        error("To use the built-in HTTP server, you need a jasy version >= 0.8. Please upgrade!")
+        return
+    
+    serve(host=host)
+
