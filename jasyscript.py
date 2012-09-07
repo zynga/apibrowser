@@ -33,8 +33,8 @@ def build(theme="original"):
     session.setField("theme", theme)
 
     # Configure assets for being loaded from local asset folder
-    assetManager.deploy(Resolver().addClassName("apibrowser.Browser").getIncludedClasses())
-    assetManager.addBuildProfile()
+    session.getAssetManager().deploy(Resolver().addClassName("apibrowser.Browser").getIncludedClasses())
+    session.getAssetManager().addBuildProfile()
     
     # Write kernel script
     includedByKernel = storeKernel("script/kernel.js")
@@ -63,7 +63,7 @@ def source(theme="original"):
     session.setField("theme", theme)
 
     # Configure assets for being loaded from source folders
-    assetManager.addSourceProfile()
+    session.getAssetManager().addSourceProfile()
 
     # Write kernel script
     includedByKernel = storeKernel("script/kernel.js", debug=True)
