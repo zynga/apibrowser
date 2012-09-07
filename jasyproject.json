@@ -14,7 +14,8 @@
 	"requires": 
 	[
 		{
-			"source" : "https://github.com/zynga/core.git"
+			"source" : "https://github.com/zynga/core.git",
+			"version" : "0.8-beta2"
 		}
 	]
 }
