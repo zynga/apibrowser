@@ -7,13 +7,17 @@ session.permutateField("es5")
 session.permutateField("debug")
 
 
-@task("Clear build cache")
+@task
 def clean():
+    """Clear build cache"""
+
     session.clean()
 
 
-@task("Clear caches and build results")
+@task
 def distclean():
+    """Clear caches and build results"""
+
     session.clean()
     removeDir("build")
     removeDir("external")
@@ -21,14 +25,17 @@ def distclean():
     removeDir("source/data")
 
 
-@task("Build the full api viewer into api folder")
+@task
 def api():
+    """Build the full api viewer into api folder"""
+
     build(prefix="api")
     ApiWriter().write("data")
 
 
-@task("Build the API viewer application")
+@task
 def build(theme="original"):
+    """Build the API viewer application"""
 
     session.setField("theme", theme)
 
@@ -57,8 +64,9 @@ def build(theme="original"):
         storeCompressed(resolver.getSortedClasses(), "script/browser-%s.js" % permutation.getChecksum(), "new apibrowser.Browser;")
 
 
-@task("Generate source")
+@task
 def source(theme="original"):
+    """Generate source"""
     
     session.setField("theme", theme)
 
