@@ -79,8 +79,8 @@ def source(theme="original"):
     # Initialize shared objects
     assetManager = AssetManager(session)
     assetManager.addSourceProfile()
-    
-    outputManager = OutputManager(session, assetManager)
+
+    outputManager = OutputManager(session, assetManager, compressionLevel=0)
     fileManager = FileManager(session)
 
     # Write kernel script
