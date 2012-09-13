@@ -1,17 +1,16 @@
+#
 # API Browser
-# Copyright 2012 Zynga Inc.
+# Copyright 2011-2012 Zynga Inc.
+#
 
 import json
-
-session.permutateField("es5")
-session.permutateField("debug")
-
 
 @task
 def clean():
     """Clear build cache"""
 
     session.clean()
+    Repository.clean()
 
 
 @task
@@ -19,10 +18,7 @@ def distclean():
     """Clear caches and build results"""
 
     session.clean()
-    removeDir("build")
-    removeDir("external")
-    removeDir("source/script")
-    removeDir("source/data")
+    Repository.distclean()
 
 
 @task
@@ -37,6 +33,11 @@ def api():
 def build(theme="original"):
     """Build the API viewer application"""
 
+    # Configure fields
+    session.permutateField("es5")
+    session.setField("debug", False)
+
+    # Pass theme into client code
     session.setField("theme", theme)
 
     # Configure assets for being loaded from local asset folder
@@ -67,7 +68,12 @@ def build(theme="original"):
 @task
 def source(theme="original"):
     """Generate source"""
+
+    # Configure fields
+    session.permutateField("es5")
+    session.permutateField("debug")
     
+    # Pass theme into client code
     session.setField("theme", theme)
 
     # Configure assets for being loaded from source folders
@@ -93,10 +99,4 @@ def source(theme="original"):
     # Generate API data into source folder
     ApiWriter(session).write("data")
 
-
-@task
-def server(host='127.0.0.1'):
-    """Start HTTP server"""
-
-    serve(host=host)
 
