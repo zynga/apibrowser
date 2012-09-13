@@ -34,19 +34,20 @@ def build(theme="original"):
     """Build the API viewer application"""
 
     # Configure fields
-    session.permutateField("es5")
     session.setField("debug", False)
-
-    # Pass theme into client code
     session.setField("theme", theme)
+    session.permutateField("es5")
 
     # Configure assets for being loaded from local asset folder
     assetManager = AssetManager(session)
     assetManager.deploy(Resolver(session).addClassName("apibrowser.Browser").getIncludedClasses())
     assetManager.addBuildProfile()
     
+    # Configure output
+    outputManager = OutputManager(session, assetManager, compressionLevel=2)
+
     # Write kernel script
-    includedByKernel = Output(session).storeKernel("$prefix/script/kernel.js")
+    includedByKernel = outputManager.storeKernel("$prefix/script/kernel.js", debug=True)
 
     # Copy files from source
     File.updateFile("source/index.html", "$prefix/index.html")
@@ -63,7 +64,7 @@ def build(theme="original"):
         resolver = Resolver(session).addClassName("apibrowser.Browser").excludeClasses(includedByKernel)
 
         # Compressing classes
-        Output(session).storeCompressed(resolver.getSortedClasses(), "$prefix/script/browser-$permutation.js", "new apibrowser.Browser;")
+        outputManager.storeCompressed(resolver.getSortedClasses(), "$prefix/script/browser-$permutation.js", "new apibrowser.Browser;")
 
 
 @task
@@ -71,18 +72,19 @@ def source(theme="original"):
     """Generate source"""
 
     # Configure fields
+    session.setField("theme", theme)
     session.permutateField("es5")
     session.permutateField("debug")
-    
-    # Pass theme into client code
-    session.setField("theme", theme)
 
     # Configure assets for being loaded from source folders
     assetManager = AssetManager(session)
     assetManager.addSourceProfile()
 
+    # Configure output
+    outputManager = OutputManager(session, assetManager)
+
     # Write kernel script
-    includedByKernel = Output(session).storeKernel("$prefix/script/kernel.js", debug=True)
+    includedByKernel = outputManager.storeKernel("$prefix/script/kernel.js", debug=True)
 
     # Rewrite template as jsonp
     for tmpl in ["main", "error", "entry", "type", "params", "info", "origin", "tags"]:
@@ -96,7 +98,7 @@ def source(theme="original"):
         resolver = Resolver(session).addClassName("apibrowser.Browser").excludeClasses(includedByKernel)
 
         # Building class loader
-        Output(session).storeLoader(resolver.getSortedClasses(), "$prefix/script/browser-$permutation.js", "new apibrowser.Browser;")
+        outputManager.storeLoader(resolver.getSortedClasses(), "$prefix/script/browser-$permutation.js", "new apibrowser.Browser;")
 
     # Generate API data into source folder
     ApiWriter(session).write("$prefix/data")
