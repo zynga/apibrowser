@@ -63,7 +63,7 @@ def build(theme="original"):
         resolver = Resolver(session).addClassName("apibrowser.Browser").excludeClasses(includedByKernel)
 
         # Compressing classes
-        Output(session).storeCompressed(resolver.getSortedClasses(), "$prefix/script/browser-%s.js" % permutation.getChecksum(), "new apibrowser.Browser;")
+        Output(session).storeCompressed(resolver.getSortedClasses(), "$prefix/script/browser-$permutation.js", "new apibrowser.Browser;")
 
 
 @task
@@ -96,7 +96,7 @@ def source(theme="original"):
         resolver = Resolver(session).addClassName("apibrowser.Browser").excludeClasses(includedByKernel)
 
         # Building class loader
-        Output(session).storeLoader(resolver.getSortedClasses(), "$prefix/script/browser-%s.js" % permutation.getChecksum(), "new apibrowser.Browser;")
+        Output(session).storeLoader(resolver.getSortedClasses(), "$prefix/script/browser-$permutation.js", "new apibrowser.Browser;")
 
     # Generate API data into source folder
     ApiWriter(session).write("$prefix/data")
