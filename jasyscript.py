@@ -30,7 +30,7 @@ def api():
     """Build the full api viewer into api folder"""
 
     build(prefix="api")
-    ApiWriter().write("data")
+    ApiWriter(session).write("data")
 
 
 @task
