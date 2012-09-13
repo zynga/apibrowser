@@ -38,24 +38,24 @@ def build(theme="original"):
     session.setField("theme", theme)
     session.permutateField("es5")
 
-    # Configure assets for being loaded from local asset folder
+    # Initialize shared objects
     assetManager = AssetManager(session)
     assetManager.deploy(Resolver(session).addClassName("apibrowser.Browser").getIncludedClasses())
     assetManager.addBuildProfile()
-    
-    # Configure output
+
     outputManager = OutputManager(session, assetManager, compressionLevel=2)
+    fileManager = FileManager(session)
 
     # Write kernel script
     includedByKernel = outputManager.storeKernel("$prefix/script/kernel.js", debug=True)
 
     # Copy files from source
-    File.updateFile("source/index.html", "$prefix/index.html")
+    fileManager.updateFile("source/index.html", "$prefix/index.html")
     
     # Rewrite template as jsonp
     for tmpl in ["main", "error", "entry", "type", "params", "info", "origin", "tags"]:
         jsonTemplate = json.dumps({ "template" : open("source/tmpl/%s.mustache" % tmpl).read() })
-        File.writeFile("$prefix/tmpl/%s.js" % tmpl, "apiload(%s, '%s.mustache')" % (jsonTemplate, tmpl))
+        fileManager.writeFile("$prefix/tmpl/%s.js" % tmpl, "apiload(%s, '%s.mustache')" % (jsonTemplate, tmpl))
         
     # Process every possible permutation
     for permutation in session.permutate():
@@ -76,12 +76,12 @@ def source(theme="original"):
     session.permutateField("es5")
     session.permutateField("debug")
 
-    # Configure assets for being loaded from source folders
+    # Initialize shared objects
     assetManager = AssetManager(session)
     assetManager.addSourceProfile()
-
-    # Configure output
+    
     outputManager = OutputManager(session, assetManager)
+    fileManager = FileManager(session)
 
     # Write kernel script
     includedByKernel = outputManager.storeKernel("$prefix/script/kernel.js", debug=True)
@@ -89,7 +89,7 @@ def source(theme="original"):
     # Rewrite template as jsonp
     for tmpl in ["main", "error", "entry", "type", "params", "info", "origin", "tags"]:
         jsonTemplate = json.dumps({ "template" : open("source/tmpl/%s.mustache" % tmpl).read() })
-        File.writeFile("$prefix/tmpl/%s.js" % tmpl, "apiload(%s, '%s.mustache')" % (jsonTemplate, tmpl))
+        fileManager.writeFile("$prefix/tmpl/%s.js" % tmpl, "apiload(%s, '%s.mustache')" % (jsonTemplate, tmpl))
 
     # Process every possible permutation
     for permutation in session.permutate():
