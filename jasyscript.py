@@ -26,7 +26,7 @@ def api():
     """Build the full api viewer into api folder"""
 
     build(prefix="api")
-    ApiWriter(session).write("data")
+    ApiWriter(session).write("$prefix/data")
 
 
 @task
@@ -41,19 +41,20 @@ def build(theme="original"):
     session.setField("theme", theme)
 
     # Configure assets for being loaded from local asset folder
-    session.getAssetManager().deploy(Resolver(session).addClassName("apibrowser.Browser").getIncludedClasses())
-    session.getAssetManager().addBuildProfile()
+    assetManager = AssetManager(session)
+    assetManager.deploy(Resolver(session).addClassName("apibrowser.Browser").getIncludedClasses())
+    assetManager.addBuildProfile()
     
     # Write kernel script
-    includedByKernel = Output(session).storeKernel("script/kernel.js")
+    includedByKernel = Output(session).storeKernel("$prefix/script/kernel.js")
 
     # Copy files from source
-    File.updateFile("source/index.html", "index.html")
+    File.updateFile("source/index.html", "$prefix/index.html")
     
     # Rewrite template as jsonp
     for tmpl in ["main", "error", "entry", "type", "params", "info", "origin", "tags"]:
         jsonTemplate = json.dumps({ "template" : open("source/tmpl/%s.mustache" % tmpl).read() })
-        File.writeFile("tmpl/%s.js" % tmpl, "apiload(%s, '%s.mustache')" % (jsonTemplate, tmpl))
+        File.writeFile("$prefix/tmpl/%s.js" % tmpl, "apiload(%s, '%s.mustache')" % (jsonTemplate, tmpl))
         
     # Process every possible permutation
     for permutation in session.permutate():
@@ -62,7 +63,7 @@ def build(theme="original"):
         resolver = Resolver(session).addClassName("apibrowser.Browser").excludeClasses(includedByKernel)
 
         # Compressing classes
-        Output(session).storeCompressed(resolver.getSortedClasses(), "script/browser-%s.js" % permutation.getChecksum(), "new apibrowser.Browser;")
+        Output(session).storeCompressed(resolver.getSortedClasses(), "$prefix/script/browser-%s.js" % permutation.getChecksum(), "new apibrowser.Browser;")
 
 
 @task
@@ -77,15 +78,16 @@ def source(theme="original"):
     session.setField("theme", theme)
 
     # Configure assets for being loaded from source folders
-    session.getAssetManager().addSourceProfile()
+    assetManager = AssetManager(session)
+    assetManager.addSourceProfile()
 
     # Write kernel script
-    includedByKernel = Output(session).storeKernel("script/kernel.js", debug=True)
+    includedByKernel = Output(session).storeKernel("$prefix/script/kernel.js", debug=True)
 
     # Rewrite template as jsonp
     for tmpl in ["main", "error", "entry", "type", "params", "info", "origin", "tags"]:
         jsonTemplate = json.dumps({ "template" : open("source/tmpl/%s.mustache" % tmpl).read() })
-        File.writeFile("tmpl/%s.js" % tmpl, "apiload(%s, '%s.mustache')" % (jsonTemplate, tmpl))
+        File.writeFile("$prefix/tmpl/%s.js" % tmpl, "apiload(%s, '%s.mustache')" % (jsonTemplate, tmpl))
 
     # Process every possible permutation
     for permutation in session.permutate():
@@ -94,9 +96,9 @@ def source(theme="original"):
         resolver = Resolver(session).addClassName("apibrowser.Browser").excludeClasses(includedByKernel)
 
         # Building class loader
-        Output(session).storeLoader(resolver.getSortedClasses(), "script/browser-%s.js" % permutation.getChecksum(), "new apibrowser.Browser;")
+        Output(session).storeLoader(resolver.getSortedClasses(), "$prefix/script/browser-%s.js" % permutation.getChecksum(), "new apibrowser.Browser;")
 
     # Generate API data into source folder
-    ApiWriter(session).write("data")
+    ApiWriter(session).write("$prefix/data")
 
 
