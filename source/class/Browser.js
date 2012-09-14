@@ -9,6 +9,7 @@
  * The main class of the API Browser.
  *
  * #asset(apibrowser/*)
+ * #require(core.io.StyleSheet)
  */
 core.Class('apibrowser.Browser', {
 

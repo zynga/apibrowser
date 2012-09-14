@@ -73,8 +73,8 @@ def source(theme="original"):
 
     # Configure fields
     session.setField("theme", theme)
+    session.setField("debug", True)
     session.permutateField("es5")
-    session.permutateField("debug")
 
     # Initialize shared objects
     assetManager = AssetManager(session)
