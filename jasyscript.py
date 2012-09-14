@@ -47,7 +47,7 @@ def build(theme="original"):
     fileManager = FileManager(session)
 
     # Write kernel script
-    outputManager.storeKernel("$prefix/script/kernel.js", debug=True, classes=["core.io.Script"])
+    outputManager.storeKernel("$prefix/script/kernel.js", debug=True)
 
     # Copy files from source
     fileManager.updateFile("source/index.html", "$prefix/index.html")
@@ -84,7 +84,7 @@ def source(theme="original"):
     fileManager = FileManager(session)
 
     # Write kernel script
-    outputManager.storeKernel("$prefix/script/kernel.js", debug=True, classes=["core.io.Script"])
+    outputManager.storeKernel("$prefix/script/kernel.js", debug=True)
 
     # Rewrite template as jsonp
     for tmpl in ["main", "error", "entry", "type", "params", "info", "origin", "tags"]:
