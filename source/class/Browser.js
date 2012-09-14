@@ -28,7 +28,7 @@ core.Class('apibrowser.Browser', {
 		document.body.appendChild(this.__treeElem);
 		document.body.appendChild(this.__contentElem);
 
-		var theme = core.Env.getValue("theme");
+		var theme = jasy.Env.getValue("theme");
 
 		// Load initial data
 		core.io.Queue.load([
