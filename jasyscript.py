@@ -39,12 +39,12 @@ def build(theme="original"):
     session.permutateField("es5")
 
     # Initialize shared objects
-    assetManager = AssetManager(session)
-    assetManager.deploy(Resolver(session).addClassName("apibrowser.Browser").getIncludedClasses())
-    assetManager.addBuildProfile()
-
+    assetManager = AssetManager(session).addBuildProfile()
     outputManager = OutputManager(session, assetManager, compressionLevel=2)
     fileManager = FileManager(session)
+
+    # Deploy assets
+    outputManager.deployAssets(["apibrowser.Browser"])
 
     # Write kernel script
     outputManager.storeKernel("$prefix/script/kernel.js", debug=True)
@@ -77,9 +77,7 @@ def source(theme="original"):
     session.permutateField("es5")
 
     # Initialize shared objects
-    assetManager = AssetManager(session)
-    assetManager.addSourceProfile()
-
+    assetManager = AssetManager(session).addSourceProfile()
     outputManager = OutputManager(session, assetManager, compressionLevel=0)
     fileManager = FileManager(session)
 
