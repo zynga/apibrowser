@@ -47,7 +47,7 @@ def build(theme="original"):
     fileManager = FileManager(session)
 
     # Write kernel script
-    includedByKernel = outputManager.storeKernel("$prefix/script/kernel.js", debug=True)
+    outputManager.storeKernel("$prefix/script/kernel.js", debug=True, classes=["core.io.Script"])
 
     # Copy files from source
     fileManager.updateFile("source/index.html", "$prefix/index.html")
@@ -61,7 +61,7 @@ def build(theme="original"):
     for permutation in session.permutate():
         
         # Resolving dependencies
-        resolver = Resolver(session).addClassName("apibrowser.Browser").excludeClasses(includedByKernel)
+        resolver = Resolver(session).addClassName("apibrowser.Browser")
 
         # Compressing classes
         outputManager.storeCompressed(resolver.getSortedClasses(), "$prefix/script/browser-$permutation.js", "new apibrowser.Browser;")
@@ -84,7 +84,7 @@ def source(theme="original"):
     fileManager = FileManager(session)
 
     # Write kernel script
-    includedByKernel = outputManager.storeKernel("$prefix/script/kernel.js", debug=True)
+    outputManager.storeKernel("$prefix/script/kernel.js", debug=True, classes=["core.io.Script"])
 
     # Rewrite template as jsonp
     for tmpl in ["main", "error", "entry", "type", "params", "info", "origin", "tags"]:
@@ -95,12 +95,19 @@ def source(theme="original"):
     for permutation in session.permutate():
 
         # Resolving dependencies
-        resolver = Resolver(session).addClassName("apibrowser.Browser").excludeClasses(includedByKernel)
+        resolver = Resolver(session).addClassName("apibrowser.Browser")
 
         # Building class loader
         outputManager.storeLoader(resolver.getSortedClasses(), "$prefix/script/browser-$permutation.js", "new apibrowser.Browser;")
 
     # Generate API data into source folder
     ApiWriter(session).write("$prefix/data")
+
+
+@task
+def server():
+    """Starts built-in HTTP server"""
+
+    Server().start()
 
 
