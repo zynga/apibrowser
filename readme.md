@@ -12,8 +12,12 @@ Add a requires section into your `jasyproject.json` (or YAML):
 
 ```json
 {
-  "requires": [
-    "../apibrowser"
+  "requires": 
+  [
+    {
+      "source" : "https://github.com/zynga/apibrowser.git",
+      "version" : 0.8
+    }
   ]
 }
 ```
@@ -25,10 +29,10 @@ Add another task to your `jasyscript.py`:
 def api():
 
     # Writes API data to api/data
-    ApiWriter(session).write("data")
+    ApiWriter(session).write("$prefix/data")
 
     # Generates API browser into api folder
-    runTask("apibrowser", "build")
+    Task.runTask("apibrowser", "build")
 
 ```
 
