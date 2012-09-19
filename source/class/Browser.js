@@ -33,11 +33,11 @@ core.Class('apibrowser.Browser', {
 
 		// Load initial data
 		core.io.Queue.load([
-			core.io.Asset.toUri("apibrowser/icon/stylesheet.css"),
-			core.io.Asset.toUri("apibrowser/reset.css"),
-			core.io.Asset.toUri("apibrowser/style.css"),
-			core.io.Asset.toUri("apibrowser/theme/" + theme + ".css"),
-			core.io.Asset.toUri("apibrowser/syntax.css"),
+			jasy.Asset.toUri("apibrowser/icon/stylesheet.css"),
+			jasy.Asset.toUri("apibrowser/reset.css"),
+			jasy.Asset.toUri("apibrowser/style.css"),
+			jasy.Asset.toUri("apibrowser/theme/" + theme + ".css"),
+			jasy.Asset.toUri("apibrowser/syntax.css"),
 
 			"tmpl/main.js",
 			"tmpl/entry.js",
