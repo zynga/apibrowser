@@ -37,6 +37,14 @@ def api():
 ```
 
 
+## Jasy Compatibility
+
+This project is kept compatible with newest development of the Jasy tooling. This means that the newest GitHub versions typically requires a recent Jasy version being installed. Take a look at this list to understand what version to chose from:
+
+* **0.6**: Jasy >= 0.8
+* **0.5.3**: Jasy = 0.7.x
+* **0.5.2**: Jasy = 0.6.x
+
 
 ## Authors
 
